@@ -1,8 +1,129 @@
-.App {
-  text-align: center;
+@import "../base/settings.scss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-h1 {
-  color: red;
+#nav-container {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $dark;
+  height: 90px;
+  width: 100%;
 }
 
+#left-nav-container {
+  display: flex;
+  flex-direction: row-reverse;
+  height: 80px;
+  margin-left: 140px;
+  align-items: center;
+  justify-content: center;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#nav-links {
+  display: flex;
+  flex-direction: row-reverse;
+  color: $gray;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+}
+
+#nav-links a:hover {
+  color: $yellow;
+  cursor: pointer;
+}
+
+.logo-container {
+  text-decoration: none;
+}
+
+#nav-links a {
+  margin-right: 50px;
+  color: $gray;
+  text-decoration: none;
+}
+
+#logo {
+  color: $gray;
+  margin-right: 140px;
+  font-weight: 200;
+}
+
+#logo span {
+  color: $yellow;
+}
+
+// #language {
+//   background-color: $light;
+//   border: none;
+//   outline: none;
+//   margin-left: 1em;
+//   width: 70px;
+//   height: 70px;
+//   color: $gray;
+//   appearance: none;
+//   text-indent: 2em;
+// }
+
+// #theme {
+//   background-color: $light;
+//   border: none;
+//   outline: none;
+//   width: 70px;
+//   height: 70px;
+//   color: $gray;
+//   appearance: none;
+//   text-indent: 1.5em;
+// }
+
+.languageController,
+.themeController {
+  width: 71px;
+  height: 71px;
+  padding: 0.4em;
+}
+
+.languageController__control,
+.themeController__control {
+  background-color: $light !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.languageController__value-container,
+.themeController__value-container {
+  padding: 0.8em !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.languageController__indicator,
+.themeController__indicator {
+  display: none !important;
+}
+
+.languageController__value-container,
+.themeController__value-container {
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.themeController__single-value {
+  color: white !important;
+  margin: inherit !important;
+}
