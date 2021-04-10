@@ -7,8 +7,13 @@ function LoginPage() {
         <form className="register-form">
           <p>ثبت نام</p>
 
-          <label htmlFor="registerName">نام و نام خانوادگی </label>
+          <label htmlFor="registerName">نام</label>
           <input type="text" name="registerName" />
+          <label htmlFor="registersureName">نام خانوادگی </label>
+          <input type="text" name="registersureName" />
+
+          <label htmlFor="phoneNumber">شماره همراه</label>
+          <input type="email" name="phoneNumber" />
 
           <label htmlFor="registerEmail">ایمیل</label>
           <input type="email" name="registerEmail" />
