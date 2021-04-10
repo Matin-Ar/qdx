@@ -300,6 +300,111 @@ nav {
   border-radius: 10px;
 }
 
+//contactus page
+.contactUsPage-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  padding: 3em;
+  background: $dark;
+}
+
+.contactus-map-wrapper {
+  grid-column: 2/3;
+  grid-row: 1/3;
+  background: $light;
+  margin-left: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+}
+
+#contactusMap {
+  margin-top: 2em;
+  border-radius: 10px;
+}
+
+.contactus-map-title {
+  color: $gray;
+  align-self: flex-end;
+  margin: 1em 2em;
+}
+
+.contactus-map-info {
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.contactus-map-info img {
+  width: 20px;
+  display: inline;
+}
+
+.map-info {
+  margin-top: 1.5em;
+  margin-right: 3em;
+  display: flex;
+  align-items: center;
+}
+
+.contactus-map-info span {
+  color: $gray;
+  margin-right: 1em;
+}
+// .contactusform-wrapper {
+// }
+
+.contactusform {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  direction: rtl;
+  grid-column: 1/3;
+  grid-row: 1/3;
+  background: $light;
+  color: $gray;
+  border-radius: 10px;
+}
+
+.contactusform label {
+  display: inline;
+}
+
+.contactusform label div {
+  display: inline;
+}
+.contactusform input {
+  display: inline;
+  margin-top: 0.8em;
+  margin-bottom: 2em;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid $gray;
+  width: 100%;
+  color: $gray;
+  padding-right: 1em;
+  height: 30px;
+}
+.contactusform button {
+  padding: 0.8em 3em;
+  margin: 2em;
+  background-color: $yellow;
+  outline: none;
+  border: none;
+  color: $dark;
+  font-size: 0.8em;
+  font-family: bold;
+  border-radius: 10px;
+}
+.social-wrapper {
+  grid-column: 1/-1;
+  background: aqua;
+}
+
 //footer
 .footer-container {
   background-color: $light;
