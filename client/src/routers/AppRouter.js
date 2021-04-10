@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import HomePage from "../components/HomePage";
 import ContactUsPage from "../components/ContactUsPage";
 import Footer from "../components/Footer";
+import LoginPage from "../components/LoginPage";
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -15,6 +16,7 @@ const AppRouter = () => (
         <Route path="/" component={HomePage} exact={true} />
         <Route path="/aboutus" component={AboutUsPage} />
         <Route path="/contactus" component={ContactUsPage} />
+        <Route path="/login" component={LoginPage} />
         <Route component={NotFoundPage} />
       </Switch>
       <Footer />
