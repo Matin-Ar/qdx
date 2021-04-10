@@ -34,7 +34,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-bottom-wrapper">
-        <p>Designed with ❤️ by A & M</p>
+        <p>QDX is a simple OpenSource Project | Designed with ❤️ by A & M</p>
       </div>
     </div>
   );

@@ -224,6 +224,82 @@ nav {
   border-radius: 10px;
 }
 
+//NEW course List
+.newcourseslist-container {
+  background-color: $dark;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+  color: $white;
+}
+//Single Course Comp
+.singlecoursecomponent {
+  width: 90%;
+  height: 240px;
+  display: flex;
+  flex-direction: row-reverse;
+  background-color: $light;
+  margin: 2em;
+}
+.singlecourse-img-wrapper img {
+  height: 100%;
+}
+
+.singlecourse-description-wrapper {
+  direction: rtl;
+  color: $white;
+  padding: 1em;
+  position: relative;
+}
+
+// .singlecourse-description-title {
+// }
+.singlecourse-description-text {
+  color: $gray;
+  margin-top: 1em;
+}
+
+.singlecourse-description-bottom-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.singlecourse-description-bottom-icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+}
+
+.singlecourse-description-bottom-icon {
+  display: flex;
+  margin-left: 2em;
+}
+
+.singlecourse-description-bottom-icon p {
+  margin-right: 1em;
+}
+
+.singlecourse-description-button {
+  padding: 0.8em 3em;
+  margin: 2em;
+  background-color: $yellow;
+  outline: none;
+  border: none;
+  color: $dark;
+  font-size: 0.8em;
+  font-family: bold;
+  border-radius: 10px;
+}
+
 //footer
 .footer-container {
   background-color: $light;
