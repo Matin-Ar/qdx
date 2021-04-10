@@ -16,6 +16,7 @@
   background-color: $dark;
   height: 90px;
   width: 100%;
+  border-bottom: 1px solid $yellow;
 }
 
 #left-nav-container {
@@ -402,7 +403,19 @@ nav {
 }
 .social-wrapper {
   grid-column: 1/-1;
-  background: aqua;
+  background: $light;
+  margin-top: 2em;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  color: $gray;
+  padding: 2em;
+}
+
+.social-icons img {
+  height: 60px;
+  margin-right: 1em;
 }
 
 //footer
