@@ -1,9 +1,12 @@
 import React from "react";
+import FavCategory from "./FavCategory";
+import Hero from "./Hero";
 
 export default function HomePage() {
   return (
     <div>
-      <p>this is the homepage</p>
+      <Hero />
+      <FavCategory />
     </div>
   );
 }
