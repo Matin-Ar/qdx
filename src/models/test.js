@@ -4,7 +4,8 @@ const testSchema = new mongoose.Schema({
     test: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: true
     }
 })
 
