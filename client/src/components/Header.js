@@ -17,6 +17,7 @@ const Header = () => {
             <NavLink to="#">دسته بندی دوره ها</NavLink>
             <NavLink to="/aboutus">درباره ما</NavLink>
             <NavLink to="/contactus">تماس با ما</NavLink>
+            <NavLink to="/Login">ورود</NavLink>
           </ul>
         </nav>
         <LangCustomSelect className="#language" />
