@@ -1,0 +1,52 @@
+POST - /users/singup
+	tozihat: baraie sabtenam kardan. niaz ba auth nadare. faghat niaz be body dare.
+	file json ba attribute haye (name, lastname, number, email, password) ferestade mishe.
+	response: etelate user + token
+
+POST - /users/login
+	tozihat: baraie login kardane. niaz be auth nadare. faghat niaz be body dare.
+	file json ba attribute haye (email, password) ferestade mishe.
+	har bar user login mikone ye token sakhte mishe.
+	response: etelate user + token
+
+POST - /users/logout
+	tozihat: baraie logout kardan. NIAZ BE AUTH DARE. be body niaz nadare.
+	vaghti yek user logout mikone , tokeni ke baraie AUTH esteafde mikone az database az arraye token oon user hazf mishe.
+	response: response khasi felan nadare
+
+POST - /users/logoutALL
+	tozihat: baraie logout kardan az hame device haye motasel shode. NIAZ BE AUTH DARE. be body niaz nadare.
+	haman kare logout mikone faghat ba in tafavot ke tamami token haye marboot be array oon usero az database pak mikone.
+	(ghablie faghat tokeni ke baraie auth bood pak mikard vali in ba har tokeni age zade beshe , kolle token haro pak mikone.)
+	response: response khasi felan nadare
+
+GET - /users/me
+	tozihat: baraie didane profile user hast. NIAZ BE AUTH DARE. be body niaz nadare.
+	user mitone ba tokenesh etelate marboor be profilesho bebine.
+	response: response khasi felan nadare
+
+PATCH - /users/me
+	tozihat: baraie update kardan profile user hast. NIAZ BE AUTH DARE. NIAZ BE BODY DARE.
+	file json ba ba harkodam az attribute haye zamane sabtenam.
+	masalan age user mikhad (name, lastname) esho avaz kone baiad in 2 attribute estafde kone
+	{
+		"name": "...",
+		"lastname": "..."
+	}
+
+	va ya age mikhad faghat password avaz kone
+	{
+		"password": "...",
+	}
+
+	beharhal harchio bekhad avaz kone oon too mizare xD . 
+	response: etelate user (dar vaghe etelate user bad az update shodanesh)
+	
+DELETE - /users/me
+	tozihat: baraie pak kardan user az database. NIAZ BE AUTH DARE. be body niaz nadare.
+	tamami etelate user az database pak mishe va dg fard nemitone login kone, va mitavan dobare ba hamoon etalat signup jadid anjam dad.
+
+--------------------------
+
+felan haminha baraie shooroo khoobe, bazam mitoni ertegha va viraiesheshon konim ke jolo tar ha hatman khahim kard.
+GL HF ;)

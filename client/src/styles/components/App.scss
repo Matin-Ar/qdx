@@ -507,6 +507,14 @@ nav {
   justify-content: center;
 }
 
+.registerError-container {
+  border-radius: 10px;
+  margin-bottom: 2em;
+  background-color: rgb(253, 236, 234);
+  color: rgb(97, 26, 21);
+  width: 100%;
+  padding: 2em;
+}
 .register-form {
   color: $gray;
   background-color: $dark;
@@ -548,6 +556,9 @@ nav {
   border-radius: 10px;
 }
 
+.registerButton:hover {
+  background-color: lighten($yellow, $amount: 10);
+}
 //footer
 .footer-container {
   background-color: $light;

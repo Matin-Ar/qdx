@@ -1,0 +1,2 @@
+//setRegisterError
+//ClearRegisterError
