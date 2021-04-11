@@ -4,7 +4,7 @@ const usersReducerDefaults = {
   lastname: "",
   number: null,
   email: "",
-  JWT: null,
+  token: null,
 };
 
 //USERS reducer
@@ -17,7 +17,15 @@ const usersReducer = (state = usersReducerDefaults, action) => {
         lastname: action.payload.lastname,
         number: action.payload.number,
         email: action.payload.email,
-        JWT: action.payload.JWT,
+        token: action.payload.token,
+      };
+    case "USER_LOG_OUT":
+      return {
+        name: "",
+        lastname: "",
+        number: null,
+        email: "",
+        token: null,
       };
 
     default:

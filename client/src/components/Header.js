@@ -14,6 +14,8 @@ const Header = () => {
       <div id="left-nav-container">
         <nav>
           <ul id="nav-links">
+            <NavLink to="/dashboard">پروفایل کاربری</NavLink>
+
             <NavLink to="#">دسته بندی دوره ها</NavLink>
             <NavLink to="/aboutus">درباره ما</NavLink>
             <NavLink to="/contactus">تماس با ما</NavLink>

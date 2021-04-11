@@ -1,9 +1,21 @@
 import React from "react";
+import { connect } from "react-redux";
+import { startUserLogIn } from "../Actions/user";
 
-function LoginPage() {
+function LoginPage(props) {
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    const user = {
+      email: e.target.loginEmail.value,
+      password: e.target.loginPassword.value,
+    };
+
+    props.dispatch(startUserLogIn(user));
+  };
   return (
     <div className="loginPage-wrapper">
-      <div className="login-wrapper">
+      <form className="login-wrapper" onSubmit={handleLogin}>
         <p>ورود</p>
         <label htmlFor="loginEmail">ایمیل</label>
         <input type="text" name="loginEmail" />
@@ -13,9 +25,9 @@ function LoginPage() {
         <button type="submit" className="loginButton">
           ورود
         </button>
-      </div>
+      </form>
     </div>
   );
 }
 
-export default LoginPage;
+export default connect()(LoginPage);

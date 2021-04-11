@@ -1,7 +1,6 @@
 import axios from "axios";
-
-//USER_LOGIN
 //USER_LOGOUT
+//USER_LOGIN
 //USER_GET_ALL
 //USER_DELETE
 //SET_REGISTER_ERROR
@@ -21,8 +20,9 @@ export const starUserRegister = (payload) => (dispatch) => {
   const { name, lastname, number, email, password } = payload;
   axios.post("/users/singup", { name, lastname, number, email, password }).then(
     (response) => {
-      const JWT = response.data.token;
-      dispatch(userRegister({ name, lastname, number, email, JWT }));
+      const token = response.data.token;
+      console.log(response.data);
+      dispatch(userRegister({ name, lastname, number, email, token }));
     },
     (error) => {
       console.log(error.response);
@@ -33,6 +33,47 @@ export const starUserRegister = (payload) => (dispatch) => {
         dispatch(setRegisterError(error.response.data.message));
       }
     }
+  );
+};
+
+//USER_LOGOUT
+export const userLogOut = () => ({
+  type: "USER_LOG_OUT",
+});
+
+//StartUSERLOGOUT
+export const startUserLogOut = (token) => (dispatch) => {
+  const axiosAuth = axios.create({
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
+
+  dispatch(userLogOut());
+
+  return axiosAuth.post("/users/logout").then(
+    () => console.log("user logged out"),
+    (e) => console.log("there was a error logging out")
+  );
+};
+
+//USER_LOGIN
+export const userLogIn = (name, lastname, number, email, token) => ({
+  type: "USER_LOG_IN",
+  name,
+  lastname,
+  number,
+  email,
+  token,
+});
+
+//startUserLogin
+export const startUserLogIn = ({ email, password }) => (dispatch) => {
+  axios.post("/users/login", { email, password }).then(
+    (resp) => {
+      console.log(resp.data);
+    },
+    (error) => console.log(error.response)
   );
 };
 
@@ -82,9 +123,3 @@ export const starUserRegister = (payload) => (dispatch) => {
 //     return dispatch(userRegister(name, lastname, number, email, password));
 //   };
 // };
-
-// axios.create({
-//     headers: {
-//         authorization: `Bearer `
-//     }
-// })
