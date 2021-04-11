@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+var uniqueValidator = require('mongoose-unique-validator')
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -21,10 +22,10 @@ const userSchema = new mongoose.Schema({
         trim: true,
         validate(value) {
             if (!validator.isMobilePhone(value)) {
-                throw new Error('Phone number is invalid!')
+                throw new Error('شماره تلفن اشتباه می باشد')
             }
             if (value.length != 11) {
-                throw new Error('Wrong number!')
+                throw new Error('شماره تلفن باید 11 رقمی باشد')
             }
         }
     },
@@ -36,18 +37,17 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
         validate(value) {
             if (!validator.isEmail(value)) {
-                throw new Error('Email is invalid')
+                throw new Error('ایمیل وارد شده اشتباه میباشد')
             }
         }
     },
     password: {
         type: String,
         required: true,
-        minLength: 8,
         trim: true,
         validate(value) {
             if (!validator.isStrongPassword(value, {minLength: 8, minLowercase: 1, minUppercase: 0, minNumbers: 1, minSymbols: 0})) {
-                throw new Error('Password is not strong!')
+                throw new Error('پسورد وارد شده باید شامل حداقل 1 حرف کوچک و 1 عدد باشد.(حداقل تعداد کل کاراکتر ها 8)')
             }
         }
     },
@@ -85,13 +85,13 @@ userSchema.statics.findByCredentials = async (email, password) => {
     const user = await User.findOne({ email })
 
     if (!user) {
-        throw new Error('Unable to login')
+        throw new Error('ایمیل و یا رمز عبور شما اشتباه می باشد')
     }
 
     const isMatch = await bcrypt.compare(password, user.password)
 
     if(!isMatch) {
-        throw new Error('Unable to login')
+        throw new Error('ایمیل و یا رمز عبور شما اشتباه می باشد')
     }
 
     return user
@@ -107,6 +107,8 @@ userSchema.pre('save', async function (next) {
 
     next()
 })
+
+userSchema.plugin(uniqueValidator)
 
 const User = mongoose.model('User', userSchema)
 
