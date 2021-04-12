@@ -27,6 +27,14 @@ const usersReducer = (state = usersReducerDefaults, action) => {
         email: "",
         token: null,
       };
+    case "USER_LOG_IN":
+      return {
+        name: action.name,
+        lastname: action.lastname,
+        number: action.number,
+        email: action.email,
+        token: action.token,
+      };
 
     default:
       return state;

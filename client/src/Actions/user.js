@@ -1,5 +1,11 @@
 import axios from "axios";
-import { setRegisterError } from "./errors";
+import {
+  startSetRegisterError,
+  clearAllErrors,
+  setLoginSuccessMsg,
+  setRegisterSuccess,
+  clearRegisterMsg,
+} from "./errors";
 
 //USER_LOGOUT
 //USER_LOGIN
@@ -16,25 +22,23 @@ export const userRegister = (payload) => ({
 //START_USER_REGISTER
 export const starUserRegister = (payload) => (dispatch) => {
   const { name, lastname, number, email, password } = payload;
+
   return axios
     .post("/users/singup", { name, lastname, number, email, password })
+
     .then(
       (response) => {
         const token = response.data.token;
-        console.log(response.data);
         dispatch(userRegister({ name, lastname, number, email, token }));
-        return "ثبت نام موفق";
+        const successTxt = "ثبت نام موفق";
+        dispatch(setRegisterSuccess(successTxt));
+        setTimeout(() => {
+          dispatch(clearRegisterMsg());
+        }, 5000);
+        return successTxt;
       },
       (error) => {
-        console.log(error.response);
-
-        if (error.response.data.name === "MongoError") {
-          dispatch(setRegisterError(error.response.data.name));
-          return "registerError";
-        } else {
-          dispatch(setRegisterError(error.response.data.message));
-          return "registerError";
-        }
+        dispatch(startSetRegisterError(error.response.data.errors));
       }
     );
 };
@@ -53,6 +57,7 @@ export const startUserLogOut = (token) => (dispatch) => {
   });
 
   dispatch(userLogOut());
+  dispatch(clearAllErrors());
 
   return axiosAuth.post("/users/logout").then(
     () => console.log("user logged out"),
@@ -61,7 +66,7 @@ export const startUserLogOut = (token) => (dispatch) => {
 };
 
 //USER_LOGIN
-export const userLogIn = (name, lastname, number, email, token) => ({
+export const userLogIn = ({ name, lastname, number, email, token }) => ({
   type: "USER_LOG_IN",
   name,
   lastname,
@@ -74,8 +79,16 @@ export const userLogIn = (name, lastname, number, email, token) => ({
 export const startUserLogIn = ({ email, password }) => (dispatch) => {
   return axios.post("/users/login", { email, password }).then(
     (resp) => {
+      const token = resp.data.token;
+      const user = resp.data.user;
       console.log(resp.data);
+      dispatch(userLogIn({ token, ...user }));
+      dispatch(setLoginSuccessMsg());
+
+      return "signIn Successful";
     },
-    (error) => console.log(error.response)
+    (error) => {
+      return "  ایمیل و یا رمز عبور وارد شده صحیح نمی باشد";
+    }
   );
 };

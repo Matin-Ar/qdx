@@ -1,11 +1,15 @@
 import React from "react";
-import { connect } from "mongodb";
-
+import { connect } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import LangCustomSelect from "./LangCustomSelect";
 import ThemeCustomSelect from "./ThemeCustomSelect";
+import { startUserLogOut } from "../Actions/user";
 
-const Header = () => {
+export const Header = (props) => {
+  const handleLogOut = () => {
+    props.dispatch(startUserLogOut(props.token));
+  };
+
   return (
     <div id="nav-container">
       <Link to="/" className="logo-container">
@@ -21,8 +25,15 @@ const Header = () => {
             <NavLink to="#">دسته بندی دوره ها</NavLink>
             <NavLink to="/aboutus">درباره ما</NavLink>
             <NavLink to="/contactus">تماس با ما</NavLink>
-            <NavLink to="/Login">ورود</NavLink>
-            <NavLink to="/register">ثبت نام</NavLink>
+            {!props.isAuthenticated && <NavLink to="/Login">ورود</NavLink>}
+            {!props.isAuthenticated && (
+              <NavLink to="/register">ثبت نام</NavLink>
+            )}
+            {props.isAuthenticated && (
+              <Link to="/" onClick={handleLogOut}>
+                خروج
+              </Link>
+            )}
           </ul>
         </nav>
         <LangCustomSelect className="#language" />
@@ -31,7 +42,12 @@ const Header = () => {
     </div>
   );
 };
+
 const mapStateToProps = (state) => {
-  isAuthenticated: "";
+  return {
+    isAuthenticated: !!state.user.token,
+    token: state.user.token,
+  };
 };
+
 export default connect(mapStateToProps)(Header);
