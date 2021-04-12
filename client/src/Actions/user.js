@@ -1,4 +1,5 @@
 import axios from "axios";
+
 //USER_LOGOUT
 //USER_LOGIN
 //USER_GET_ALL
@@ -18,22 +19,27 @@ export const userRegister = (payload) => ({
 
 export const starUserRegister = (payload) => (dispatch) => {
   const { name, lastname, number, email, password } = payload;
-  axios.post("/users/singup", { name, lastname, number, email, password }).then(
-    (response) => {
-      const token = response.data.token;
-      console.log(response.data);
-      dispatch(userRegister({ name, lastname, number, email, token }));
-    },
-    (error) => {
-      console.log(error.response);
+  return axios
+    .post("/users/singup", { name, lastname, number, email, password })
+    .then(
+      (response) => {
+        const token = response.data.token;
+        console.log(response.data);
+        dispatch(userRegister({ name, lastname, number, email, token }));
+        return "registerComplete";
+      },
+      (error) => {
+        console.log(error.response);
 
-      if (error.response.data.name === "MongoError") {
-        dispatch(setRegisterError(error.response.data.name));
-      } else {
-        dispatch(setRegisterError(error.response.data.message));
+        if (error.response.data.name === "MongoError") {
+          dispatch(setRegisterError(error.response.data.name));
+          return "registerError";
+        } else {
+          dispatch(setRegisterError(error.response.data.message));
+          return "registerError";
+        }
       }
-    }
-  );
+    );
 };
 
 //USER_LOGOUT
@@ -69,7 +75,7 @@ export const userLogIn = (name, lastname, number, email, token) => ({
 
 //startUserLogin
 export const startUserLogIn = ({ email, password }) => (dispatch) => {
-  axios.post("/users/login", { email, password }).then(
+  return axios.post("/users/login", { email, password }).then(
     (resp) => {
       console.log(resp.data);
     },

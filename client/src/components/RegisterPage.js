@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { starUserRegister } from "../Actions/user";
+import { withRouter } from "react-router-dom";
 
 export class RegisterPage extends Component {
   constructor(props) {
@@ -18,7 +19,15 @@ export class RegisterPage extends Component {
       password: e.target.registerPassword.value,
     };
 
-    this.props.dispatch(starUserRegister(user));
+    const javab = this.props.dispatch(starUserRegister(user));
+    javab.then(
+      (res) => {
+        if (res === "registerComplete") {
+          this.props.history.push("/dashboard");
+        }
+      },
+      (e) => console.log(e)
+    );
   }
 
   handleErrorMassageText() {
@@ -70,7 +79,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(RegisterPage);
+export default withRouter(connect(mapStateToProps)(RegisterPage));
 
 // function RegisterPage(props) {
 //   const handleRegister = (e) => {

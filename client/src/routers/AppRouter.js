@@ -8,6 +8,7 @@ import ContactUsPage from "../components/ContactUsPage";
 import Footer from "../components/Footer";
 import LoginPage from "../components/LoginPage";
 import RegisterPage from "../components/RegisterPage";
+import Dashboard from "../components/Dashboard";
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -19,6 +20,7 @@ const AppRouter = () => (
         <Route path="/contactus" component={ContactUsPage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
+        <Route path="/dashboard" component={Dashboard} />
 
         <Route component={NotFoundPage} />
       </Switch>
