@@ -29,6 +29,7 @@ export const starUserRegister = (payload) => (dispatch) => {
     .then(
       (response) => {
         const token = response.data.token;
+        localStorage.setItem("jwtToken", token);
         dispatch(userRegister({ name, lastname, number, email, token }));
         const successTxt = "ثبت نام موفق";
         dispatch(setRegisterSuccess(successTxt));
@@ -39,6 +40,7 @@ export const starUserRegister = (payload) => (dispatch) => {
       },
       (error) => {
         dispatch(startSetRegisterError(error.response.data.errors));
+        console.log("console from starUserRegister", error.response.data);
       }
     );
 };
