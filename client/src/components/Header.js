@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "mongodb";
+
 import { Link, NavLink } from "react-router-dom";
 import LangCustomSelect from "./LangCustomSelect";
 import ThemeCustomSelect from "./ThemeCustomSelect";
@@ -29,5 +31,7 @@ const Header = () => {
     </div>
   );
 };
-
-export default Header;
+const mapStateToProps = (state) => {
+  isAuthenticated: "";
+};
+export default connect(mapStateToProps)(Header);

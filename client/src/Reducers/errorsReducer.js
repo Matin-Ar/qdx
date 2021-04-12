@@ -1,6 +1,7 @@
 //userRegister reducer defaults
 const errorsReducerDefaults = {
   registerErrorMsg: "",
+  registersuccessMsg: "",
 };
 
 //USERS reducer
@@ -10,6 +11,17 @@ const errorsReducer = (state = errorsReducerDefaults, action) => {
       return {
         ...state,
         registerErrorMsg: action.error,
+      };
+
+    case "SET_REGISTER_SUCCESS":
+      return {
+        ...state,
+        registersuccessMsg: action.msg,
+      };
+
+    case "CLEAR_ALL_ERRORS":
+      return {
+        ...errorsReducerDefaults,
       };
 
     default:
