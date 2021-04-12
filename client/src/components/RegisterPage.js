@@ -14,6 +14,10 @@ export class RegisterPage extends Component {
     super(props);
     this.handleRegister = this.handleRegister.bind(this);
     this.renderErrorMsg = this.renderErrorMsg.bind(this);
+
+    this.state = {
+      persianMsg: "",
+    };
   }
 
   handleRegister(e) {
@@ -53,19 +57,23 @@ export class RegisterPage extends Component {
     }
 
     if (massage) {
-      massage.map((err) => {
-        if (err[0] === "number") {
-          persianMsg.push("شماره همراه قبلا ثبت شده است");
-        } else if (err[0] === "email") {
-          persianMsg.push("ایمیل قبلا ثبت شده است");
-        } else {
-          console.log("this is a new register error", err[0]);
+      massage.map((item) => {
+        if (item === "password") {
+          persianMsg.push("پسورد شما ضعیف می باشد");
+        }
+        if (item === "email") {
+          persianMsg.push("ایمیل وارد شده تکراری می باشد");
+        }
+        if (item === "number") {
+          persianMsg.push("شماره وارد شده تکراری می باشد");
         }
       });
     }
 
-    console.log(massage);
+    // console.log(massage);
+    // console.log(persianMsg);
     console.log(persianMsg);
+    // console.log(this.props.registerErrorMsg[0]);
   }
 
   //   return this.props.registerErrorMsg;

@@ -11,6 +11,7 @@ export const startSetRegisterError = (errors) => {
   return (dispatch) => {
     //turning the object into an array and storing it in the store
     const errorArray = Object.entries(errors);
+    console.log(errorArray);
     dispatch(setRegisterError(errorArray));
   };
 };

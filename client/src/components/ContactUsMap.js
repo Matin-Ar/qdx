@@ -11,10 +11,10 @@ export default function ContactUsMap() {
         id="contactusMap"
         width="600"
         height="350"
-        frameborder="0"
+        frameBorder="0"
         scrolling="no"
-        marginheight="0"
-        marginwidth="0"
+        marginHeight="0"
+        marginWidth="0"
         src="https://www.openstreetmap.org/export/embed.html?bbox=48.404663092223934%2C36.62488959676216%2C48.56533814105206%2C36.71012097235828&amp;layer=mapnik&amp;marker=36.66751708364692%2C48.48500061663799"
       ></iframe>
       <div className="contactus-map-info">
