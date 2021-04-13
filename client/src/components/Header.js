@@ -1,13 +1,38 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import LangCustomSelect from "./LangCustomSelect";
 import ThemeCustomSelect from "./ThemeCustomSelect";
 import { startUserLogOut } from "../Actions/user";
+import HeaderProfile from "./HeaderProfile";
 
 export const Header = (props) => {
   const handleLogOut = () => {
     props.dispatch(startUserLogOut(props.token));
+  };
+
+  const handleLogoutMenu = () => {
+    return (
+      <div>
+        <NavLink to="/Login" activeClassName="selected">
+          ورود
+        </NavLink>
+        <NavLink to="/register" activeClassName="selected">
+          ثبت نام
+        </NavLink>
+      </div>
+    );
+  };
+
+  const handleLoginMenu = () => {
+    return (
+      <div className="loginMenu">
+        <HeaderProfile userName={props.userName} />
+        <Link className="logout-text" to="/" onClick={handleLogOut}>
+          خروج
+        </Link>
+      </div>
+    );
   };
 
   return (
@@ -20,24 +45,22 @@ export const Header = (props) => {
       <div id="left-nav-container">
         <nav>
           <ul id="nav-links">
-            <NavLink to="/dashboard">پروفایل کاربری</NavLink>
-
-            <NavLink to="#">دسته بندی دوره ها</NavLink>
-            <NavLink to="/aboutus">درباره ما</NavLink>
-            <NavLink to="/contactus">تماس با ما</NavLink>
-            {!props.isAuthenticated && <NavLink to="/Login">ورود</NavLink>}
-            {!props.isAuthenticated && (
-              <NavLink to="/register">ثبت نام</NavLink>
-            )}
-            {props.isAuthenticated && (
-              <Link to="/" onClick={handleLogOut}>
-                خروج
-              </Link>
-            )}
+            <NavLink to="/dashboard" activeClassName="selected">
+              پروفایل کاربری
+            </NavLink>
+            <NavLink to="/course" activeClassName="selected">
+              دسته بندی دوره ها
+            </NavLink>
+            <NavLink to="/aboutus" activeClassName="selected">
+              درباره ما
+            </NavLink>
+            <NavLink to="/contactus" activeClassName="selected">
+              تماس با ما
+            </NavLink>
+            {props.isAuthenticated && handleLoginMenu()}
+            {!props.isAuthenticated && handleLogoutMenu()}
           </ul>
         </nav>
-        <LangCustomSelect className="#language" />
-        <ThemeCustomSelect />
       </div>
     </div>
   );
@@ -45,8 +68,9 @@ export const Header = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: !!state.user.token,
+    isAuthenticated: !!state.user.isAuth,
     token: state.user.token,
+    userName: state.user.name,
   };
 };
 

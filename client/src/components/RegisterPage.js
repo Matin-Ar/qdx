@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { starUserRegister } from "../Actions/user";
+import exclamation from "../assets/exclamation.png";
 import {
   setRegisterSuccess,
   clearAllErrors,
@@ -34,16 +35,21 @@ export class RegisterPage extends Component {
       password: e.target.registerPassword.value,
     };
 
+    e.target.registerBtn.disabled = true;
+
+    setTimeout(() => {
+      e.target.registerBtn.disabled = false;
+    }, 5000);
+
     // dipatching start User Register process
     const registerResult = this.props.dispatch(starUserRegister(user));
     registerResult.then((res, rej) => {
       if (res === "ثبت نام موفق") {
         setTimeout(() => {
           this.props.history.push("/dashboard");
-        }, 3000);
+        }, 5000);
       }
     });
-    console.log(registerResult);
   }
 
   renderErrorMsg() {
@@ -59,37 +65,34 @@ export class RegisterPage extends Component {
     if (massage) {
       massage.map((item) => {
         if (item === "password") {
-          persianMsg.push("پسورد شما ضعیف می باشد");
+          persianMsg.push(
+            "رمر عبور باید شامل حداقل 1 حرف کوچک ، 1 حرف بزرگ و  1 عدد باشد"
+          );
         }
         if (item === "email") {
-          persianMsg.push("ایمیل وارد شده تکراری می باشد");
+          persianMsg.push("ایمیل وارد شده قبلا ثبت شده است");
         }
         if (item === "number") {
-          persianMsg.push("شماره وارد شده تکراری می باشد");
+          persianMsg.push("شماره همراه قبلا ثبت شده است");
         }
       });
     }
 
-    // console.log(massage);
-    // console.log(persianMsg);
-    console.log(persianMsg);
-    // console.log(this.props.registerErrorMsg[0]);
+    const finalMassage = persianMsg.map((error) => (
+      <p className="error-text-container">
+        <svg
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+          focusable="false"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
+        </svg>
+        {error}
+      </p>
+    ));
+    return finalMassage;
   }
-
-  //   return this.props.registerErrorMsg;
-
-  // this.props.registerErrorMsg.forEach((error) => {
-  //   if (error[0] === "number") {
-  //     massage.push("شماره همراه قبلا ثبت شده است");
-  //   } else if (error[0] === "email") {
-  //     massage.push("ایمیل قبلا ثبت شده است");
-  //   } else {
-  //     console.log("this is a new register error", error[0]);
-  //   }
-
-  //   //   return massage;
-  //   // });
-  // }
 
   render() {
     return (
@@ -98,11 +101,23 @@ export class RegisterPage extends Component {
           <form className="register-form" onSubmit={this.handleRegister}>
             {this.props.registersuccessMsg && (
               <div className="registerSuccess-container">
+                <svg
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4C12.76,4 13.5,4.11 14.2, 4.31L15.77,2.74C14.61,2.26 13.34,2 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0, 0 22,12M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z"></path>
+                </svg>
                 {this.props.registersuccessMsg}
               </div>
             )}
 
-            {this.renderErrorMsg()}
+            {this.props.isError && (
+              <div className="registerError-container">
+                {this.renderErrorMsg()}{" "}
+              </div>
+            )}
 
             <p>ثبت نام</p>
             <label htmlFor="registerName">نام</label>
@@ -119,7 +134,7 @@ export class RegisterPage extends Component {
             <label htmlFor="registerPassword">پسورد</label>
             <input type="password" name="registerPassword" required />
 
-            <button type="submit" className="registerButton">
+            <button type="submit" name="registerBtn" className="registerButton">
               ثبت نام
             </button>
           </form>
@@ -132,6 +147,8 @@ export class RegisterPage extends Component {
 const mapStateToProps = (state) => {
   return {
     registerErrorMsg: state.errorMsg.registerErrorMsg,
+    isError: state.errorMsg.registerErrorMsg.length > 0 ? true : false,
+
     registersuccessMsg:
       state.errorMsg.registersuccessMsg != "registerError"
         ? state.errorMsg.registersuccessMsg

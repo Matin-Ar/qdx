@@ -10,6 +10,7 @@
 
 #nav-container {
   display: flex;
+  position: relative;
   flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
@@ -46,6 +47,11 @@ nav {
 #nav-links a:hover {
   color: $yellow;
   cursor: pointer;
+}
+
+.selected {
+  font-weight: bold;
+  color: $yellow !important;
 }
 
 .logo-container {
@@ -91,46 +97,93 @@ nav {
 //   text-indent: 1.5em;
 // }
 
-.languageController,
-.themeController {
-  width: 71px;
+// .languageController,
+// .themeController {
+//   width: 71px;
+//   height: 71px;
+//   background-color: $light;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
+
+// .themeController {
+//   position: absolute;
+//   left: -100px;
+// }
+
+// .languageController__control,
+// .themeController__control {
+//   background-color: $light !important;
+//   border: none !important;
+//   outline: none !important;
+// }
+
+// .languageController__value-container,
+// .themeController__value-container {
+//   padding: 0.8em !important;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .languageController__indicator,
+// .themeController__indicator {
+//   display: none !important;
+// }
+
+// .languageController__value-container,
+// .themeController__value-container {
+//   padding: 1em;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
+
+// .themeController__single-value {
+//   color: white !important;
+//   margin: inherit !important;
+// }
+
+.header-profile-container {
+  display: flex;
+  flex-direction: row-reverse;
+  color: $gray;
+  justify-items: center;
+  align-items: center;
   height: 71px;
-  padding: 0.4em;
-}
-
-.languageController__control,
-.themeController__control {
-  background-color: $light !important;
-  border: none !important;
-  outline: none !important;
-}
-
-.languageController__value-container,
-.themeController__value-container {
-  padding: 0.8em !important;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.languageController__indicator,
-.themeController__indicator {
-  display: none !important;
-}
-
-.languageController__value-container,
-.themeController__value-container {
+  max-width: 300px;
+  background-color: $light;
   padding: 1em;
+  margin-right: 1em;
+  border-radius: 10px;
+}
+
+.header-profile-container img {
+  border: 3px solid $yellow;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  margin-left: 10px;
+}
+
+.header-profile-welcome {
+  direction: rtl;
+  font-size: 0.8em;
+}
+
+.loginMenu {
   display: flex;
+  flex-direction: row-reverse;
   align-items: center;
-  justify-content: center;
+  position: relative;
 }
 
-.themeController__single-value {
-  color: white !important;
-  margin: inherit !important;
+.logout-text {
+  position: absolute;
+  left: -8em;
 }
-
 //HomePage
 
 //Hero
@@ -452,6 +505,8 @@ nav {
 
 //LOGIN page
 .loginPage-wrapper {
+  min-height: 60vh;
+
   background-color: $dark;
   display: flex;
   justify-content: center;
@@ -490,6 +545,20 @@ nav {
   font-size: 1em;
   font-family: bold;
   border-radius: 10px;
+  cursor: pointer;
+}
+.loginButton:hover {
+  background-color: lighten($yellow, $amount: 10%);
+}
+
+.loginButton:disabled {
+  background-color: $gray;
+  cursor: no-drop;
+}
+
+.loginButton:disabled:hover {
+  background-color: $gray;
+  cursor: no-drop;
 }
 
 .login-wrapper {
@@ -535,13 +604,39 @@ nav {
   padding: 2em;
 }
 
+.error-text-container {
+  display: flex;
+  align-items: center;
+}
+
+.error-text-container svg {
+  min-height: 32px;
+  max-height: 32px;
+  margin-left: 1em;
+  fill: #f44336;
+}
+
+.registerError-container p {
+  color: rgb(97, 26, 21) !important;
+}
+
 .registerSuccess-container {
+  display: flex;
+  align-items: center;
+
   border-radius: 10px;
   margin-bottom: 2em;
   background-color: rgb(237, 247, 237);
   color: rgb(30, 70, 32);
   width: 100%;
   padding: 2em;
+}
+
+.registerSuccess-container svg {
+  min-height: 32px;
+  max-height: 32px;
+  margin-left: 1em;
+  fill: #4caf50;
 }
 
 .register-form {
@@ -583,11 +678,39 @@ nav {
   font-size: 1em;
   font-family: bold;
   border-radius: 10px;
+  cursor: pointer;
+}
+
+.registerButton:disabled {
+  background-color: $gray;
+  cursor: no-drop;
+}
+
+.registerButton:disabled:hover {
+  background-color: $gray;
 }
 
 .registerButton:hover {
   background-color: lighten($yellow, $amount: 10);
 }
+
+//Dashboard
+.dashboard-Container {
+  background-color: $dark;
+  min-height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+}
+
+.dashboard-content-wrapper {
+  width: 80%;
+  height: 600px;
+  background-color: $light;
+  border-radius: 10px;
+}
+
 //footer
 .footer-container {
   background-color: $light;

@@ -17,6 +17,12 @@ function LoginPage(props) {
       password: e.target.loginPassword.value,
     };
 
+    e.target.loginButton.disabled = true;
+
+    setTimeout(() => {
+      e.target.loginButton.disabled = false;
+    }, 3000);
+
     const signInRes = props.dispatch(startUserLogIn(user));
     signInRes.then(
       (res) => {
@@ -35,10 +41,11 @@ function LoginPage(props) {
       (e) => {}
     );
   };
+
   return (
     <div className="loginPage-wrapper">
       <form className="login-wrapper" onSubmit={handleLogin}>
-        {props.loginSuccess && (
+        {props.name && (
           <div className="loginSuccess-container">
             {" "}
             {props.name} عزیز خوش اومدی
@@ -55,7 +62,7 @@ function LoginPage(props) {
 
         <label htmlFor="loginPassword">پسورد</label>
         <input type="password" name="loginPassword" required />
-        <button type="submit" className="loginButton">
+        <button type="submit" className="loginButton" name="loginButton">
           ورود
         </button>
       </form>

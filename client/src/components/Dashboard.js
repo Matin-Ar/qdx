@@ -2,8 +2,8 @@ import React from "react";
 
 export default function Dashboard() {
   return (
-    <div>
-      <p>this is the dashboard</p>
+    <div className="dashboard-Container">
+      <div className="dashboard-content-wrapper"></div>
     </div>
   );
 }

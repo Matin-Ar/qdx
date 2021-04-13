@@ -1,4 +1,5 @@
 import axios from "axios";
+import setAutherizationToken from "../utils/setAutherizationToken";
 import {
   startSetRegisterError,
   clearAllErrors,
@@ -30,6 +31,7 @@ export const starUserRegister = (payload) => (dispatch) => {
       (response) => {
         const token = response.data.token;
         localStorage.setItem("jwtToken", token);
+        setAutherizationToken(token);
         dispatch(userRegister({ name, lastname, number, email, token }));
         const successTxt = "ثبت نام موفق";
         dispatch(setRegisterSuccess(successTxt));
@@ -60,6 +62,9 @@ export const startUserLogOut = (token) => (dispatch) => {
 
   dispatch(userLogOut());
   dispatch(clearAllErrors());
+  axios.post("/users/logout");
+  setAutherizationToken();
+  localStorage.removeItem("jwtToken");
 
   return axiosAuth.post("/users/logout").then(
     () => console.log("user logged out"),
@@ -82,8 +87,10 @@ export const startUserLogIn = ({ email, password }) => (dispatch) => {
   return axios.post("/users/login", { email, password }).then(
     (resp) => {
       const token = resp.data.token;
+      setAutherizationToken(token);
+      localStorage.setItem("jwtToken", token);
+
       const user = resp.data.user;
-      console.log(resp.data);
       dispatch(userLogIn({ token, ...user }));
       dispatch(setLoginSuccessMsg());
 
@@ -92,5 +99,23 @@ export const startUserLogIn = ({ email, password }) => (dispatch) => {
     (error) => {
       return "  ایمیل و یا رمز عبور وارد شده صحیح نمی باشد";
     }
+  );
+};
+
+export const SetCurrentUser = ({ name, lastname, number, email }) => ({
+  type: "SET_CURRENT_USER",
+  name,
+  lastname,
+  number,
+  email,
+});
+
+export const startSetCurrentUser = () => (dispatch) => {
+  axios.get("/users/me").then(
+    (resp) => {
+      console.log("the current user data is: ", resp.data);
+      dispatch(SetCurrentUser(resp.data));
+    },
+    (error) => console.log("there was a error in setting current user", error)
   );
 };
