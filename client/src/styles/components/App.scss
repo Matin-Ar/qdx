@@ -1,11 +1,44 @@
 @import "../base/settings.scss";
 
+@font-face {
+  font-family: "IRANSansWeb";
+  src: local("IRANSansWeb"), url(../../fonts/IRANSansWeb.ttf) format("opentype");
+}
+
+@font-face {
+  font-family: "IRANSansWeb_Bold";
+  font-weight: 900;
+  src: local("IRANSansWeb_Bold"),
+    url(../../fonts/IRANSansWeb_Bold.ttf) format("opentype");
+}
+
+@font-face {
+  font-family: "IRANSansWeb_Black";
+  font-weight: 900;
+  src: local('"IRANSansWeb_Black"'),
+    url(../../fonts/IRANSansWeb_Black.ttf) format("opentype");
+}
+
 *,
 *::before,
 *::after {
+  font-family: IRANSansWeb;
+
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 #nav-container {
@@ -701,14 +734,290 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2em;
+  padding: 4em 2em;
 }
 
 .dashboard-content-wrapper {
   width: 80%;
-  height: 600px;
   background-color: $light;
   border-radius: 10px;
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+}
+
+.dashboard-header-text {
+  color: white;
+  font-size: 1.2em;
+
+  margin-bottom: 3em;
+}
+
+.dashboard-avatar-container {
+  position: relative;
+
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4em;
+}
+
+.dashboard-avatar-img {
+  border-radius: 50%;
+  border: 5px solid $yellow;
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+
+.avatar-overLay {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.avatar-overLay::after {
+  position: absolute;
+  content: "📥 انتخاب آواتار";
+  color: $dark;
+  font-size: 0.8em;
+  padding: 1.2em;
+  display: flex;
+  justify-content: center;
+  height: 250px;
+  width: 250px;
+  top: 200px;
+  border-radius: 50%;
+  background-color: $yellow;
+}
+.avatar-overLay-text {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.user-info-wrapper {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+}
+
+.left-user-info,
+.right-user-info {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  color: $gray;
+}
+
+.left-user-info input,
+.right-user-info input {
+  margin-bottom: 1em;
+  height: 45px;
+  background-color: $dark;
+  outline: none;
+  border: none;
+  padding-right: 1em;
+  color: white;
+  border-bottom: 1px solid darken($color: $dark, $amount: 20%);
+  border-left: 1px solid darken($color: $dark, $amount: 20%);
+}
+
+.left-user-info input:disabled,
+.right-user-info input:disabled {
+  background-color: rgb(61, 61, 61);
+}
+
+// ----- Select component for sex selection ----- //
+
+.sex-checkbox-wrapper {
+  display: flex;
+  direction: rtl;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#male,
+#female,
+#rathernotsay {
+  display: none;
+}
+
+.gender-container label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.gender-container label img {
+  margin-left: 10px;
+  height: 40px;
+  width: 40px;
+  pointer-events: none;
+}
+
+#male:checked ~ #malelabel {
+  color: #a3a3cd;
+}
+#female:checked ~ #femalelabel {
+  color: rgb(247, 175, 187);
+}
+#rathernotsay:checked ~ #rathernotsaylable {
+  color: #b3b0e7;
+}
+
+.react-select-dashboard-sex-info__menu {
+  z-index: 2000000;
+}
+
+.left-user-info label,
+.right-user-info label {
+  margin-bottom: 0.8em;
+}
+
+.dashboard-button-wrapper {
+  display: flex;
+  margin-top: 2em;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.dashboard-button-update,
+.dashboard-button-delete {
+  padding: 1em 3em;
+  margin: 1em 1em;
+  font-size: 1.1em;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+}
+
+.dashboard-button-update {
+  background-color: $yellow;
+  cursor: pointer;
+}
+.dashboard-button-update:hover {
+  background-color: #4caf50;
+}
+.dashboard-button-delete {
+  background-color: #f32013;
+  cursor: pointer;
+}
+
+.dashboard-button-delete:hover {
+  background-color: lighten($color: #f32013, $amount: 10%);
+}
+
+//avatarMaker & MODAL
+.modal-content div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#avatar-upload-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+#avatar-upload-input + label {
+  font-weight: 700;
+  color: white;
+  background-color: $yellow;
+  display: inline-block;
+  color: $dark;
+  padding: 10px 100px;
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+#avatar-upload-input:focus + label,
+#avatar-upload-input + label:hover {
+  background-color: #4caf50;
+}
+
+#avatar-upload-input + label {
+  cursor: pointer; /* "hand" cursor */
+}
+
+.avatar-upload-label {
+  justify-content: center;
+  text-align: center;
+}
+#avatar-upload-input:focus + label {
+  outline: 1px dotted $yellow;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.avatar-uploaded-file-tag {
+  direction: rtl;
+  color: $gray;
+  display: flex;
+  flex-direction: column;
+}
+
+.avatar-uploaded-file-tag-desc {
+  font-size: 0.6em;
+  word-wrap: break-word;
+  margin-top: 1em;
+}
+.avatar-input-file-wrapper {
+  display: flex;
+  flex-direction: column;
+  direction: rtl;
+}
+
+.avatar-page-button-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row !important;
+  margin-top: 2em;
+}
+
+.avatar-page-button-upload {
+  font-weight: 700;
+  color: white;
+  display: inline-block;
+  padding: 10px 30px;
+  margin-bottom: 1em;
+  margin-right: 1em;
+  background-color: #4caf50;
+  color: rgb(30, 70, 32);
+  outline: none;
+  border: none;
+}
+
+.avatar-page-button-upload:hover {
+  cursor: pointer;
+  background-color: lighten($color: #4caf50, $amount: 10%);
+}
+
+.avatar-page-button-cancel:hover {
+  cursor: pointer;
+  background-color: lighten($color: #f32013, $amount: 10%);
+}
+
+.avatar-page-button-cancel {
+  font-weight: 700;
+  color: white;
+  background-color: #f32013;
+  display: inline-block;
+  color: $dark;
+  padding: 10px 30px;
+  margin-bottom: 1em;
+  outline: none;
+  border: none;
 }
 
 //footer

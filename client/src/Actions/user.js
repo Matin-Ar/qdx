@@ -113,7 +113,6 @@ export const SetCurrentUser = ({ name, lastname, number, email }) => ({
 export const startSetCurrentUser = () => (dispatch) => {
   axios.get("/users/me").then(
     (resp) => {
-      console.log("the current user data is: ", resp.data);
       dispatch(SetCurrentUser(resp.data));
     },
     (error) => console.log("there was a error in setting current user", error)
