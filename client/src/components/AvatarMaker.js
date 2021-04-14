@@ -6,9 +6,10 @@ class AvatarMaker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      myImage: "",
+      myImage: DefaultAvatar,
     };
   }
+
   onClickSave = () => {
     if (this.editor) {
       // This returns a HTMLCanvasElement, it can be made into a data URL or a blob,
@@ -17,27 +18,57 @@ class AvatarMaker extends React.Component {
       const canvasURI = canvas.toDataURL();
       console.log(canvasURI);
       this.setState({ myImage: canvasURI });
-
-      // If you want the image resized to the canvas size (also a HTMLCanvasElement)
-      const canvasScaled = this.editor.getImageScaledToCanvas();
     }
   };
 
   setEditorRef = (editor) => (this.editor = editor);
 
-  render() {
+  render(props) {
     return (
       <div>
-        <AvatarEditor
-          ref={this.setEditorRef}
-          image={DefaultAvatar}
-          width={250}
-          height={250}
-          border={50}
-          scale={1.2}
-        />
-        <button onClick={this.onClickSave}>save </button>
-        <img src={this.state.myImage} />
+        <div>
+          <AvatarEditor
+            ref={this.setEditorRef}
+            image={DefaultAvatar}
+            width={250}
+            height={250}
+            border={5}
+            scale={1.2}
+          />
+        </div>
+
+        <div className="avatar-input-file-wrapper">
+          <input
+            type="file"
+            name="avatar-upload-input"
+            id="avatar-upload-input"
+          ></input>
+
+          <label htmlFor="avatar-upload-input" className="avatar-upload-label">
+            {" "}
+            📥 لطفا آواتار خود را انتخاب نمایید
+          </label>
+          <span className="avatar-uploaded-file-tag">
+            <span>
+              {" "}
+              <strong>فایل انتخاب شده :</strong>
+              <span>هیج فایلی انتخاب نشده است</span>
+            </span>
+            <span className="avatar-uploaded-file-tag-desc">
+              * حداکثر ظرفیت مجاز 1 مگابایت می باشد | فرمت های مجاز : jpeg , jpg
+              , png
+            </span>
+          </span>
+        </div>
+        <div className="avatar-page-button-wrapper">
+          <button className="avatar-page-button-upload">تایید و آپلود</button>
+          <button
+            className="avatar-page-button-cancel"
+            onClick={this.props.handleModleClose}
+          >
+            لغو و بازگشت
+          </button>
+        </div>
       </div>
     );
   }
