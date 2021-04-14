@@ -1,11 +1,38 @@
-// html {
-//   font-size: 62.5%;
-// }
+@font-face {
+  font-family: "IRANSansWeb";
+  src: local("IRANSansWeb"), url(./fonts/IRANSansWeb.ttf) format("opentype");
+}
+
+@font-face {
+  font-family: "IRANSansWeb_Bold";
+  font-weight: 900;
+  src: local("IRANSansWeb_Bold"),
+    url(./fonts/IRANSansWeb_Bold.ttf) format("opentype");
+}
+
+@font-face {
+  font-family: "IRANSansWeb_Black";
+  font-weight: 900;
+  src: local('"IRANSansWeb_Black"'),
+    url(./fonts/IRANSansWeb_Black.ttf) format("opentype");
+}
 
 body {
-  font-family: Helvetica, Arial, sans-serif;
-//   font-size: $m-size;
-background-color: aqua;
+  font-family: "IRANSansWeb_Bold";
+  //   font-size: $m-size;
+  background-color: aqua;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 // button {
