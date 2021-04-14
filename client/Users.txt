@@ -46,7 +46,31 @@ DELETE - /users/me
 	tozihat: baraie pak kardan user az database. NIAZ BE AUTH DARE. be body niaz nadare.
 	tamami etelate user az database pak mishe va dg fard nemitone login kone, va mitavan dobare ba hamoon etalat signup jadid anjam dad.
 
+
+NEW :
+
+POST - /users/me/avatar
+	tozihat: baraie add kardane avatar be profile user. NIAZ BE AUTH DARE. NIAZ BE BODY DARE.
+	file body baiad "form-data" bashe va hatman - key - on baiad "avatar" bashe , value ham baiad oon akse bashe.
+	MESAL :       key="avatar"     value="example.jpg"
+	response: dar soorate dorost ferestade shodan fagaht status code 200 miad va hich massage dgei nemiad vali age 
+			  ertebat fail she response ye file JSON maid ke error marboot too oonja zekr shode.
+
+DELETE - /users/me/avatar
+	tozihat: baraie pak kardane avatar dar profile user. NIAZ BE AUTH DARE. be body niaz nadare.
+	kare khasi niaz nadare , fagaht ba oon token ye request dade mishe va aks pak mishe
+	response: hich response khassi nadare va faghat dar soorat bargharr shodan ertebat status code 200 mide
+
+GET - /users/:id/avatar
+	tozihat: baraie didane avatar profile, NIAZ BE HICH CHIZ NADARE.
+	hame mitoonam az tarighe url bebinanesh.
+	dar kol chize khassi nadare.(baghie tozihatesh too skype dadam)
+	
 --------------------------
 
-felan, bazam mitoni ertegha va viraiesheshon konim ke jolo tar ha hatman khahim kard.
-GL HF ;)
+
+
+gender 
+bday 
+codinglanguage
+education
