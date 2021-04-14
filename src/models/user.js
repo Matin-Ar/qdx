@@ -60,6 +60,18 @@ const userSchema = new mongoose.Schema({
     }],
     avatar: {
         type: Buffer
+    },
+    gender: {
+        type: String
+    },
+    bday: {
+        type: Date
+    },
+    codinglanguage: {
+        type: String
+    },
+    education: {
+        type: String
     }
 }, {
     timestamps: true
