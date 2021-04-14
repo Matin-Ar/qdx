@@ -829,6 +829,11 @@ nav {
   border-left: 1px solid darken($color: $dark, $amount: 20%);
 }
 
+.left-user-info input:disabled,
+.right-user-info input:disabled {
+  background-color: rgb(61, 61, 61);
+}
+
 // ----- Select component for sex selection ----- //
 
 .sex-checkbox-wrapper {

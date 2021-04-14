@@ -5,9 +5,20 @@ import AvatarEditor from "react-avatar-editor";
 class AvatarMaker extends React.Component {
   constructor(props) {
     super(props);
+    this.handleFileSelect = this.handleFileSelect.bind(this);
+
     this.state = {
       myImage: DefaultAvatar,
+      uploadedFileName: "هیچ فایلی انتخاب نشده",
     };
+  }
+
+  handleFileSelect(e) {
+    console.log(e.target.files[0]);
+    this.setState({
+      myImage: e.target.files[0],
+      uploadedFileName: e.target.files[0].name,
+    });
   }
 
   onClickSave = () => {
@@ -29,7 +40,7 @@ class AvatarMaker extends React.Component {
         <div>
           <AvatarEditor
             ref={this.setEditorRef}
-            image={DefaultAvatar}
+            image={this.state.myImage}
             width={250}
             height={250}
             border={5}
@@ -42,6 +53,7 @@ class AvatarMaker extends React.Component {
             type="file"
             name="avatar-upload-input"
             id="avatar-upload-input"
+            onChange={this.handleFileSelect}
           ></input>
 
           <label htmlFor="avatar-upload-input" className="avatar-upload-label">
@@ -52,7 +64,7 @@ class AvatarMaker extends React.Component {
             <span>
               {" "}
               <strong>فایل انتخاب شده :</strong>
-              <span>هیج فایلی انتخاب نشده است</span>
+              <span>{this.state.uploadedFileName}</span>
             </span>
             <span className="avatar-uploaded-file-tag-desc">
               * حداکثر ظرفیت مجاز 1 مگابایت می باشد | فرمت های مجاز : jpeg , jpg

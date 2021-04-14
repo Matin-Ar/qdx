@@ -64,7 +64,13 @@ export function DashboardForm({
           </div>
 
           <label htmlFor="dashboardEducation">رشته تحصیلی</label>
-          <input type="text" name="dashboardEducation" autocomplete="false" />
+          <input
+            type="text"
+            name="dashboardEducation"
+            autocomplete="false"
+            disabled
+            placeholder="غیر فعال است"
+          />
 
           <label htmlFor="dashboardCodingLanguage">
             زبان برنامه نویسی مورد علاقه
@@ -73,6 +79,8 @@ export function DashboardForm({
             type="text"
             name="dashboardCodingLanguage"
             autocomplete="false"
+            disabled
+            placeholder="غیر فعال است"
           />
         </div>
         <div className="right-user-info">
