@@ -6,6 +6,7 @@ const usersReducerDefaults = {
   email: "",
   token: null,
   isAuth: false,
+  id: "",
 };
 
 //USERS reducer
@@ -19,6 +20,7 @@ const usersReducer = (state = usersReducerDefaults, action) => {
         number: action.payload.number,
         email: action.payload.email,
         token: action.payload.token,
+        id: action.payload._id,
         isAuth: true,
       };
     case "USER_LOG_OUT":
@@ -38,6 +40,7 @@ const usersReducer = (state = usersReducerDefaults, action) => {
         email: action.email,
         token: action.token,
         isAuth: true,
+        id: action._id,
       };
 
     case "SET_CURRENT_USER":
@@ -47,6 +50,7 @@ const usersReducer = (state = usersReducerDefaults, action) => {
         number: action.number,
         email: action.email,
         isAuth: true,
+        id: action._id,
       };
 
     default:

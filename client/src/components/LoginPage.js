@@ -47,8 +47,7 @@ function LoginPage(props) {
       <form className="login-wrapper" onSubmit={handleLogin}>
         {props.name && (
           <div className="loginSuccess-container">
-            {" "}
-            {props.name} عزیز خوش اومدی
+            {props.name} عزیز خوش اومدی{" "}
           </div>
         )}
 
