@@ -2,7 +2,8 @@ import React, { useState, useReducer } from "react";
 import { connect } from "react-redux";
 import DatePicker, { utils } from "react-modern-calendar-datepicker";
 import SexSelect from "./SexSelect";
-
+import axios from "axios";
+import { withRouter } from "react-router";
 export function DashboardForm({
   handleModleOpen,
   firstName,
@@ -13,6 +14,7 @@ export function DashboardForm({
   id,
   email,
   userAvatar,
+  history,
 }) {
   const [selectedDay, setSelectedDay] = useState(null);
 
@@ -34,6 +36,24 @@ export function DashboardForm({
     year: now.year,
     month: now.month,
     day: now.day,
+  };
+
+  const handleDeleteUser = (e) => {
+    e.preventDefault();
+    const promptMsg = prompt(
+      "آیا مطمئن هستین ؟ این عملیات غیر قابل بازگشت می باشد | for delete type yes"
+    );
+
+    if (promptMsg) {
+      console.log(promptMsg);
+      if (promptMsg === "yes") {
+        axios.delete("/users/me");
+        alert("حذف اکانت با موفقیت انجام شد | خدانگهدار");
+        history.push("/");
+      } else {
+        alert("حذف اکانت ناموفق");
+      }
+    }
   };
 
   return (
@@ -119,7 +139,9 @@ export function DashboardForm({
       </div>
       <div className="dashboard-button-wrapper">
         <button className="dashboard-button-update">بروزرسانی</button>
-        <button className="dashboard-button-delete">حذف پروفایل</button>
+        <button className="dashboard-button-delete" onClick={handleDeleteUser}>
+          حذف پروفایل
+        </button>
       </div>
     </form>
   );
@@ -139,4 +161,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(DashboardForm);
+export default withRouter(connect(mapStateToProps)(DashboardForm));
