@@ -2,6 +2,7 @@ const express = require('express')
 const multer = require('multer')
 const sharp = require('sharp')
 const fs = require('fs')
+var cors = require('cors')
 const User = require('../models/user')
 const auth = require('../middleware/auth')
 const { sendWelcomeEmail, sendCancelatonEmail } = require('../emails/account')
@@ -117,7 +118,7 @@ router.delete('/users/me/avatar', auth, async (req, res) => {
     res.send()
 })
 
-router.get('/users/:id/avatar', async (req, res) => {
+router.get('/users/:id/avatar', cors() ,async (req, res) => {
     try {
         const user = await User.findById(req.params.id)
         if (!user) {

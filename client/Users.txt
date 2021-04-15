@@ -39,6 +39,8 @@ PATCH - /users/me
 		"password": "...",
 	}
 
+	ALL ATTRIBUTES : 'name', 'lastname', 'number', 'email', 'password', 'gender', 'bday', 'codinglanguage', 'education'
+
 	beharhal harchio bekhad avaz kone oon too mizare xD . 
 	response: etelate user (dar vaghe etelate user bad az update shodanesh)
 	
@@ -67,10 +69,3 @@ GET - /users/:id/avatar
 	dar kol chize khassi nadare.(baghie tozihatesh too skype dadam)
 	
 --------------------------
-
-
-
-gender 
-bday 
-codinglanguage
-education
