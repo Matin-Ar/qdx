@@ -99,7 +99,7 @@ const upload = multer({
 
 })
 
-router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) => {
+router.post('/users/me/avatar', auth, cors(), upload.single('avatar'), async (req, res) => {
     if (!req.file) {
         res.status(400).send({ error: "Provide avatar"})
     } else {
@@ -118,7 +118,7 @@ router.delete('/users/me/avatar', auth, async (req, res) => {
     res.send()
 })
 
-router.get('/users/:id/avatar', cors() ,async (req, res) => {
+router.get('/users/:id/avatar', async (req, res) => {
     try {
         const user = await User.findById(req.params.id)
         if (!user) {
