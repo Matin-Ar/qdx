@@ -1,5 +1,6 @@
 import axios from "axios";
 import setAutherizationToken from "../utils/setAutherizationToken";
+import moment from "moment";
 import {
   startSetRegisterError,
   clearAllErrors,
@@ -122,17 +123,26 @@ export const startSetCurrentUser = () => (dispatch) => {
   );
 };
 
-export const startSetUserAvatar = (file) => () => {
+export const setUserAvatar = (avatar) => ({
+  type: "SET_USER_AVATAR",
+  avatar,
+});
+
+export const startSetUserAvatar = (file, userId) => (dispatch) => {
   let formData = new FormData();
-
   formData.append("avatar", file);
-
   return axios({
     url: "/users/me/avatar",
     method: "POST",
     data: formData,
   })
     .then((res) => {
+      dispatch(
+        setUserAvatar(
+          `http://localhost:3001/users/${userId}/avatar/?${moment().valueOf()}`
+        )
+      );
+
       return res.status;
     })
     .catch((err) => {

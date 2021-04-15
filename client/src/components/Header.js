@@ -27,7 +27,10 @@ export const Header = (props) => {
   const handleLoginMenu = () => {
     return (
       <div className="loginMenu">
-        <HeaderProfile userName={props.userName} userId={props.id} />
+        <HeaderProfile
+          userName={props.userName}
+          userAvatar={props.userAvatar}
+        />
         <Link className="logout-text" to="/" onClick={handleLogOut}>
           خروج
         </Link>
@@ -71,7 +74,7 @@ const mapStateToProps = (state) => {
     isAuthenticated: !!state.user.isAuth,
     token: state.user.token,
     userName: state.user.name,
-    id: state.user.id,
+    userAvatar: state.user.avatar,
   };
 };
 

@@ -12,13 +12,9 @@ export function DashboardForm({
   gender,
   id,
   email,
+  userAvatar,
 }) {
   const [selectedDay, setSelectedDay] = useState(null);
-  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
-
-  function handleRerender() {
-    forceUpdate();
-  }
 
   const now = utils("fa").getToday();
 
@@ -43,11 +39,10 @@ export function DashboardForm({
   return (
     <form autocomplete="off">
       <h1 className="dashboard-header-text">ویرایش حساب کاربری</h1>
-      <button onClick={handleRerender}>rerender</button>
       <div className="dashboard-avatar-container">
         <img
           className="dashboard-avatar-img"
-          src={`http://localhost:3001/users/${id}/avatar`}
+          src={userAvatar}
           onClick={handleModleOpen}
         />
         <div className="avatar-overLay"></div>
@@ -140,7 +135,7 @@ const mapStateToProps = (state) => {
       : "شماره موبایل خود را وارد نمایید",
     email: state.user.email ? state.user.email : "ایمیل خود را وارد نمایید",
     gender: state.user.gender ? state.user.gender : null,
-    id: state.user.id,
+    userAvatar: state.user.avatar,
   };
 };
 

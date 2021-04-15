@@ -1,7 +1,37 @@
 import React from "react";
 import AvatarEditor from "react-avatar-editor";
-import { startSetUserAvatar } from "./../Actions/user";
+import { startSetUserAvatar, setUserAvatar } from "./../Actions/user";
 import { connect } from "react-redux";
+import axios from "axios";
+import moment from "moment";
+
+// <div>
+// <label for="image-rotation">
+//   image-rotation (between 0 and 360):
+// </label>
+// <input
+//   type="range"
+//   id="image-rotation"
+//   name="image-rotation"
+//   min="0"
+//   max="360"
+//   defaultValue="0"
+//   onChange={this.handleRotationChange}
+// />
+
+// <label for="image-scale">image-scale (between -2 and 2):</label>
+
+// <input
+//   type="range"
+//   id="image-scale"
+//   name="image-scale"
+//   min="0.5"
+//   max="5"
+//   step="0.1"
+//   defaultValue="1"
+//   onChange={this.handleScaleChange}
+// />
+// </div>
 
 export class AvatarMaker extends React.Component {
   constructor(props) {
@@ -10,9 +40,10 @@ export class AvatarMaker extends React.Component {
     this.handleFileUpload = this.handleFileUpload.bind(this);
     this.handleRotationChange = this.handleRotationChange.bind(this);
     this.handleScaleChange = this.handleScaleChange.bind(this);
+    this.handleAvatarDelete = this.handleAvatarDelete.bind(this);
 
     this.state = {
-      myImage: `http://localhost:3001/users/${this.props.userId}/avatar`,
+      myImage: this.props.userAvatar,
       uploadedFileName: "هیچ فایلی انتخاب نشده",
       file: "",
       imgRotation: 0,
@@ -28,25 +59,39 @@ export class AvatarMaker extends React.Component {
     });
   }
 
+  setEditorRef = (editor) => (this.editor = editor);
+
   handleFileUpload(e) {
     let file = this.state.file;
 
     if (this.editor) {
       const canvas = this.editor.getImage().toDataURL();
-      let profileImage = new Image();
-      profileImage.crossOrigin = "anonymous";
-      profileImage.src = canvas;
-      console.log(profileImage);
+      // let tempImage = new Image();
+      // tempImage.crossOrigin = "anonymous";
+      // tempImage.src = canvas;
 
-      this.props.dispatch(startSetUserAvatar(profileImage)).then((res) => {
-        console.log("res from .then -- avatar:", res);
-        if (res === 200) {
-          alert("آپلود با موفقیت انجام شد");
-          this.props.handleModleClose();
-        } else {
-          alert(res);
-        }
-      });
+      // let profileImage = new Image();
+      // profileImage.setAttribute("crossOrigin", "anonymous");
+      // profileImage.src = tempImage;
+
+      // localStorage.setItem("imgdata", profileImage);
+
+      // const finalimg = localStorage.getItem("imgdata");
+      // const finalfinalimg = new Image();
+      // finalfinalimg.crossOrigin = "anonymous";
+      // finalfinalimg.src = finalimg;
+
+      this.props
+        .dispatch(startSetUserAvatar(file, this.props.userId))
+        .then((res) => {
+          console.log("res from .then -- avatar:", res);
+          if (res === 200) {
+            alert("آپلود با موفقیت انجام شد");
+            this.props.handleModleClose();
+          } else {
+            alert(res);
+          }
+        });
     }
   }
 
@@ -62,7 +107,26 @@ export class AvatarMaker extends React.Component {
     });
   }
 
-  setEditorRef = (editor) => (this.editor = editor);
+  handleAvatarDelete(e) {
+    axios
+      .delete("/users/me/avatar")
+
+      .then((res) => {
+        if (res.status === 200) {
+          alert("حذف آواتار با موفقیت انجام شد");
+          this.props.dispatch(
+            setUserAvatar(
+              `http://localhost:3001/users/${
+                this.props.userId
+              }/avatar/?${moment().valueOf()}`
+            )
+          );
+          this.props.handleModleClose();
+        } else {
+          alert(res);
+        }
+      });
+  }
 
   render(props) {
     return (
@@ -78,33 +142,6 @@ export class AvatarMaker extends React.Component {
             scale={this.state.imgScale}
             rotate={this.state.imgRotation}
           />
-          <div>
-            <label for="image-rotation">
-              image-rotation (between 0 and 360):
-            </label>
-            <input
-              type="range"
-              id="image-rotation"
-              name="image-rotation"
-              min="0"
-              max="360"
-              defaultValue="0"
-              onChange={this.handleRotationChange}
-            />
-
-            <label for="image-scale">image-scale (between -2 and 2):</label>
-
-            <input
-              type="range"
-              id="image-scale"
-              name="image-scale"
-              min="0.5"
-              max="5"
-              step="0.1"
-              defaultValue="1"
-              onChange={this.handleScaleChange}
-            />
-          </div>
         </div>
 
         <div className="avatar-input-file-wrapper">
@@ -139,6 +176,14 @@ export class AvatarMaker extends React.Component {
           >
             تایید و آپلود
           </button>
+
+          <button
+            className="avatar-page-button-delete"
+            onClick={this.handleAvatarDelete}
+          >
+            حذف آواتار
+          </button>
+
           <button
             className="avatar-page-button-cancel"
             onClick={this.props.handleModleClose}
@@ -153,6 +198,7 @@ export class AvatarMaker extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    userAvatar: state.user.avatar,
     userId: state.user.id,
   };
 };
