@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import { connect } from "react-redux";
 import DatePicker, { utils } from "react-modern-calendar-datepicker";
-import DefaultAvatar from "../assets/DefaultAvatar.jpg";
 import SexSelect from "./SexSelect";
 
 export function DashboardForm({
@@ -11,7 +10,9 @@ export function DashboardForm({
   phoneNumber,
   age,
   gender,
+  id,
   email,
+  userAvatar,
 }) {
   const [selectedDay, setSelectedDay] = useState(null);
 
@@ -41,7 +42,7 @@ export function DashboardForm({
       <div className="dashboard-avatar-container">
         <img
           className="dashboard-avatar-img"
-          src={DefaultAvatar}
+          src={userAvatar}
           onClick={handleModleOpen}
         />
         <div className="avatar-overLay"></div>
@@ -134,6 +135,7 @@ const mapStateToProps = (state) => {
       : "شماره موبایل خود را وارد نمایید",
     email: state.user.email ? state.user.email : "ایمیل خود را وارد نمایید",
     gender: state.user.gender ? state.user.gender : null,
+    userAvatar: state.user.avatar,
   };
 };
 

@@ -1,5 +1,6 @@
 import axios from "axios";
 import setAutherizationToken from "../utils/setAutherizationToken";
+import moment from "moment";
 import {
   startSetRegisterError,
   clearAllErrors,
@@ -22,7 +23,7 @@ export const userRegister = (payload) => ({
 
 //START_USER_REGISTER
 export const starUserRegister = (payload) => (dispatch) => {
-  const { name, lastname, number, email, password } = payload;
+  const { name, lastname, number, email, password, _id } = payload;
 
   return axios
     .post("/users/singup", { name, lastname, number, email, password })
@@ -32,7 +33,7 @@ export const starUserRegister = (payload) => (dispatch) => {
         const token = response.data.token;
         localStorage.setItem("jwtToken", token);
         setAutherizationToken(token);
-        dispatch(userRegister({ name, lastname, number, email, token }));
+        dispatch(userRegister({ name, lastname, number, email, token, _id }));
         const successTxt = "ثبت نام موفق";
         dispatch(setRegisterSuccess(successTxt));
         setTimeout(() => {
@@ -73,13 +74,14 @@ export const startUserLogOut = (token) => (dispatch) => {
 };
 
 //USER_LOGIN
-export const userLogIn = ({ name, lastname, number, email, token }) => ({
+export const userLogIn = ({ name, lastname, number, email, token, _id }) => ({
   type: "USER_LOG_IN",
   name,
   lastname,
   number,
   email,
   token,
+  _id,
 });
 
 //startUserLogin
@@ -102,19 +104,49 @@ export const startUserLogIn = ({ email, password }) => (dispatch) => {
   );
 };
 
-export const SetCurrentUser = ({ name, lastname, number, email }) => ({
+export const SetCurrentUser = ({ name, lastname, number, email, _id }) => ({
   type: "SET_CURRENT_USER",
   name,
   lastname,
   number,
   email,
+  _id,
 });
 
 export const startSetCurrentUser = () => (dispatch) => {
   axios.get("/users/me").then(
     (resp) => {
+      console.log("this is from startSetCurrentUSer", resp.data);
       dispatch(SetCurrentUser(resp.data));
     },
     (error) => console.log("there was a error in setting current user", error)
   );
+};
+
+export const setUserAvatar = (avatar) => ({
+  type: "SET_USER_AVATAR",
+  avatar,
+});
+
+export const startSetUserAvatar = (file, userId) => (dispatch) => {
+  let formData = new FormData();
+  formData.append("avatar", file);
+  return axios({
+    url: "/users/me/avatar",
+    method: "POST",
+    data: formData,
+  })
+    .then((res) => {
+      dispatch(
+        setUserAvatar(
+          `http://localhost:3001/users/${userId}/avatar/?${moment().valueOf()}`
+        )
+      );
+
+      return res.status;
+    })
+    .catch((err) => {
+      console.log("avatar upload action error :", err);
+      return err;
+    });
 };

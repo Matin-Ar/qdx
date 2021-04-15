@@ -922,6 +922,23 @@ nav {
   align-items: center;
 }
 
+.avatarEditor-wrapper {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.avatarUploadSuccessfull {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: red;
+}
+
 #avatar-upload-input {
   width: 0.1px;
   height: 0.1px;
@@ -996,6 +1013,24 @@ nav {
   color: rgb(30, 70, 32);
   outline: none;
   border: none;
+}
+
+.avatar-page-button-delete {
+  font-weight: 700;
+  color: white;
+  display: inline-block;
+  padding: 10px 30px;
+  margin-bottom: 1em;
+  margin-right: 1em;
+  background-color: orange;
+  color: rgb(30, 70, 32);
+  outline: none;
+  border: none;
+}
+
+.avatar-page-button-delete:hover {
+  cursor: pointer;
+  background-color: lighten($color: orange, $amount: 10%);
 }
 
 .avatar-page-button-upload:hover {

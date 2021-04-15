@@ -9,6 +9,8 @@
     "axios": "^0.21.1",
     "history": "^5.0.0",
     "install": "^0.13.0",
+    "moment": "^2.29.1",
+    "mongodb-client-encryption": "^1.2.3",
     "node-sass": "^5.0.0",
     "npm": "^7.8.0",
     "react": "^17.0.2",

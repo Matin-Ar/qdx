@@ -1,19 +1,19 @@
-import React from 'react';
+// import React from 'react';
 
-const getExpensesTotal =  (expenses) => {
-    
-    if (expenses){
-        const amounts = expenses.map((expense)=> {
-            return expense.amount
-        })    
-        
-        const totalAmount = amounts.reduce((acc,amount) => acc + amount , 0 )
-        return totalAmount
+// const getExpensesTotal =  (expenses) => {
 
-    } else {
-        return 0
-    }
+//     if (expenses){
+//         const amounts = expenses.map((expense)=> {
+//             return expense.amount
+//         })
 
-}
+//         const totalAmount = amounts.reduce((acc,amount) => acc + amount , 0 )
+//         return totalAmount
 
-export default getExpensesTotal
+//     } else {
+//         return 0
+//     }
+
+// }
+
+// export default getExpensesTotal

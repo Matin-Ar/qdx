@@ -46,7 +46,7 @@ export class RegisterPage extends Component {
     registerResult.then((res, rej) => {
       if (res === "ثبت نام موفق") {
         setTimeout(() => {
-          this.props.history.push("/dashboard");
+          this.props.history.push("/");
         }, 5000);
       }
     });
@@ -156,39 +156,3 @@ const mapStateToProps = (state) => {
   };
 };
 export default withRouter(connect(mapStateToProps)(RegisterPage));
-
-//   regRes.then(
-//     (res) => {
-//       if (res === "ثبت نام موفق") {
-//         this.props.dispatch(setRegisterSuccess(res));
-//         setTimeout(() => {
-//           this.props.dispatch(clearAllErrors());
-//           this.props.history.push("/dashboard");
-//         }, 2000);
-//       } else {
-//         this.props.dispatch(startSetRegisterError(res));
-//       }
-//     },
-//     (e) => console.log(e)
-//   );
-// }
-
-// handleErrorMassageText() {
-//   if (this.props.registerErrorMsg === "MongoError") {
-//     setTimeout(() => {
-//       this.props.dispatch(clearRegisterMsg);
-//     }, 5000);
-//     return <div>کاربر قبلا ثبت نام کرده است </div>;
-//   } else if (this.props.registerErrorMsg) {
-//     setTimeout(() => {
-//       this.props.dispatch(clearRegisterMsg);
-//     }, 5000);
-//     return <div>{this.props.registerErrorMsg}</div>;
-//   }
-// }
-
-// {!!this.props.registerErrorMsg && (
-//   <div className="registerError-container">
-//     {this.props.registerErrorMsg}
-//   </div>
-// )}

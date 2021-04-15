@@ -1,3 +1,5 @@
+import moment from "moment";
+
 //userRegister reducer defaults
 const usersReducerDefaults = {
   name: "",
@@ -6,6 +8,8 @@ const usersReducerDefaults = {
   email: "",
   token: null,
   isAuth: false,
+  id: "",
+  avatar: "",
 };
 
 //USERS reducer
@@ -19,7 +23,13 @@ const usersReducer = (state = usersReducerDefaults, action) => {
         number: action.payload.number,
         email: action.payload.email,
         token: action.payload.token,
+        id: action.payload._id,
         isAuth: true,
+        avatar: {
+          url: `http://localhost:3001/users/${
+            action.payload._id
+          }/avatar/?${moment().valueOf()}`,
+        },
       };
     case "USER_LOG_OUT":
       return {
@@ -29,6 +39,7 @@ const usersReducer = (state = usersReducerDefaults, action) => {
         email: "",
         token: null,
         isAuth: false,
+        avatar: "",
       };
     case "USER_LOG_IN":
       return {
@@ -38,6 +49,10 @@ const usersReducer = (state = usersReducerDefaults, action) => {
         email: action.email,
         token: action.token,
         isAuth: true,
+        id: action._id,
+        avatar: `http://localhost:3001/users/${
+          action._id
+        }/avatar/?${moment().valueOf()}`,
       };
 
     case "SET_CURRENT_USER":
@@ -47,6 +62,16 @@ const usersReducer = (state = usersReducerDefaults, action) => {
         number: action.number,
         email: action.email,
         isAuth: true,
+        id: action._id,
+        avatar: `http://localhost:3001/users/${
+          action._id
+        }/avatar/?${moment().valueOf()}`,
+      };
+
+    case "SET_USER_AVATAR":
+      return {
+        ...state,
+        avatar: action.avatar,
       };
 
     default:
