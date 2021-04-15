@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import { connect } from "react-redux";
 import DatePicker, { utils } from "react-modern-calendar-datepicker";
 import SexSelect from "./SexSelect";
@@ -14,6 +14,11 @@ export function DashboardForm({
   email,
 }) {
   const [selectedDay, setSelectedDay] = useState(null);
+  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
+
+  function handleRerender() {
+    forceUpdate();
+  }
 
   const now = utils("fa").getToday();
 
@@ -38,6 +43,7 @@ export function DashboardForm({
   return (
     <form autocomplete="off">
       <h1 className="dashboard-header-text">ویرایش حساب کاربری</h1>
+      <button onClick={handleRerender}>rerender</button>
       <div className="dashboard-avatar-container">
         <img
           className="dashboard-avatar-img"

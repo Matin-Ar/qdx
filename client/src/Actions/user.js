@@ -121,3 +121,22 @@ export const startSetCurrentUser = () => (dispatch) => {
     (error) => console.log("there was a error in setting current user", error)
   );
 };
+
+export const startSetUserAvatar = (file) => () => {
+  let formData = new FormData();
+
+  formData.append("avatar", file);
+
+  return axios({
+    url: "/users/me/avatar",
+    method: "POST",
+    data: formData,
+  })
+    .then((res) => {
+      return res.status;
+    })
+    .catch((err) => {
+      console.log("avatar upload action error :", err);
+      return err;
+    });
+};

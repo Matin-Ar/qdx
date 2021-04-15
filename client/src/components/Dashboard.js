@@ -74,6 +74,7 @@ export default class Dashboard extends Component {
             >
               <AvatarMaker
                 handleModleClose={this.handleModleClose}
+                handleRerender={this.handleRerender}
               ></AvatarMaker>
             </ReactModal>
           </div>

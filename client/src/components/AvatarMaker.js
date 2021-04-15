@@ -1,56 +1,116 @@
 import React from "react";
-import DefaultAvatar from "../assets/DefaultAvatar.jpg";
 import AvatarEditor from "react-avatar-editor";
+import { startSetUserAvatar } from "./../Actions/user";
+import { connect } from "react-redux";
 
-class AvatarMaker extends React.Component {
+export class AvatarMaker extends React.Component {
   constructor(props) {
     super(props);
     this.handleFileSelect = this.handleFileSelect.bind(this);
+    this.handleFileUpload = this.handleFileUpload.bind(this);
+    this.handleRotationChange = this.handleRotationChange.bind(this);
+    this.handleScaleChange = this.handleScaleChange.bind(this);
 
     this.state = {
-      myImage: DefaultAvatar,
+      myImage: `http://localhost:3001/users/${this.props.userId}/avatar`,
       uploadedFileName: "هیچ فایلی انتخاب نشده",
+      file: "",
+      imgRotation: 0,
+      imgScale: 1,
     };
   }
 
   handleFileSelect(e) {
-    console.log(e.target.files[0]);
     this.setState({
       myImage: e.target.files[0],
       uploadedFileName: e.target.files[0].name,
+      file: e.target.files[0],
     });
   }
 
-  onClickSave = () => {
+  handleFileUpload(e) {
+    let file = this.state.file;
+
     if (this.editor) {
-      // This returns a HTMLCanvasElement, it can be made into a data URL or a blob,
-      // drawn on another canvas, or added to the DOM.
-      const canvas = this.editor.getImage();
-      const canvasURI = canvas.toDataURL();
-      console.log(canvasURI);
-      this.setState({ myImage: canvasURI });
+      const canvas = this.editor.getImage().toDataURL();
+      let profileImage = new Image();
+      profileImage.crossOrigin = "anonymous";
+      profileImage.src = canvas;
+      console.log(profileImage);
+
+      this.props.dispatch(startSetUserAvatar(profileImage)).then((res) => {
+        console.log("res from .then -- avatar:", res);
+        if (res === 200) {
+          alert("آپلود با موفقیت انجام شد");
+          this.props.handleModleClose();
+        } else {
+          alert(res);
+        }
+      });
     }
-  };
+  }
+
+  handleRotationChange(e) {
+    this.setState({
+      imgRotation: e.target.value,
+    });
+  }
+
+  handleScaleChange(e) {
+    this.setState({
+      imgScale: e.target.value,
+    });
+  }
 
   setEditorRef = (editor) => (this.editor = editor);
 
   render(props) {
     return (
       <div>
-        <div>
+        <div className="avatarEditor-wrapper">
           <AvatarEditor
             ref={this.setEditorRef}
             image={this.state.myImage}
+            onChange
             width={250}
             height={250}
             border={5}
-            scale={1.2}
+            scale={this.state.imgScale}
+            rotate={this.state.imgRotation}
           />
+          <div>
+            <label for="image-rotation">
+              image-rotation (between 0 and 360):
+            </label>
+            <input
+              type="range"
+              id="image-rotation"
+              name="image-rotation"
+              min="0"
+              max="360"
+              defaultValue="0"
+              onChange={this.handleRotationChange}
+            />
+
+            <label for="image-scale">image-scale (between -2 and 2):</label>
+
+            <input
+              type="range"
+              id="image-scale"
+              name="image-scale"
+              min="0.5"
+              max="5"
+              step="0.1"
+              defaultValue="1"
+              onChange={this.handleScaleChange}
+            />
+          </div>
         </div>
 
         <div className="avatar-input-file-wrapper">
           <input
             type="file"
+            accept="image/*"
             name="avatar-upload-input"
             id="avatar-upload-input"
             onChange={this.handleFileSelect}
@@ -73,7 +133,12 @@ class AvatarMaker extends React.Component {
           </span>
         </div>
         <div className="avatar-page-button-wrapper">
-          <button className="avatar-page-button-upload">تایید و آپلود</button>
+          <button
+            className="avatar-page-button-upload"
+            onClick={this.handleFileUpload}
+          >
+            تایید و آپلود
+          </button>
           <button
             className="avatar-page-button-cancel"
             onClick={this.props.handleModleClose}
@@ -86,4 +151,10 @@ class AvatarMaker extends React.Component {
   }
 }
 
-export default AvatarMaker;
+const mapStateToProps = (state) => {
+  return {
+    userId: state.user.id,
+  };
+};
+
+export default connect(mapStateToProps)(AvatarMaker);
