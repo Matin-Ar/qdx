@@ -1,14 +1,25 @@
 const mongoose = require('mongoose')
+const uniqueValidator = require('mongoose-unique-validator')
 
 const categorySchema = new mongoose.Schema({
-    description: {
+    name: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: true
     }
 }, {
     timestamps: true
 })
+
+categorySchema.virtual('tutorials', {
+    ref: 'Tutorial',
+    localField: '_id',
+    foreignField: 'cat'
+})
+
+
+categorySchema.plugin(uniqueValidator)
 
 const Category = mongoose.model('Category', categorySchema)
 
