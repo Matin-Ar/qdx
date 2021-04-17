@@ -14,6 +14,8 @@ import setAutherizationToken from "../utils/setAutherizationToken";
 import { startSetCurrentUser } from "../Actions/user";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
+import SingleCoursePage from "../components/SingleCoursePage";
+import DashboardPage from "../components/DashboardPage";
 
 export const AppRouter = (props) => {
   //check local storage to see if token exists
@@ -31,6 +33,17 @@ export const AppRouter = (props) => {
           <Route path="/" component={HomePage} exact={true} />
           <Route path="/aboutus" component={AboutUsPage} />
           <Route path="/contactus" component={ContactUsPage} />
+          <PrivateRoute
+            path="/course/singlecourse"
+            component={SingleCoursePage}
+            isAuth={props.isAuth}
+          />
+          <PrivateRoute
+            path="/dashboard"
+            component={DashboardPage}
+            isAuth={props.isAuth}
+            exact={true}
+          />
           <PublicRoute
             path="/login"
             component={LoginPage}
@@ -39,11 +52,6 @@ export const AppRouter = (props) => {
           <PublicRoute
             path="/register"
             component={RegisterPage}
-            isAuth={props.isAuth}
-          />
-          <PrivateRoute
-            path="/dashboard"
-            component={Dashboard}
             isAuth={props.isAuth}
           />
 

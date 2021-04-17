@@ -727,48 +727,39 @@ nav {
   background-color: lighten($yellow, $amount: 10);
 }
 
-//Dashboard
+//edit- profile
 .dashboard-Container {
   background-color: $dark;
   min-height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4em 2em;
+  padding: 2em 2em;
 }
 
 .dashboard-content-wrapper {
-  width: 80%;
+  width: 100%;
   background-color: $light;
   border-radius: 10px;
   direction: rtl;
   display: flex;
   flex-direction: column;
-  padding: 2em;
-}
-
-.dashboard-header-text {
-  color: white;
-  font-size: 1.2em;
-
-  margin-bottom: 3em;
 }
 
 .dashboard-avatar-container {
   position: relative;
-
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: center;
-  margin-bottom: 4em;
+  margin-bottom: 1em;
 }
 
 .dashboard-avatar-img {
   border-radius: 50%;
   border: 5px solid $yellow;
-  width: 250px;
-  height: 250px;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
 }
 
@@ -777,8 +768,8 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 250px;
-  width: 250px;
+  height: 150px;
+  width: 150px;
   border-radius: 50%;
   pointer-events: none;
   overflow: hidden;
@@ -788,13 +779,13 @@ nav {
   position: absolute;
   content: "📥 انتخاب آواتار";
   color: $dark;
-  font-size: 0.8em;
+  font-size: 0.4em;
   padding: 1.2em;
   display: flex;
   justify-content: center;
-  height: 250px;
-  width: 250px;
-  top: 200px;
+  height: 150px;
+  width: 150px;
+  top: 90px;
   border-radius: 50%;
   background-color: $yellow;
 }
@@ -803,6 +794,7 @@ nav {
 }
 
 .user-info-wrapper {
+  font-size: 12px;
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-evenly;
@@ -883,16 +875,16 @@ nav {
 
 .dashboard-button-wrapper {
   display: flex;
-  margin-top: 2em;
+  margin-top: 1em;
   flex-direction: row;
   justify-content: flex-end;
 }
 
 .dashboard-button-update,
 .dashboard-button-delete {
-  padding: 1em 3em;
+  padding: 0.5em 1em;
   margin: 1em 1em;
-  font-size: 1.1em;
+  font-size: 0.6em;
   border-radius: 5px;
   outline: none;
   border: none;
@@ -1053,6 +1045,104 @@ nav {
   margin-bottom: 1em;
   outline: none;
   border: none;
+}
+
+//SingleCoursePage
+
+.singleCousePage-wrapper {
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  background-color: $dark;
+  padding: 4em;
+}
+
+.singleCourse-container {
+  background-color: $light;
+  border-radius: 10px;
+  padding: 2em;
+  direction: rtl;
+  color: $gray;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 1em;
+}
+
+.imageContainer {
+  grid-column: 1/2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.courseShortDescription-container {
+  padding: 1em;
+  grid-column: 2/3;
+}
+
+.courseLongDescription-container {
+  padding: 1em;
+  grid-column: 1/3;
+}
+.tabs-wrapper {
+  padding: 1em;
+
+  grid-column: 1/3;
+}
+
+.tabs-container {
+  background-color: $dark;
+}
+
+.tabs-title-container {
+  padding: 1em;
+  //   width: 100%;
+  //   border-bottom: 1px solid $gray;
+  //   display: flex;
+  //   flex-direction: row;
+  //   align-items: center;
+  //   width: 100%;
+}
+
+.tabs-title {
+  display: flex;
+  // direction: rtl;
+  // flex-direction: row;
+  // align-items: center;
+  // justify-content: space-evenly;
+  // width: 100%;
+  // height: 100%;
+  // margin-bottom: 2em;
+}
+
+.tabs-title li {
+  text-decoration: none;
+  list-style: none;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 1em;
+  cursor: pointer;
+}
+
+.tabs-data-container {
+  padding: 1em;
+}
+
+// .download-link-tab,
+// .user-comments-tab,
+// .user-questions-tab {
+//   display: none;
+// }
+
+.active-tab {
+  border-bottom: 5px solid $yellow;
+  color: $yellow;
+  font-weight: bold;
+}
+
+.active-content {
+  display: block;
 }
 
 //footer

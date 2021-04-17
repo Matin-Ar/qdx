@@ -58,7 +58,6 @@ export function DashboardForm({
 
   return (
     <form autocomplete="off">
-      <h1 className="dashboard-header-text">ویرایش حساب کاربری</h1>
       <div className="dashboard-avatar-container">
         <img
           className="dashboard-avatar-img"

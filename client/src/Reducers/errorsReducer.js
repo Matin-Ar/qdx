@@ -36,7 +36,7 @@ const errorsReducer = (state = errorsReducerDefaults, action) => {
     case "SET_LOGIN_SUCCESS":
       return {
         ...state,
-        loginSuccess: "loginSuccess",
+        loginSuccess: action.msg,
       };
     case "SET_LOGIN_ERROR":
       return {

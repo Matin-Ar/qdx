@@ -33,8 +33,9 @@ export const clearRegisterMsg = () => ({
 });
 
 //set Login success MSg
-export const setLoginSuccessMsg = () => ({
+export const setLoginSuccessMsg = (msg) => ({
   type: "SET_LOGIN_SUCCESS",
+  msg,
 });
 
 //set Login Error MSg

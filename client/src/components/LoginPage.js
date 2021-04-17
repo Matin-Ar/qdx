@@ -6,6 +6,7 @@ import {
   clearAllErrors,
   setLoginErrorMsg,
   clearLoginErrorMsg,
+  setLoginSuccessMsg,
 } from "../Actions/errors";
 
 function LoginPage(props) {
@@ -26,11 +27,12 @@ function LoginPage(props) {
     const signInRes = props.dispatch(startUserLogIn(user));
     signInRes.then(
       (res) => {
-        if (res === "signIn Successful") {
-          setTimeout(() => {
-            props.dispatch(clearAllErrors());
-            props.history.push("/dashboard");
-          }, 2000);
+        console.log("result response is", res);
+        if (res.status === 200) {
+          // setTimeout(() => {
+          //   // props.dispatch(clearAllErrors());
+          //   props.history.push("/dashboard");
+          // }, 10000);
         } else {
           props.dispatch(setLoginErrorMsg(res));
           setTimeout(() => {
@@ -45,10 +47,8 @@ function LoginPage(props) {
   return (
     <div className="loginPage-wrapper">
       <form className="login-wrapper" onSubmit={handleLogin}>
-        {props.name && (
-          <div className="loginSuccess-container">
-            {props.name} عزیز خوش اومدی{" "}
-          </div>
+        {props.isLoginSuccess && (
+          <div className="loginSuccess-container">{props.loginSuccess}</div>
         )}
 
         {props.loginError && (
@@ -71,7 +71,8 @@ function LoginPage(props) {
 
 const mapStateToProps = (state) => {
   return {
-    loginSuccess: !!state.errorMsg.loginSuccess,
+    isLoginSuccess: !!state.errorMsg.loginSuccess,
+    loginSuccess: state.errorMsg.loginSuccess,
     loginError: state.errorMsg.loginError,
     name: state.user.name,
   };

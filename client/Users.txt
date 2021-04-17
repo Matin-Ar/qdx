@@ -49,8 +49,6 @@ DELETE - /users/me
 	tamami etelate user az database pak mishe va dg fard nemitone login kone, va mitavan dobare ba hamoon etalat signup jadid anjam dad.
 
 
-NEW :
-
 POST - /users/me/avatar
 	tozihat: baraie add kardane avatar be profile user. NIAZ BE AUTH DARE. NIAZ BE BODY DARE.
 	file body baiad "form-data" bashe va hatman - key - on baiad "avatar" bashe , value ham baiad oon akse bashe.

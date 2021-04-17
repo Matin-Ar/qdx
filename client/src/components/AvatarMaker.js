@@ -66,23 +66,13 @@ export class AvatarMaker extends React.Component {
 
     if (this.editor) {
       const canvas = this.editor.getImage().toDataURL();
-      // let tempImage = new Image();
-      // tempImage.crossOrigin = "anonymous";
-      // tempImage.src = canvas;
 
-      // let profileImage = new Image();
-      // profileImage.setAttribute("crossOrigin", "anonymous");
-      // profileImage.src = tempImage;
-
-      // localStorage.setItem("imgdata", profileImage);
-
-      // const finalimg = localStorage.getItem("imgdata");
-      // const finalfinalimg = new Image();
-      // finalfinalimg.crossOrigin = "anonymous";
-      // finalfinalimg.src = finalimg;
+      let profileImage = new Image();
+      profileImage.setAttribute("crossOrigin", "anonymous");
+      profileImage.src = canvas;
 
       this.props
-        .dispatch(startSetUserAvatar(file, this.props.userId))
+        .dispatch(startSetUserAvatar(profileImage, this.props.userId))
         .then((res) => {
           console.log("res from .then -- avatar:", res);
           if (res === 200) {
@@ -142,6 +132,34 @@ export class AvatarMaker extends React.Component {
             scale={this.state.imgScale}
             rotate={this.state.imgRotation}
           />
+
+          <div>
+            <label for="image-rotation">
+              image-rotation (between 0 and 360):
+            </label>
+            <input
+              type="range"
+              id="image-rotation"
+              name="image-rotation"
+              min="0"
+              max="360"
+              defaultValue="0"
+              onChange={this.handleRotationChange}
+            />
+
+            <label for="image-scale">image-scale (between -2 and 2):</label>
+
+            <input
+              type="range"
+              id="image-scale"
+              name="image-scale"
+              min="0.5"
+              max="5"
+              step="0.1"
+              defaultValue="1"
+              onChange={this.handleScaleChange}
+            />
+          </div>
         </div>
 
         <div className="avatar-input-file-wrapper">

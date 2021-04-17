@@ -94,12 +94,12 @@ export const startUserLogIn = ({ email, password }) => (dispatch) => {
 
       const user = resp.data.user;
       dispatch(userLogIn({ token, ...user }));
-      dispatch(setLoginSuccessMsg());
 
-      return "signIn Successful";
+      return resp;
     },
     (error) => {
-      return "  ایمیل و یا رمز عبور وارد شده صحیح نمی باشد";
+      console.log("error from startUserLogin Catch:", error);
+      return "ایمیل و یا رمز عبور وارد شده صحیح نمی باشد";
     }
   );
 };
@@ -131,6 +131,7 @@ export const setUserAvatar = (avatar) => ({
 export const startSetUserAvatar = (file, userId) => (dispatch) => {
   let formData = new FormData();
   formData.append("avatar", file);
+  console.log(formData);
   return axios({
     url: "/users/me/avatar",
     method: "POST",

@@ -51,9 +51,10 @@ export const Header = (props) => {
             <NavLink to="/dashboard" activeClassName="selected">
               پروفایل کاربری
             </NavLink>
-            <NavLink to="/course" activeClassName="selected">
+            <NavLink to="/course/singlecourse" activeClassName="selected">
               دسته بندی دوره ها
             </NavLink>
+
             <NavLink to="/aboutus" activeClassName="selected">
               درباره ما
             </NavLink>

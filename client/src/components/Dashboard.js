@@ -43,42 +43,34 @@ export default class Dashboard extends Component {
       ModalIsOpen: false,
     };
   }
-
   handleModleClose() {
     this.setState({
       ModalIsOpen: false,
     });
   }
-
   handleModleOpen() {
     this.setState({
       ModalIsOpen: true,
     });
   }
-
   render() {
     return (
       <div>
-        <div className="dashboard-Container">
-          <div className="dashboard-content-wrapper">
-            <DashboardForm handleModleOpen={this.handleModleOpen} />
-
-            <ReactModal
-              isOpen={
-                this.state.ModalIsOpen
-                /* Boolean describing if the modal should be shown or not. */
-              }
-              onRequestClose={this.handleModleClose}
-              style={reactModalStyles}
-              className="modal-content"
-            >
-              <AvatarMaker
-                handleModleClose={this.handleModleClose}
-                handleRerender={this.handleRerender}
-              ></AvatarMaker>
-            </ReactModal>
-          </div>
-        </div>
+        <DashboardForm handleModleOpen={this.handleModleOpen} />
+        <ReactModal
+          isOpen={
+            this.state.ModalIsOpen
+            /* Boolean describing if the modal should be shown or not. */
+          }
+          onRequestClose={this.handleModleClose}
+          style={reactModalStyles}
+          className="modal-content"
+        >
+          <AvatarMaker
+            handleModleClose={this.handleModleClose}
+            handleRerender={this.handleRerender}
+          ></AvatarMaker>
+        </ReactModal>
       </div>
     );
   }
