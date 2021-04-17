@@ -6,7 +6,8 @@ const tutorialSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        unique: true
+        unique: true,
+        lowercase: true
     },
     cat: {
         type: mongoose.Schema.Types.ObjectId,
@@ -16,6 +17,21 @@ const tutorialSchema = new mongoose.Schema({
 }, {
     timestamps: true
 })
+
+tutorialSchema.virtual('courses', {
+    ref: 'Course',
+    localField: '_id',
+    foreignField: 'tut'
+})
+
+tutorialSchema.methods.toJSON = function () {
+    const tutorial = this
+    const tutorialObject = tutorial.toObject()
+
+    delete tutorialObject.cat
+
+    return tutorialObject
+}
 
 
 tutorialSchema.plugin(uniqueValidator)
