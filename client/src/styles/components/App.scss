@@ -727,6 +727,41 @@ nav {
   background-color: lighten($yellow, $amount: 10);
 }
 
+//main dashboard - tabs
+.dashboard-tabs-tablist {
+  border-bottom: none !important;
+  color: $gray;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.react-tabs {
+  padding: 1em 2em !important;
+}
+
+.react-tabs__tab {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-left: 1px solid $gray !important;
+}
+
+.react-tabs__tab img {
+  height: 30px;
+  width: 30px;
+  margin-left: 0.5em;
+}
+
+.dashboard-tabs-selected-tab {
+  background-color: transparent !important;
+  border: none !important;
+  color: $yellow !important;
+  border-left: 1px solid $gray !important;
+
+  border-bottom: 5px solid $yellow !important;
+}
+
 //edit- profile
 .dashboard-Container {
   background-color: $dark;
@@ -884,7 +919,7 @@ nav {
 .dashboard-button-delete {
   padding: 0.5em 1em;
   margin: 1em 1em;
-  font-size: 0.6em;
+  font-size: 0.5em;
   border-radius: 5px;
   outline: none;
   border: none;
@@ -1045,6 +1080,11 @@ nav {
   margin-bottom: 1em;
   outline: none;
   border: none;
+}
+
+// addCourse Tab
+.add-course-tab-wrapper {
+  min-height: 60vh;
 }
 
 //SingleCoursePage

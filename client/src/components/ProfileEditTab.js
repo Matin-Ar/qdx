@@ -34,7 +34,7 @@ const reactModalStyles = {
   },
 };
 
-export default class Dashboard extends Component {
+export default class ProfileEditTab extends Component {
   constructor(props) {
     super(props);
     this.handleModleClose = this.handleModleClose.bind(this);

@@ -9,7 +9,6 @@ import ContactUsPage from "../components/ContactUsPage";
 import Footer from "../components/Footer";
 import LoginPage from "../components/LoginPage";
 import RegisterPage from "../components/RegisterPage";
-import Dashboard from "../components/Dashboard";
 import setAutherizationToken from "../utils/setAutherizationToken";
 import { startSetCurrentUser } from "../Actions/user";
 import PrivateRoute from "./PrivateRoute";

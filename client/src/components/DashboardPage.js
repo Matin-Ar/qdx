@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import Dashboard from "../components/Dashboard";
+import ProfileEditTab from "./ProfileEditTab";
+import editUserIMG from "../assets/Dashboard/edit-user.png";
+import adminIMG from "../assets/Dashboard/admin.png";
+import addCourseIMG from "../assets/Dashboard/add-course.png";
+import dashboardIMG from "../assets/Dashboard/dashboard.png";
+import AddCourseTab from "./AddCourseTab";
 
 const CustomTabPanel = ({ children, myCustomProp, ...otherProps }) => (
   <TabPanel {...otherProps}>
@@ -24,12 +29,30 @@ export default class DashboardPage extends Component {
             selectedTabPanelClassName="react-tabs__tab-panel--selected dashboard-tabs-selected-pannel"
           >
             <TabList className="react-tabs__tab-list dashboard-tabs-tablist">
-              <Tab>Custom Tab 1</Tab>
-              <Tab>ویرایش حساب کاربری</Tab>
+              <Tab>
+                <img src={dashboardIMG} />
+                داشبورد
+              </Tab>
+              <Tab>
+                <img src={editUserIMG} />
+                ویرایش حساب کاربری
+              </Tab>
+              <Tab>
+                <img src={adminIMG} />
+                پنل مدیریت
+              </Tab>
+              <Tab>
+                <img src={addCourseIMG} />
+                افزودن دوره
+              </Tab>
             </TabList>
-            <CustomTabPanel>Panel 1</CustomTabPanel>
+            <CustomTabPanel>Dashboard Tab</CustomTabPanel>
             <CustomTabPanel>
-              <Dashboard />
+              <ProfileEditTab />
+            </CustomTabPanel>
+            <CustomTabPanel>addmin Tab</CustomTabPanel>
+            <CustomTabPanel>
+              <AddCourseTab />
             </CustomTabPanel>
           </Tabs>
         </div>
