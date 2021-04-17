@@ -6,12 +6,13 @@ const courseSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        unique: true
+        unique: true,
+        lowercase: true
     },
-    subset: {
-        type: String,
+    tut: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
-       // ref: 'Tutorial'
+        ref: 'Tutorial'
     }
 }, {
     timestamps: true

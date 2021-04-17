@@ -1,11 +1,10 @@
 const express = require('express')
 const Tutorial = require('../models/tutorial')
 const Category = require('../models/category')
+const Course = require('../models/course')
 const router = new express.Router()
 
 router.post('/tutorials', async (req,res) => {
-   
-
     try {
         const cat = await Category.findOne({ name: req.body.cat })
         const tutorial = new Tutorial({
@@ -16,6 +15,32 @@ router.post('/tutorials', async (req,res) => {
         res.status(201).send(tutorial)
     } catch(e) {
         res.status(400).send(e)
+    }
+})
+
+
+router.get('/tutorials', async (req,res) => {
+    const tutorial = await Tutorial.find({ })
+
+    try {
+        res.send(tutorial)
+    } catch(e) {
+        res.status(400).send(e)
+    }
+})
+
+router.patch('/tutorials', async (req, res) => {
+    try {
+        if(!req.body.oldname || !req.body.newname) {
+            throw new Error()
+        }
+        const tutorial = await Tutorial.findOneAndUpdate({ name: req.body.oldname }, { name: req.body.newname })
+        if(!tutorial) {
+            throw new Error()
+        }
+        res.send()
+    } catch(e) {
+        res.status(400).send()
     }
 })
 
