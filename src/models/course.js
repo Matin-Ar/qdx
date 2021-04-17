@@ -1,19 +1,24 @@
 const mongoose = require('mongoose')
+const uniqueValidator = require('mongoose-unique-validator')
 
 const courseSchema = new mongoose.Schema({
-    description: {
+    name: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: true
     },
     subset: {
         type: String,
         required: true,
-        ref: 'Tutorial'
+       // ref: 'Tutorial'
     }
 }, {
     timestamps: true
 })
+
+
+courseSchema.plugin(uniqueValidator)
 
 const Course = mongoose.model('Course', courseSchema)
 
