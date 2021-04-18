@@ -13,6 +13,10 @@ const tutorialSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Category'
+    },
+    avatar: {
+        type: Buffer,
+        required: true
     }
 }, {
     timestamps: true
@@ -29,6 +33,7 @@ tutorialSchema.methods.toJSON = function () {
     const tutorialObject = tutorial.toObject()
 
     delete tutorialObject.cat
+    delete tutorialObject.avatar
 
     return tutorialObject
 }

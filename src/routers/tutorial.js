@@ -1,21 +1,39 @@
 const express = require('express')
+const multer = require('multer')
+const sharp = require('sharp')
 const Tutorial = require('../models/tutorial')
 const Category = require('../models/category')
 const Course = require('../models/course')
 const router = new express.Router()
 
-router.post('/tutorials', async (req,res) => {
+const upload = multer({
+    limits: {
+        fileSize: 1000000
+    },
+    fileFilter(req, file, cb) {
+        if(!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+            return cb(new Error('Please upload an image'))
+        }
+        cb(undefined, true)
+    }
+})
+
+router.post('/tutorials', upload.single('avatar'), async (req,res) => {
     try {
         const cat = await Category.findOne({ name: req.body.cat })
+        const buffer = await sharp(req.file.buffer).resize({ width: 390, height: 240 }).png().toBuffer()
         const tutorial = new Tutorial({
             name: req.body.name,
-            cat: cat._id
+            cat: cat._id,
+            avatar: buffer
         })
         await tutorial.save()
         res.status(201).send(tutorial)
     } catch(e) {
         res.status(400).send(e)
     }
+}, (error, req, res, next) => {
+    res.status(400).send({ error: error.message })
 })
 
 
@@ -53,6 +71,19 @@ router.patch('/tutorials', async (req, res) => {
         res.send()
     } catch(e) {
         res.status(400).send()
+    }
+})
+
+router.get('/tutorials/:name/avatar', async (req, res) => {
+    try {
+        const tutorial = await Tutorial.findOne({ name: req.params.name })
+        if (!tutorial) {
+            throw new Error()
+        }
+        res.set('Content-Type', 'image/png')
+        res.send(tutorial.avatar)
+    }   catch (e) {
+        res.status(404).send()
     }
 })
 
