@@ -1084,7 +1084,36 @@ nav {
 
 // addCourse Tab
 .add-course-tab-wrapper {
+  color: $gray;
+  font-size: 0.8em;
   min-height: 60vh;
+}
+//tabOne
+.add-course-tab-one-container {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-course-tab-one-form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.add-course-tab-one-form-group-label {
+  text-align: center;
+}
+
+.add-course-tab-one-form-group-select-box {
+  height: 60px;
+  padding: 1em 2em;
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 2em;
+  margin-top: 1em;
 }
 
 //SingleCoursePage
