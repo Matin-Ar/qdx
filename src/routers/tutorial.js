@@ -19,11 +19,23 @@ router.post('/tutorials', async (req,res) => {
 })
 
 
-router.get('/tutorials', async (req,res) => {
+router.get('/tutorials', async (req, res) => {
     const tutorial = await Tutorial.find({ })
 
     try {
         res.send(tutorial)
+    } catch(e) {
+        res.status(400).send(e)
+    }
+})
+
+router.get('/tutorials/:cat', async (req, res) => {
+    const cat = req.params.cat
+
+    try {
+        const category = await Category.findOne({ name: cat })
+        const tutorials = await Tutorial.find({ cat: category._id }, null, { sort: { name: 1} })
+        res.send(tutorials)
     } catch(e) {
         res.status(400).send(e)
     }
