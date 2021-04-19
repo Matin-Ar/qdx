@@ -74,6 +74,21 @@ router.patch('/tutorials', async (req, res) => {
     }
 })
 
+router.delete('/tutorials', async (req, res) => {
+    try {
+        const tutorial = await Tutorial.findOne({ name: req.body.name })
+        if(!tutorial) {
+            throw new Error('No tutorial!')
+        }
+        await Course.deleteMany({ tut: tutorial._id })
+        await tutorial.remove()
+
+        res.send({ message: "Deleted!"})
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
 router.get('/tutorials/:name/avatar', async (req, res) => {
     try {
         const tutorial = await Tutorial.findOne({ name: req.params.name })
