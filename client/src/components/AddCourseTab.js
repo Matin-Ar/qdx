@@ -75,7 +75,7 @@ export class AddCourseTab extends Component {
       form.append("filedate", this.state.courseRelease);
       form.append("quality", this.state.courseQuality);
       form.append("filesize", this.state.courseFileSize);
-      form.append("links", JSON.stringify({ 1: "1", 2: "2" }));
+      form.append("links", this.state.courseLinks);
       form.append("avatar", file);
       // this.state.courseLinks
       axios({
