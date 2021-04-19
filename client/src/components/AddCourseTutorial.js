@@ -58,14 +58,27 @@ export default function AddCourseTutorial() {
       });
     } else if (newTutorial.trim() == "") {
       alertify.error("لطفا نام مناسبی انتخاب نمایید");
+
+      setTimeout(() => {
+        setisDisabled(false);
+        setButtonText("افزودن زبان برنامه نویسی");
+      }, 3000);
     } else if (tutorialAvatarFile == null) {
       alertify.error("لطفا عکس زبان برنامه نویسی را انتخاب نمایید");
+      setTimeout(() => {
+        setisDisabled(false);
+        setButtonText("افزودن زبان برنامه نویسی");
+      }, 3000);
     } else if (
       newTutorial.trim() == "" ||
       tutorialAvatarFile == null ||
       selectedCategory == "لطفا یک دسته بندی را انتخاب نمایید"
     ) {
       alertify.error("لطفا دسته بندی مناسبی انتخاب نمایید");
+      setTimeout(() => {
+        setisDisabled(false);
+        setButtonText("افزودن زبان برنامه نویسی");
+      }, 3000);
     }
   };
 

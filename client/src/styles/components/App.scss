@@ -1231,37 +1231,135 @@ input[type="submit"]:disabled {
   margin-top: 1em;
 }
 // addCourse Tab
-.add-course-tab-wrapper {
+// .add-course-tab-wrapper {
+//   color: $gray;
+//   font-size: 0.8em;
+//   min-height: 60vh;
+// }
+
+.add-course-data-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2em;
+  padding: 1em;
+  font-size: 0.5em;
   color: $gray;
-  font-size: 0.8em;
-  min-height: 60vh;
-}
-//tabOne
-.add-course-tab-one-container {
-  height: 60vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
+.add-course-right-inputs {
+  // background-color: yellow;
+}
+.add-course-left-inputs {
+}
+.add-course-bottom-inputs {
+  grid-column: 1/4;
+  padding-left: 2em;
+}
 .add-course-tab-one-form-group {
   display: flex;
   flex-direction: column;
-  width: 100%;
 }
 
 .add-course-tab-one-form-group-label {
-  text-align: center;
+}
+.add-course-tab-one-form-group-select-box {
+  margin-bottom: 1em;
+  height: 30px;
+  padding-right: 1em;
+  outline: none;
+  border: none;
+  background-color: $dark;
+  margin-top: 0.3em;
+
+  color: $white;
 }
 
-.add-course-tab-one-form-group-select-box {
-  height: 60px;
-  padding: 1em 2em;
+.add-course-input {
   width: 100%;
-  border-radius: 10px;
+  height: 30px;
+  background-color: $dark;
+  color: $white;
+  margin-bottom: 1em;
+  outline: none;
+  border: none;
+  padding-right: 1em;
+  margin-top: 0.3em;
+}
+
+.add-course-text-area {
+  height: 100px;
+  padding-top: 1em;
+}
+
+.add-course-avatar-input {
+  display: none;
+}
+.add-course-avatar-input-btn {
+  margin-top: 0.5em;
+  outline: none;
+  background-color: transparent;
+  border: none;
+  color: $red;
+  pointer-events: none;
+}
+
+.addCourseLinks-wrapper {
+  grid-column: 1/4;
+}
+.addCourseLinks-btn {
+  display: flex;
+  align-items: center;
   margin-bottom: 2em;
-  margin-top: 1em;
+  width: 200px;
+}
+
+.addCourseLinks-link-input {
+  width: 80%;
+}
+
+.addCourseLinks-image {
+  height: 32px;
+  width: 32px;
+  margin-left: 1em;
+}
+
+.addCourseLinks-link-label {
+  margin-bottom: 2em;
+}
+
+.addCourseLinks-link-remove-btn {
+  background-color: $red;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 3px 10px;
+}
+
+.addCourseLinks-link-group {
+  margin-bottom: 1em;
+}
+
+.add-course-form-submit-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.add-course-form-submit-btn {
+  padding: 1em 3em;
+  background-color: $green;
+  border: none;
+  outline: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.add-course-form-submit-btn:hover {
+  background-color: lighten($green, $amount: 10%);
+}
+
+.add-course-form-submit-btn:disabled {
+  background-color: $gray;
 }
 
 //SingleCoursePage

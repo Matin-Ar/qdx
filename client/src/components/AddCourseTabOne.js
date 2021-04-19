@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Select from "react-select";
-import AsyncSelect from "react-select/async";
 import axios from "axios";
 
 export default function AddCourseTabOne({ handleFormChange }) {
