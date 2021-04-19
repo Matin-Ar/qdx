@@ -59,11 +59,13 @@ const courseSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    links: {
-        type: Array,
-        required: true,
-        trim: true
-    },
+    links: [{
+        link: {
+            type: Array,
+            required: true,
+            trim: true
+        }
+    }],
     tut: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
