@@ -2432,6 +2432,11 @@
     "require-from-string" "^2.0.2"
     "uri-js" "^4.2.2"
 
+"alertifyjs@^1.13.1":
+  "integrity" "sha512-CckZE2dZDsEEXglOXKxT00vUDV5A6udZom+bn1XHdIWlbSFZgYq7UXCBlwkShhIH3Li/1VxLmr55GOQFQ12WSg=="
+  "resolved" "https://registry.npmjs.org/alertifyjs/-/alertifyjs-1.13.1.tgz"
+  "version" "1.13.1"
+
 "alphanum-sort@^1.0.0":
   "integrity" "sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM="
   "resolved" "https://registry.npmjs.org/alphanum-sort/-/alphanum-sort-1.0.2.tgz"
@@ -2441,6 +2446,11 @@
   "integrity" "sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU="
   "resolved" "https://registry.npmjs.org/amdefine/-/amdefine-1.0.1.tgz"
   "version" "1.0.1"
+
+"animate.css@^4.1.1":
+  "integrity" "sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ=="
+  "resolved" "https://registry.npmjs.org/animate.css/-/animate.css-4.1.1.tgz"
+  "version" "4.1.1"
 
 "ansi-colors@^3.0.0":
   "integrity" "sha512-hHUXGagefjN2iRrID63xckIvotOXOojhQKWIPUZ4mNUZ9nLZW+7FMNoE1lOkEhNWYsx/7ysGIuJYCiMAA9FnrA=="
@@ -3690,6 +3700,11 @@
 
 "clone@^1.0.2":
   "version" "1.0.4"
+
+"clsx@^1.1.0":
+  "integrity" "sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA=="
+  "resolved" "https://registry.npmjs.org/clsx/-/clsx-1.1.1.tgz"
+  "version" "1.1.1"
 
 "cmd-shim@^4.0.1":
   "version" "4.1.0"
@@ -8714,10 +8729,10 @@
 "npm-user-validate@^1.0.1":
   "version" "1.0.1"
 
-"npm@^7.8.0":
-  "integrity" "sha512-9AC3Dj9OUWaUdmTmEVttE/1MWkfF7+sAKPRo9tKEyjo49AXmHQBn+RC33M9dima91mEMqDIA71xyRm4VmhDipg=="
-  "resolved" "https://registry.npmjs.org/npm/-/npm-7.8.0.tgz"
-  "version" "7.8.0"
+"npm@^7.9.0":
+  "integrity" "sha512-GW9RbueF717kJ4ZUVsTlhKBEY7AqX28OwQCsfIAkRZclfeeqQDnsoJz6WWuYTMpGBJnB2xknF8Dp364c93FDYA=="
+  "resolved" "https://registry.npmjs.org/npm/-/npm-7.9.0.tgz"
+  "version" "7.9.0"
   dependencies:
     "@npmcli/arborist" "^2.3.0"
     "@npmcli/ci-detect" "^1.2.0"
@@ -10191,7 +10206,7 @@
   dependencies:
     "read" "1"
 
-"prop-types@^15.5.10", "prop-types@^15.5.8", "prop-types@^15.6.0", "prop-types@^15.6.2", "prop-types@^15.7.2":
+"prop-types@^15.5.0", "prop-types@^15.5.10", "prop-types@^15.5.8", "prop-types@^15.6.0", "prop-types@^15.6.2", "prop-types@^15.7.2":
   "integrity" "sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz"
   "version" "15.7.2"
@@ -10501,6 +10516,11 @@
   dependencies:
     "jalaali-js" "^1.1.0"
 
+"react-notifications-component@^3.1.0":
+  "integrity" "sha512-qq+zgqVIa2zhlw+RvO2QSPk7xHLvZWTHl9VKRO56sMUef/UrcUTqOswL0DSJtRIpZYZhclquQUfDxD6H2w8aWA=="
+  "resolved" "https://registry.npmjs.org/react-notifications-component/-/react-notifications-component-3.1.0.tgz"
+  "version" "3.1.0"
+
 "react-redux@^7.2.3":
   "integrity" "sha512-ZhAmQ1lrK+Pyi0ZXNMUZuYxYAZd59wFuVDGUt536kSGdD0ya9Q7BfsE95E3TsFLE3kOSFp5m6G5qbatE+Ic1+w=="
   "resolved" "https://registry.npmjs.org/react-redux/-/react-redux-7.2.3.tgz"
@@ -10625,6 +10645,14 @@
     "prop-types" "^15.6.0"
     "react-input-autosize" "^3.0.0"
     "react-transition-group" "^4.3.0"
+
+"react-tabs@^3.2.2":
+  "integrity" "sha512-/o52eGKxFHRa+ssuTEgSM8qORnV4+k7ibW+aNQzKe+5gifeVz8nLxCrsI9xdRhfb0wCLdgIambIpb1qCxaMN+A=="
+  "resolved" "https://registry.npmjs.org/react-tabs/-/react-tabs-3.2.2.tgz"
+  "version" "3.2.2"
+  dependencies:
+    "clsx" "^1.1.0"
+    "prop-types" "^15.5.0"
 
 "react-transition-group@^4.3.0":
   "integrity" "sha512-Djqr7OQ2aPUiYurhPalTrVy9ddmFCCzwhqQmtN+J3+3DzLO209Fdr70QrN8Z3DsglWql6iY1lDWAfpFiBtuKGw=="

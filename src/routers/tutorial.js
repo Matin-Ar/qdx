@@ -38,7 +38,7 @@ router.post('/tutorials', upload.single('avatar'), async (req,res) => {
 
 
 router.get('/tutorials', async (req, res) => {
-    const tutorial = await Tutorial.find({ })
+    const tutorial = await Tutorial.find({ }, null, { sort: { name : 1 } })
 
     try {
         res.send(tutorial)
