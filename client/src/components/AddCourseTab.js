@@ -60,6 +60,8 @@ export class AddCourseTab extends Component {
   render() {
     return (
       <div className="add-course-tab-wrapper">
+        {`مرحله ${this.state.addCourseStep} از 10 مرحله`}
+
         {this.state.courseTutorial}
         <form>
           {this.state.addCourseStep === 1 && (

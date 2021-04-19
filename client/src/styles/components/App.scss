@@ -788,6 +788,7 @@ nav {
   align-items: center;
   justify-content: center;
   margin-bottom: 1em;
+  margin-top: 2em;
 }
 
 .dashboard-avatar-img {
@@ -1082,6 +1083,153 @@ nav {
   border: none;
 }
 
+//ADD category TAB
+
+.add-category-tab-container {
+  margin-top: 1em;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  direction: rtl;
+  color: $gray;
+  padding-bottom: 1em;
+}
+
+.add-category-tab-form-group {
+  text-align: center;
+}
+
+.add-category-tab-title {
+  font-size: 0.6em;
+}
+.add-category-tab-input {
+  width: 100%;
+  min-width: 500px;
+  height: 45px;
+  margin-top: 2em;
+  outline: none;
+  padding-right: 1em;
+  border-radius: 5px;
+}
+
+.add-category-tab-button {
+  background-color: $green;
+  padding: 1em 3em;
+  border-radius: 10px;
+  margin-top: 2em;
+  color: white;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.add-category-tab-button:hover {
+  background-color: lighten($green, $amount: 10%);
+}
+input[type="submit"]:disabled {
+  background: $gray;
+}
+
+.category-displays-container {
+  transform-origin: "50% 50%";
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 500px;
+  direction: rtl;
+  position: relative;
+  margin-right: 2em;
+  border: 10px solid $yellow;
+  border-left: none;
+  overflow: hidden;
+}
+
+.category-displays-container::after {
+  content: "";
+  position: absolute;
+  background-color: $yellow;
+  width: 3%;
+  height: 100%;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.category-displays-wrapper {
+  width: 100%;
+  background-color: white;
+  overflow-y: scroll;
+  padding: 1em;
+  overflow-y: scroll;
+  max-height: 60vh;
+  -ms-overflow-style: none;
+}
+
+.category-displays-buttons {
+  background: none;
+  display: block;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  list-style-type: none;
+  margin: 1em;
+  padding: 0.5em;
+}
+
+.category-displays-li {
+  pointer-events: none;
+}
+
+.category-displays-buttons:hover {
+  background: $yellow;
+}
+
+.category-displays-span {
+  color: red;
+  margin-left: 1em;
+  pointer-events: none;
+}
+
+//add tutorial
+
+.add-tutorial-tab-container {
+  min-height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.add-tutorial-tab-title {
+  color: $gray;
+  margin-bottom: 1em;
+}
+.add-tutorial-tab-form-group {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.add-tutorial-tab-input {
+  height: 40px;
+  width: 500px;
+  max-width: 500px;
+  margin-bottom: 2em;
+}
+.add-tutorial-tab-avatar-input-label {
+  background-color: $yellow;
+  padding: 10px 30px;
+  font-size: 10px;
+}
+.add-tutorial-tab-avatar-input {
+  display: block;
+  display: none;
+}
+.add-tutorial-tab-avatar-file-name {
+  margin-top: 1em;
+}
 // addCourse Tab
 .add-course-tab-wrapper {
   color: $gray;

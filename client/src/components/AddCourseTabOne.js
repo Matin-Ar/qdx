@@ -21,7 +21,7 @@ export default function AddCourseTabOne({ handleFormChange }) {
   }, [categoriesList.length]);
 
   useEffect(() => {
-    axios.get("/tutorials/").then(
+    axios.get(`/tutorials/${selectedCategory}`).then(
       (res) => {
         let tutArr = res.data.map((tut) => tut.name);
         setTutorialsList(tutArr);

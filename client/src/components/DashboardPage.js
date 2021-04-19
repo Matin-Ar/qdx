@@ -7,6 +7,8 @@ import adminIMG from "../assets/Dashboard/admin.png";
 import addCourseIMG from "../assets/Dashboard/add-course.png";
 import dashboardIMG from "../assets/Dashboard/dashboard.png";
 import AddCourseTab from "./AddCourseTab";
+import AddCourseCategory from "./AddCourseCategory";
+import AddCourseTutorial from "./AddCourseTutorial";
 
 const CustomTabPanel = ({ children, myCustomProp, ...otherProps }) => (
   <TabPanel {...otherProps}>
@@ -43,6 +45,14 @@ export default class DashboardPage extends Component {
               </Tab>
               <Tab>
                 <img src={addCourseIMG} />
+                افزودن دسته بندی دوره
+              </Tab>
+              <Tab>
+                <img src={addCourseIMG} />
+                افزودن زبان های برنامه نویسی
+              </Tab>
+              <Tab>
+                <img src={addCourseIMG} />
                 افزودن دوره
               </Tab>
             </TabList>
@@ -51,6 +61,12 @@ export default class DashboardPage extends Component {
               <ProfileEditTab />
             </CustomTabPanel>
             <CustomTabPanel>addmin Tab</CustomTabPanel>
+            <CustomTabPanel>
+              <AddCourseCategory />
+            </CustomTabPanel>
+            <CustomTabPanel>
+              <AddCourseTutorial />
+            </CustomTabPanel>
             <CustomTabPanel>
               <AddCourseTab />
             </CustomTabPanel>
