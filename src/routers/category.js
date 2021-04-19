@@ -51,7 +51,7 @@ router.delete('/categories', async (req, res) => {
             await Course.deleteMany({ tut: tutorial._id })
         })
         await Tutorial.deleteMany({ cat: category._id})
-        await Category.deleteMany({ name: req.body.name })
+        category.remove()
 
         res.send({ message: "Deleted!"})
     } catch (e) {
