@@ -21,6 +21,8 @@ router.post('/courses', upload.single('avatar'), async (req,res) => {
     try {
         const tut = await Tutorial.findOne({ name: req.body.tut })
         const buffer = await sharp(req.file.buffer).resize({ width: 390, height: 240 }).png().toBuffer()
+        req.body.links = req.body.links.split(',')
+        console.log(req.body)
         const course = new Course({
             ...req.body,
             tut: tut._id,
@@ -33,6 +35,16 @@ router.post('/courses', upload.single('avatar'), async (req,res) => {
     }
 }, (error, req, res, next) => {
     res.status(400).send({ error: error.message })
+})
+
+router.get('/courses', async (req, res) => {
+    const course = await Course.find({ }, null, { sort: { title : 1 } })
+
+    try {
+        res.send(course)
+    } catch(e) {
+        res.status(400).send(e)
+    }
 })
 
 module.exports = router
