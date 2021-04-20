@@ -77,6 +77,18 @@ router.delete('/tutorials', async (req, res) => {
     }
 })
 
+router.get('/tutorials/:tut', async (req, res) => {
+    const tut = req.params.tut
+
+    try {
+        const tutorial = await Tutorial.findOne({ name: tut })
+        const courses = await Course.find({ tut: tutorial._id }, null, { sort: { name: 1} })
+        res.send(courses)
+    } catch(e) {
+        res.status(400).send(e)
+    }
+})
+
 router.get('/tutorials/:name/avatar', async (req, res) => {
     try {
         const tutorial = await Tutorial.findOne({ name: req.params.name })
