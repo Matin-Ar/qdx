@@ -21,7 +21,7 @@ const upload = multer({
 router.post('/tutorials', upload.single('avatar'), async (req,res) => {
     try {
         const cat = await Category.findOne({ name: req.body.cat })
-        const buffer = await sharp(req.file.buffer).resize({ width: 390, height: 240 }).png().toBuffer()
+        const buffer = await sharp(req.file.buffer).png().toBuffer()
         const tutorial = new Tutorial({
             name: req.body.name,
             cat: cat._id,
@@ -42,18 +42,6 @@ router.get('/tutorials', async (req, res) => {
 
     try {
         res.send(tutorial)
-    } catch(e) {
-        res.status(400).send(e)
-    }
-})
-
-router.get('/tutorials/:cat', async (req, res) => {
-    const cat = req.params.cat
-
-    try {
-        const category = await Category.findOne({ name: cat })
-        const tutorials = await Tutorial.find({ cat: category._id }, null, { sort: { name: 1} })
-        res.send(tutorials)
     } catch(e) {
         res.status(400).send(e)
     }
