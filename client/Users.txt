@@ -66,7 +66,22 @@ GET - /users/:id/avatar
 	hame mitoonam az tarighe url bebinanesh.
 	dar kol chize khassi nadare.(baghie tozihatesh too skype dadam)
 	
---------------------------
+
+NEW : 
+
+GET - /courses
+	hame course haro mide 
+
+GET - /courses/{TITLE COURSE}
+	har title i dashte bashe , course e ba oon title o mide
+
+GET - /course/{TITLE COURSE}/avatar
+	avatar marboot be oon course mide
+
+GET - /tutorials/{NAME TUTORIAL}
+	course haye marboot be oon tutorial mide
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
 
 http://localhost:3001/tutorials/back-end
 http://localhost:3001/tutorials/front-end
