@@ -1460,6 +1460,11 @@ input[type="submit"]:disabled {
   display: block;
 }
 
+.allCategoriesPage-wrapper {
+  background-color: $light;
+  // min-height: 60vh;
+}
+
 //footer
 .footer-container {
   background-color: $light;
