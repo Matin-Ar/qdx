@@ -67,3 +67,24 @@ GET - /users/:id/avatar
 	dar kol chize khassi nadare.(baghie tozihatesh too skype dadam)
 	
 --------------------------
+
+http://localhost:3001/tutorials/back-end
+http://localhost:3001/tutorials/front-end
+
+
+//link avatar course
+
+//link avatar tutorial
+http://localhost:3001/tutorials/${tutorial-name}/avatar
+
+
+//گرفتن جدید ترین دوره ها
+http://localhost:3001/courses
+
+//گرفتن توتوریال ها در کتگوری مشخص
+
+//گرفتن دوره ها در توتوریال مشخص--
+
+//sort bar asase alephabet
+//sort bar asase jadidtarin
+//sort bar asase most popular

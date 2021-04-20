@@ -25,13 +25,14 @@ export default class DashboardPage extends Component {
       <div className="dashboard-Container">
         <div className="dashboard-content-wrapper">
           <Tabs
+            defaultIndex={1}
             className="react-tabs dashboard-tabs-pannel"
             disabledTabClassName="react-tabs__tab--disabled dashboard-tabs-disabled-tab"
             selectedTabClassName="react-tabs__tab--selected dashboard-tabs-selected-tab"
             selectedTabPanelClassName="react-tabs__tab-panel--selected dashboard-tabs-selected-pannel"
           >
             <TabList className="react-tabs__tab-list dashboard-tabs-tablist">
-              <Tab>
+              <Tab disabled>
                 <img src={dashboardIMG} />
                 داشبورد
               </Tab>
@@ -39,7 +40,7 @@ export default class DashboardPage extends Component {
                 <img src={editUserIMG} />
                 ویرایش حساب کاربری
               </Tab>
-              <Tab>
+              <Tab disabled>
                 <img src={adminIMG} />
                 پنل مدیریت
               </Tab>
