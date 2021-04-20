@@ -290,6 +290,11 @@ nav {
   padding: 1em 2em;
   color: white;
   width: 300px;
+  cursor: pointer;
+}
+
+.single-category-container:hover {
+  background-color: darken($dark, $amount: 20%);
 }
 
 .category-wrapper {
@@ -309,6 +314,42 @@ nav {
   font-size: 1.1em;
   font-family: bold;
   border-radius: 10px;
+}
+
+.allCategoriesPage-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding: 2em;
+}
+.single-category-img-container {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: flex;
+  align-items: center;
+}
+
+.single-category-image {
+  width: 65px;
+  margin-right: 1em;
+}
+
+.single-category-wrapper {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  margin: 2em auto;
+  width: 300px;
+  padding: 1em 2em;
+  background-color: $dark;
+  color: $gray;
+  cursor: pointer;
+}
+
+.single-category-wrapper:hover {
+  background-color: darken($dark, $amount: 20%);
+  color: white;
 }
 
 //NEW course List
@@ -369,6 +410,14 @@ nav {
 .singlecourse-description-bottom-icon {
   display: flex;
   margin-left: 2em;
+}
+.singlecourse-description-top-icon {
+  display: flex;
+  margin-left: 2em;
+}
+
+.singlecourse-description-top-icon p {
+  margin-right: 1em;
 }
 
 .singlecourse-description-bottom-icon p {
@@ -760,6 +809,10 @@ nav {
   border-left: 1px solid $gray !important;
 
   border-bottom: 5px solid $yellow !important;
+}
+
+.dashboard-tabs-disabled-tab {
+  color: black !important;
 }
 
 //edit- profile
@@ -1260,8 +1313,6 @@ input[type="submit"]:disabled {
   flex-direction: column;
 }
 
-.add-course-tab-one-form-group-label {
-}
 .add-course-tab-one-form-group-select-box {
   margin-bottom: 1em;
   height: 30px;
