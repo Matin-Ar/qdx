@@ -62,17 +62,15 @@ export class AvatarMaker extends React.Component {
   setEditorRef = (editor) => (this.editor = editor);
 
   handleFileUpload(e) {
-    let file = this.state.file;
-
     if (this.editor) {
       const canvas = this.editor.getImage().toDataURL();
-
+      let file = this.state.file;
       let profileImage = new Image();
       profileImage.setAttribute("crossOrigin", "anonymous");
       profileImage.src = canvas;
 
       this.props
-        .dispatch(startSetUserAvatar(profileImage, this.props.userId))
+        .dispatch(startSetUserAvatar(file, this.props.userId))
         .then((res) => {
           console.log("res from .then -- avatar:", res);
           if (res === 200) {
@@ -85,17 +83,17 @@ export class AvatarMaker extends React.Component {
     }
   }
 
-  handleRotationChange(e) {
-    this.setState({
-      imgRotation: e.target.value,
-    });
-  }
+  // handleRotationChange(e) {
+  //   this.setState({
+  //     imgRotation: e.target.value,
+  //   });
+  // }
 
-  handleScaleChange(e) {
-    this.setState({
-      imgScale: e.target.value,
-    });
-  }
+  // handleScaleChange(e) {
+  //   this.setState({
+  //     imgScale: e.target.value,
+  //   });
+  // }
 
   handleAvatarDelete(e) {
     axios
@@ -132,34 +130,6 @@ export class AvatarMaker extends React.Component {
             scale={this.state.imgScale}
             rotate={this.state.imgRotation}
           />
-
-          <div>
-            <label for="image-rotation">
-              image-rotation (between 0 and 360):
-            </label>
-            <input
-              type="range"
-              id="image-rotation"
-              name="image-rotation"
-              min="0"
-              max="360"
-              defaultValue="0"
-              onChange={this.handleRotationChange}
-            />
-
-            <label for="image-scale">image-scale (between -2 and 2):</label>
-
-            <input
-              type="range"
-              id="image-scale"
-              name="image-scale"
-              min="0.5"
-              max="5"
-              step="0.1"
-              defaultValue="1"
-              onChange={this.handleScaleChange}
-            />
-          </div>
         </div>
 
         <div className="avatar-input-file-wrapper">

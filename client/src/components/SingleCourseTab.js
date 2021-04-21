@@ -5,10 +5,10 @@ export default class SinglePageTabs extends Component {
     super(props);
     this.handleTabChange = this.handleTabChange.bind(this);
     this.state = {
-      activeTab: "user-comments-tab",
+      activeTab: "download-link-tab",
+      // links: props.courseLinks,
     };
   }
-
   handleTabChange(e) {
     const selectedTab = e.target.innerHTML;
     if (selectedTab === "لینک دانلود دوره") {
@@ -70,7 +70,14 @@ export default class SinglePageTabs extends Component {
           <div className="tabs-data-container">
             {this.state.activeTab === "download-link-tab" && (
               <div className="download-link-tab active-content">
-                DownloadTab
+                {this.props.courseLinks &&
+                  this.props.courseLinks.map((link, index) => {
+                    return (
+                      <a href={`${link}`} className="course-download-links">
+                        دانلود قسمت <span>{index + 1}</span>
+                      </a>
+                    );
+                  })}
               </div>
             )}
 

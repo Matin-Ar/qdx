@@ -1,95 +1,82 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import SingleCourseTab from "./SingleCourseTab";
 import durationICON from "../assets/courses/duration.png";
 import authorICON from "../assets/courses/author.png";
 import languageICON from "../assets/courses/language.png";
 import lessonsICON from "../assets/courses/lessons.png";
+import downloadICON from "../assets/courses/download.png";
+
 import linkICON from "../assets/courses/link.png";
 import dummyCourseImg from "../assets/courses/courseimage/lodash.png";
 
-export default function SingleCourseComponent() {
+export default function SingleCourseComponent(props) {
+  const [course, setCourse] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`/courses/${props.courseName}`)
+      .then((res) => {
+        setCourse(res.data);
+        console.log(course);
+      })
+      .catch((err) => console.log(err));
+  }, [course.length]);
+
   return (
     <div className="singleCourse-container">
       <div className="imageContainer">
         <img src={dummyCourseImg} />
       </div>
       <div className="courseShortDescription-container">
-        <h1>Course Title</h1>
-        <p>
-          Subnautica Below Zero یک بازی جهان باز ( Open World ) و تک نفره می
-          باشد که توسط استودیو Unknown Worlds Entertainment ساخته و در تاریخ 30
-          ژانویه 2019 منتشر شد . شما در یک اقیانوس فضایی هستید که می توانید
-          مناطق مختلف بازی در زیر دریا و روی خشکی را جستجو کنید . Below Zero
-        </p>
+        <h1>{course.title}</h1>
+        <p>{course.shortdesc}</p>
         <div className="infoIcon-container">
           <div className="infoIcon-top">
             <div className="singlecourse-description-bottom-icons">
               <div className="singlecourse-description-top-icon">
                 <img src={durationICON}></img>
-                <p>03:54:21</p>
+                <p>مدت زمان : {course.duration}</p>
               </div>
               <div className="singlecourse-description-top-icon">
                 <img src={lessonsICON}></img>
-                <p>42</p>
+                <p> تعداد جلسات : {course.numberofvideos}</p>
               </div>
               <div className="singlecourse-description-top-icon">
                 <img src={languageICON}></img>
-                <p>انگلیسی </p>
+                <p>زبان : {course.language} </p>
               </div>
               <div className="singlecourse-description-top-icon">
                 <img src={linkICON}></img>
-                <p>Udemy.com</p>
-              </div>
-              <div className="singlecourse-description-top-icon">
-                <img src={authorICON}></img>
-                <p>Andrew Mead</p>
+                <p>ناشر: {course.publisher}</p>
               </div>
             </div>
           </div>
           <div className="infoIcon-bottom">
             <div className="singlecourse-description-bottom-icons">
-              <div className="singlecourse-description-bottom-icon">
-                <img src={durationICON}></img>
-                <p>03:54:21</p>
-              </div>
-              <div className="singlecourse-description-bottom-icon">
-                <img src={lessonsICON}></img>
-                <p>42</p>
+              <div className="singlecourse-description-top-icon">
+                <img src={authorICON}></img>
+                <p>اساتید: {course.author}</p>
               </div>
               <div className="singlecourse-description-bottom-icon">
                 <img src={languageICON}></img>
-                <p>انگلیسی </p>
+                <p>تاریخ انتشار: {course.filedate}</p>
               </div>
               <div className="singlecourse-description-bottom-icon">
                 <img src={linkICON}></img>
-                <p>Udemy.com</p>
+                <p>کیفیت ویدیوها : {course.quality}</p>
               </div>
               <div className="singlecourse-description-bottom-icon">
-                <img src={authorICON}></img>
-                <p>Andrew Mead</p>
+                <img src={downloadICON} className="dlIcon"></img>
+                <p>حجم: {course.filesize}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div className="courseLongDescription-container">
-        <p>
-          لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و
-          بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود. طراح
-          گرافیک از این متن به عنوان عنصری از ترکیب بندی برای پر کردن صفحه و
-          ارایه اولیه شکل ظاهری و کلی طرح سفارش گرفته شده استفاده می نماید، تا
-          از نظر گرافیکی نشانگر چگونگی نوع و اندازه فونت و ظاهر متن باشد. معمولا
-          طراحان گرافیک برای صفحه‌آرایی، نخست از متن‌های آزمایشی و بی‌معنی
-          استفاده می‌کنند تا صرفا به مشتری یا صاحب کار خود نشان دهند که صفحه
-          طراحی یا صفحه بندی شده بعد از اینکه متن در آن قرار گیرد چگونه به نظر
-          می‌رسد و قلم‌ها و اندازه‌بندی‌ها چگونه در نظر گرفته شده‌است. از آنجایی
-          که طراحان عموما نویسنده متن نیستند و وظیفه رعایت حق تکثیر متون را
-          ندارند و در همان حال کار آنها به نوعی وابسته به متن می‌باشد آنها با
-          استفاده از محتویات ساختگی، صفحه گرافیکی خود را صفحه‌آرایی می‌کنند تا
-          مرحله طراحی و صفحه‌بندی را به پایان برند.
-        </p>
+        <p>{course.longdesc}</p>
       </div>
-      <SingleCourseTab className="SingleCourseTab" />
+      <SingleCourseTab className="SingleCourseTab" courseLinks={course.links} />
     </div>
   );
 }

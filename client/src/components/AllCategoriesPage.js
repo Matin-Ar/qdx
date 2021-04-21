@@ -33,6 +33,67 @@ export default function AllCategoriesPage() {
   return (
     <div className="allCategoriesPage-wrapper">
       <div className="allCategoriesPage-container">
+        {categories.length === 0 && (
+          <React.Fragment>
+            <div className="single-category-wrapper">
+              <Skeleton type="text" />
+
+              <div className="single-category-img-container">
+                <Skeleton type="thumbnail" />
+              </div>
+            </div>
+            <div className="single-category-wrapper">
+              <Skeleton type="text" />
+
+              <div className="single-category-img-container">
+                <Skeleton type="thumbnail" />
+              </div>
+            </div>
+            <div className="single-category-wrapper">
+              <Skeleton type="text" />
+
+              <div className="single-category-img-container">
+                <Skeleton type="thumbnail" />
+              </div>
+            </div>
+            <div className="single-category-wrapper">
+              <Skeleton type="text" />
+
+              <div className="single-category-img-container">
+                <Skeleton type="thumbnail" />
+              </div>
+            </div>
+            <div className="single-category-wrapper">
+              <Skeleton type="text" />
+
+              <div className="single-category-img-container">
+                <Skeleton type="thumbnail" />
+              </div>
+            </div>
+            <div className="single-category-wrapper">
+              <Skeleton type="text" />
+
+              <div className="single-category-img-container">
+                <Skeleton type="thumbnail" />
+              </div>
+            </div>
+            <div className="single-category-wrapper">
+              <Skeleton type="text" />
+
+              <div className="single-category-img-container">
+                <Skeleton type="thumbnail" />
+              </div>
+            </div>
+            <div className="single-category-wrapper">
+              <Skeleton type="text" />
+
+              <div className="single-category-img-container">
+                <Skeleton type="thumbnail" />
+              </div>
+            </div>
+          </React.Fragment>
+        )}
+
         {finalList &&
           finalList.map((category) => {
             return (
@@ -85,66 +146,66 @@ export default function AllCategoriesPage() {
 // return (
 //   <div className="allCategoriesPage-wrapper">
 //     <div className="allCategoriesPage-container">
-//       {tutorials.length === 0 && (
-//         <React.Fragment>
-//           <div className="single-category-wrapper">
-//             <Skeleton type="text" />
+// {tutorials.length === 0 && (
+//   <React.Fragment>
+//     <div className="single-category-wrapper">
+//       <Skeleton type="text" />
 
-//             <div className="single-category-img-container">
-//               <Skeleton type="thumbnail" />
-//             </div>
-//           </div>
-//           <div className="single-category-wrapper">
-//             <Skeleton type="text" />
+//       <div className="single-category-img-container">
+//         <Skeleton type="thumbnail" />
+//       </div>
+//     </div>
+//     <div className="single-category-wrapper">
+//       <Skeleton type="text" />
 
-//             <div className="single-category-img-container">
-//               <Skeleton type="thumbnail" />
-//             </div>
-//           </div>
-//           <div className="single-category-wrapper">
-//             <Skeleton type="text" />
+//       <div className="single-category-img-container">
+//         <Skeleton type="thumbnail" />
+//       </div>
+//     </div>
+//     <div className="single-category-wrapper">
+//       <Skeleton type="text" />
 
-//             <div className="single-category-img-container">
-//               <Skeleton type="thumbnail" />
-//             </div>
-//           </div>
-//           <div className="single-category-wrapper">
-//             <Skeleton type="text" />
+//       <div className="single-category-img-container">
+//         <Skeleton type="thumbnail" />
+//       </div>
+//     </div>
+//     <div className="single-category-wrapper">
+//       <Skeleton type="text" />
 
-//             <div className="single-category-img-container">
-//               <Skeleton type="thumbnail" />
-//             </div>
-//           </div>
-//           <div className="single-category-wrapper">
-//             <Skeleton type="text" />
+//       <div className="single-category-img-container">
+//         <Skeleton type="thumbnail" />
+//       </div>
+//     </div>
+//     <div className="single-category-wrapper">
+//       <Skeleton type="text" />
 
-//             <div className="single-category-img-container">
-//               <Skeleton type="thumbnail" />
-//             </div>
-//           </div>
-//           <div className="single-category-wrapper">
-//             <Skeleton type="text" />
+//       <div className="single-category-img-container">
+//         <Skeleton type="thumbnail" />
+//       </div>
+//     </div>
+//     <div className="single-category-wrapper">
+//       <Skeleton type="text" />
 
-//             <div className="single-category-img-container">
-//               <Skeleton type="thumbnail" />
-//             </div>
-//           </div>
-//           <div className="single-category-wrapper">
-//             <Skeleton type="text" />
+//       <div className="single-category-img-container">
+//         <Skeleton type="thumbnail" />
+//       </div>
+//     </div>
+//     <div className="single-category-wrapper">
+//       <Skeleton type="text" />
 
-//             <div className="single-category-img-container">
-//               <Skeleton type="thumbnail" />
-//             </div>
-//           </div>
-//           <div className="single-category-wrapper">
-//             <Skeleton type="text" />
+//       <div className="single-category-img-container">
+//         <Skeleton type="thumbnail" />
+//       </div>
+//     </div>
+//     <div className="single-category-wrapper">
+//       <Skeleton type="text" />
 
-//             <div className="single-category-img-container">
-//               <Skeleton type="thumbnail" />
-//             </div>
-//           </div>
-//         </React.Fragment>
-//       )}
+//       <div className="single-category-img-container">
+//         <Skeleton type="thumbnail" />
+//       </div>
+//     </div>
+//   </React.Fragment>
+// )}
 
 //       <div className="single-category-wrapper">
 //         "Front-end"

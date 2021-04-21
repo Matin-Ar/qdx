@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+
 import { useParams } from "react-router-dom";
 import CourseComponent from "../components/CourseComponent";
 
@@ -24,7 +25,7 @@ function SpecificTutorialsPage() {
       <div className="SpecificTutorialsPage-container">
         {courseList &&
           courseList.map((course) => {
-            return <CourseComponent course={course} />;
+            return <CourseComponent course={course} tutorialName={tutorial} />;
           })}
       </div>
     </div>

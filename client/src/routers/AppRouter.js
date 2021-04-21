@@ -35,15 +35,16 @@ export const AppRouter = (props) => {
           <Route path="/aboutus" component={AboutUsPage} />
           <Route path="/contactus" component={ContactUsPage} />
           <PrivateRoute
+            path="/course/:courseName"
+            component={SingleCoursePage}
+            isAuth={props.isAuth}
+          />
+          <PrivateRoute
             path="/categories/:tutorial"
             component={SpecificTutorialsPage}
             isAuth={props.isAuth}
           />
-          <PrivateRoute
-            path="/course/singlecourse"
-            component={SingleCoursePage}
-            isAuth={props.isAuth}
-          />
+
           <PrivateRoute
             path="/categories/"
             component={AllCategoriesPage}

@@ -1560,7 +1560,17 @@ input[type="submit"]:disabled {
   margin-bottom: 2em;
 }
 
-.SpecificTutorialsPage-container {
+.course-download-links {
+  display: block;
+  text-decoration: none;
+  color: $yellow;
+  margin-bottom: 1em;
+}
+
+.dlIcon {
+  height: 22px;
+  fill: $gray;
+  color: $gray;
 }
 
 //footer

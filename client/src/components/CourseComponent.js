@@ -6,6 +6,7 @@ import authorICON from "../assets/courses/author.png";
 import languageICON from "../assets/courses/language.png";
 import lessonsICON from "../assets/courses/lessons.png";
 import linkICON from "../assets/courses/link.png";
+import { Link } from "react-router-dom";
 
 // {
 //   author,
@@ -63,9 +64,11 @@ export default function CourseComponent(props) {
                   <p>{props.course.author}</p>
                 </div>
               </div>
-              <button className="singlecourse-description-button">
-                دانلود دوره
-              </button>
+              <Link to={`/course/${props.course.title}`}>
+                <button className="singlecourse-description-button">
+                  دانلود دوره
+                </button>
+              </Link>
             </div>
           </div>
         </div>
