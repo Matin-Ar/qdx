@@ -16,6 +16,7 @@ import PublicRoute from "./PublicRoute";
 import SingleCoursePage from "../components/SingleCoursePage";
 import DashboardPage from "../components/DashboardPage";
 import AllCategoriesPage from "../components/AllCategoriesPage";
+import SpecificTutorialsPage from "../components/SpecificTutorialsPage";
 
 export const AppRouter = (props) => {
   //check local storage to see if token exists
@@ -33,6 +34,11 @@ export const AppRouter = (props) => {
           <Route path="/" component={HomePage} exact={true} />
           <Route path="/aboutus" component={AboutUsPage} />
           <Route path="/contactus" component={ContactUsPage} />
+          <PrivateRoute
+            path="/categories/:tutorial"
+            component={SpecificTutorialsPage}
+            isAuth={props.isAuth}
+          />
           <PrivateRoute
             path="/course/singlecourse"
             component={SingleCoursePage}

@@ -394,12 +394,11 @@ nav {
 }
 //Single Course Comp
 .singlecoursecomponent {
-  width: 90%;
-  height: 240px;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: row-reverse;
   background-color: $light;
-  margin: 2em;
 }
 .singlecourse-img-wrapper img {
   height: 100%;
@@ -1543,7 +1542,25 @@ input[type="submit"]:disabled {
 
 .allCategoriesPage-wrapper {
   background-color: $light;
-  // min-height: 60vh;
+  min-height: 60vh;
+}
+
+//specific tutorial section
+
+.SpecificTutorialsPage-wrapper {
+  background-color: $dark;
+  height: 100%;
+  min-height: 60vh;
+  width: 100%;
+  padding: 3em;
+}
+
+.single-course-Container-wrapper {
+  height: 250px;
+  margin-bottom: 2em;
+}
+
+.SpecificTutorialsPage-container {
 }
 
 //footer

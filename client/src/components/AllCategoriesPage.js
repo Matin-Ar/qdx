@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Skeleton from "./skeleton/Skeleton";
 
 export default function AllCategoriesPage() {
@@ -42,15 +43,17 @@ export default function AllCategoriesPage() {
                 {category.subCategories &&
                   category.subCategories.map((subcategory) => {
                     return (
-                      <div className="single-category-wrapper">
-                        {subcategory.name}
-                        <div className="single-category-img-container">
-                          <img
-                            className="single-category-image"
-                            src={`http://localhost:3001/tutorials/${subcategory.name}/avatar`}
-                          ></img>
+                      <Link to={`/categories/${subcategory.name}`}>
+                        <div className="single-category-wrapper">
+                          {subcategory.name}
+                          <div className="single-category-img-container">
+                            <img
+                              className="single-category-image"
+                              src={`http://localhost:3001/tutorials/${subcategory.name}/avatar`}
+                            ></img>
+                          </div>
                         </div>
-                      </div>
+                      </Link>
                     );
                   })}
               </React.Fragment>
