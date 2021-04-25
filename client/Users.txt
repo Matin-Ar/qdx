@@ -75,7 +75,7 @@ GET - /courses
 GET - /courses/{TITLE COURSE}
 	har title i dashte bashe , course e ba oon title o mide
 
-GET - /course/{TITLE COURSE}/avatar
+GET - /courses/{TITLE COURSE}/avatar
 	avatar marboot be oon course mide
 
 GET - /tutorials/{NAME TUTORIAL}
