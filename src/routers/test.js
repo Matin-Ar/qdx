@@ -1,0 +1,28 @@
+const express = require('express')
+const Category = require('../models/category')
+const Tutorial = require('../models/tutorial')
+const Course = require('../models/course')
+const router = new express.Router()
+
+router.get('/test', async (req,res) => {    
+    try {
+        const category = await Category.find({ }, null, { sort: { name: 1 } })
+        const tutorial = await Tutorial.find({ }, null, { sort: { name: 1 } })
+
+        let test = []
+        category.forEach((cat) => {
+            const myObj = {
+                category: cat.name,
+                tutorials: tutorial.filter((tut) => {
+                    return tut.cat == cat._id.toString()
+                })
+            } 
+            test.push(myObj)
+        })
+        res.send(test)
+    } catch(e) {
+        res.status(400).send(e)
+    }
+})
+
+module.exports = router
