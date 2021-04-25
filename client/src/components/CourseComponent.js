@@ -8,22 +8,6 @@ import lessonsICON from "../assets/courses/lessons.png";
 import linkICON from "../assets/courses/link.png";
 import { Link } from "react-router-dom";
 
-// {
-//   author,
-//   duration,
-//   filedate,
-//   filesize,
-//   language,
-//   longdesc,
-//   numberofvideos,
-//   publisher,
-//   quality,
-//   shortdesc,
-//   title,
-//   updatedAt,
-//   links,
-// }
-
 export default function CourseComponent(props) {
   console.log("props from CourseComponent :  ", props);
 

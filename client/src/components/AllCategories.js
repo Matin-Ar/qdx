@@ -1,25 +1,29 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useQuery, useQueries } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import React from "react";
 import axios from "axios";
-import { getCategories } from "./Hooks/getCategories";
+import RenderCollection from "./RenderCollection";
+import Loader from "./Loader";
 
 function AllCategories() {
-  const categories = useQuery("categories", () => {
-    return axios.get("/categories").then((res) => res.data);
+  const collections = useQuery("categoriesAndTutorials", () => {
+    return axios.get("/test").then((res) => res.data);
   });
 
-  console.log(categories);
+  console.log(collections);
 
-  return categories.isLoading ? (
-    "LOADING .... "
+  return collections.isLoading ? (
+    <div className="all_categories_page_container">
+      <div className="loader-container">
+        <Loader />
+      </div>
+    </div>
   ) : (
-    <>
-      <ReactQueryDevtools />
-
-      <div> {categories.data?.map((item) => item.name)} </div>
-    </>
+    <div className="all_categories_page_container">
+      {collections.data?.map((collection) => {
+        return <RenderCollection collection={collection} />;
+      })}
+    </div>
   );
 }
 

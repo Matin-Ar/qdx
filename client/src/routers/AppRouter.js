@@ -11,11 +11,11 @@ import LoginPage from "../components/LoginPage";
 import RegisterPage from "../components/RegisterPage";
 import setAutherizationToken from "../utils/setAutherizationToken";
 import { startSetCurrentUser } from "../Actions/user";
+import { ReactQueryDevtools } from "react-query/devtools";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import SingleCoursePage from "../components/SingleCoursePage";
 import DashboardPage from "../components/DashboardPage";
-import AllCategoriesPage from "../components/AllCategoriesPage";
 import SpecificTutorialsPage from "../components/SpecificTutorialsPage";
 import ManageCategoriesAndTutorials from "../components/table/ManageCategoriesAndTutorials";
 import AllCategories from "../components/AllCategories";
@@ -77,6 +77,7 @@ export const AppRouter = (props) => {
           <Route component={NotFoundPage} />
         </Switch>
         <Footer />
+        <ReactQueryDevtools />
       </div>
     </BrowserRouter>
   );
