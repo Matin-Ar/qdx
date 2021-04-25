@@ -38,8 +38,6 @@ export class AvatarMaker extends React.Component {
     super(props);
     this.handleFileSelect = this.handleFileSelect.bind(this);
     this.handleFileUpload = this.handleFileUpload.bind(this);
-    this.handleRotationChange = this.handleRotationChange.bind(this);
-    this.handleScaleChange = this.handleScaleChange.bind(this);
     this.handleAvatarDelete = this.handleAvatarDelete.bind(this);
 
     this.state = {

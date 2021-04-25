@@ -17,6 +17,8 @@ import SingleCoursePage from "../components/SingleCoursePage";
 import DashboardPage from "../components/DashboardPage";
 import AllCategoriesPage from "../components/AllCategoriesPage";
 import SpecificTutorialsPage from "../components/SpecificTutorialsPage";
+import ManageCategoriesAndTutorials from "../components/table/ManageCategoriesAndTutorials";
+import AllCategories from "../components/AllCategories";
 
 export const AppRouter = (props) => {
   //check local storage to see if token exists
@@ -34,6 +36,11 @@ export const AppRouter = (props) => {
           <Route path="/" component={HomePage} exact={true} />
           <Route path="/aboutus" component={AboutUsPage} />
           <Route path="/contactus" component={ContactUsPage} />
+          <Route
+            path="/ManageCategoriesAndTutorials"
+            component={ManageCategoriesAndTutorials}
+          />
+
           <PrivateRoute
             path="/course/:courseName"
             component={SingleCoursePage}
@@ -47,7 +54,7 @@ export const AppRouter = (props) => {
 
           <PrivateRoute
             path="/categories/"
-            component={AllCategoriesPage}
+            component={AllCategories}
             isAuth={props.isAuth}
           />
           <PrivateRoute

@@ -9,6 +9,8 @@ import dashboardIMG from "../assets/Dashboard/dashboard.png";
 import AddCourseTab from "./AddCourseTab";
 import AddCourseCategory from "./AddCourseCategory";
 import AddCourseTutorial from "./AddCourseTutorial";
+import ManageCategoriesAndTutorials from "./table/ManageCategoriesAndTutorials";
+import { Link } from "react-router-dom";
 
 const CustomTabPanel = ({ children, myCustomProp, ...otherProps }) => (
   <TabPanel {...otherProps}>
@@ -46,12 +48,15 @@ export default class DashboardPage extends Component {
               </Tab>
               <Tab>
                 <img src={addCourseIMG} />
-                افزودن دسته بندی دوره
+                <Link
+                  to="/ManageCategoriesAndTutorials"
+                  className="courseandcategorymanagment-link"
+                >
+                  {" "}
+                  مدیریت دسته بندی ها و زبان ها
+                </Link>
               </Tab>
-              <Tab>
-                <img src={addCourseIMG} />
-                افزودن زبان های برنامه نویسی
-              </Tab>
+
               <Tab>
                 <img src={addCourseIMG} />
                 افزودن دوره
@@ -62,12 +67,7 @@ export default class DashboardPage extends Component {
               <ProfileEditTab />
             </CustomTabPanel>
             <CustomTabPanel>addmin Tab</CustomTabPanel>
-            <CustomTabPanel>
-              <AddCourseCategory />
-            </CustomTabPanel>
-            <CustomTabPanel>
-              <AddCourseTutorial />
-            </CustomTabPanel>
+            <CustomTabPanel>manage dashboard</CustomTabPanel>
             <CustomTabPanel>
               <AddCourseTab />
             </CustomTabPanel>

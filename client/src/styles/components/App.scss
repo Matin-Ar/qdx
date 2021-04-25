@@ -327,6 +327,15 @@ nav {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $gray;
+  height: 100%;
+  min-height: 50vh;
+  width: 100%;
+}
 
 .single-category-img-container {
   width: 100%;
@@ -1328,11 +1337,6 @@ input[type="submit"]:disabled {
   color: $gray;
 }
 
-.add-course-right-inputs {
-  // background-color: yellow;
-}
-.add-course-left-inputs {
-}
 .add-course-bottom-inputs {
   grid-column: 1/4;
   padding-left: 2em;
@@ -1571,6 +1575,147 @@ input[type="submit"]:disabled {
   height: 22px;
   fill: $gray;
   color: $gray;
+}
+
+//test table style
+.tablepage-wrapper {
+  background-color: $dark;
+  padding: 2em;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.table-container {
+  width: 90%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tablebody-row:nth-child(even) {
+  background-color: lighten($gray, $amount: 40%);
+  color: White;
+}
+
+.table-avatar {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+.add-category-table {
+  background-color: $yellow;
+  padding: 1em 2em;
+  direction: rtl;
+}
+.add-category-input-table {
+  width: 90%;
+  height: 30px;
+  outline: none;
+  border: none;
+  padding-right: 1em;
+}
+
+.add-category-button-table {
+  background-color: $green;
+  outline: none;
+  border: none;
+  color: white;
+  height: 30px;
+  padding: 0 1em;
+  cursor: pointer;
+}
+
+.add-category-button-table:hover {
+  background-color: lighten($green, $amount: 10%);
+}
+
+.add-language-table {
+  background-color: $yellow;
+  padding: 1em 2em;
+  direction: rtl;
+}
+
+.add-language-top-table {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.add-language-button-top-table {
+  background-color: $red;
+  outline: none;
+  border: none;
+  color: white;
+  height: 30px;
+  padding: 0 1em;
+  cursor: pointer;
+}
+
+.add-language-button-top-table:hover {
+  background-color: lighten($red, $amount: 10%);
+}
+
+.add-language-input-table {
+  width: 90%;
+  height: 30px;
+  outline: none;
+  border: none;
+  padding-right: 1em;
+}
+
+.add-language-button-table {
+  background-color: $green;
+  outline: none;
+  border: none;
+  color: white;
+  height: 30px;
+  padding: 0 1em;
+  cursor: pointer;
+}
+
+.add-language-button-table:hover {
+  background-color: lighten($green, $amount: 10%);
+}
+
+.edit-image-table {
+  pointer-events: none;
+}
+.edit-button-table,
+.delete-button-table {
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+.category-button-table {
+  outline: none;
+  border: none;
+  padding: 1em;
+  cursor: pointer;
+  background-color: lighten($gray, $amount: 40%);
+}
+
+.category-button-table:hover {
+  background-color: lighten($gray, $amount: 20%);
+}
+
+.loading-gif {
+  margin-bottom: 1em;
+}
+
+.courseandcategorymanagment-link {
+  text-decoration: none;
+  color: $gray;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 //footer
