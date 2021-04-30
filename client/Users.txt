@@ -66,9 +66,6 @@ GET - /users/:id/avatar
 	hame mitoonam az tarighe url bebinanesh.
 	dar kol chize khassi nadare.(baghie tozihatesh too skype dadam)
 	
-
-NEW : 
-
 GET - /courses
 	hame course haro mide 
 
@@ -81,6 +78,60 @@ GET - /courses/{TITLE COURSE}/avatar
 GET - /tutorials/{NAME TUTORIAL}
 	course haye marboot be oon tutorial mide
 
+
+NEW : 
+
+PATCH - /tutorials
+	ye body ba key haye oldname & newname (daghighan mesle category ha)
+	mesal : 
+	{
+		"oldname": "..."
+		"newname": "..."
+	}
+
+DELETE - /tutorials
+	ye body ba key e name . baraie pak kardane ye tutorial
+	mesal : 
+	{
+		"name": "..."
+	}
+
+DELETE - /courses
+	ye body ba key e title . baraie pak kardane course ba title mored nazar
+	mesal : 
+	{
+		"title": "..."
+	}
+
+PATCH - /courses/:title 
+	dar title bala , title coursei ke mikhaim update konim mizanim va dar body attribute hayii ke mikhaim taghir bedim
+
+	mesal :          PATCH /courses/nodejs 
+	body : 
+			{
+				"title": "aaaa",
+				"shortdesc": "aaaa",
+				"longdesc": "aaaa",
+				"duration": "aaaa",
+				"author": "aaaa",
+				"publisher": "aaaa",
+				"language": "aaaa",
+				"numberofvideos": "aaaa",
+				"filedate": "aaaa",
+				"quality": "aaaa",
+				"filesize": "aaaa",
+				"links": "aaaa.com,bbbb.com"
+			}
+	NOKTE : majboor nistim hamasho taghir bedim , harkoodoom khasti mitonim taghir bedim .
+	mesal : 
+			{
+				"title": "aaaa",
+				"shortdesc": "aaaa",
+			}
+
+
+
+bazam soal dashti sohbat mikonim ok mikonim.
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 
 http://localhost:3001/tutorials/back-end
