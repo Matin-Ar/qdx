@@ -37,7 +37,6 @@ router.post('/courses', upload.single('avatar'), async (req,res) => {
 })
 
 router.get('/courses', async (req, res) => {
-
     try {
         const course = await Course.find({ }, null, { sort: { title : 1 }, limit: parseInt(req.query.limit), skip: parseInt(req.query.skip) })
         res.send(course)
@@ -46,7 +45,7 @@ router.get('/courses', async (req, res) => {
     }
 })
 
-router.get('/courses/:title/', async (req, res) => {
+router.get('/courses/:title', async (req, res) => {
     try {
         const course = await Course.findOne({ title: req.params.title })
         if (!course) {

@@ -82,7 +82,7 @@ router.get('/tutorials/:tut', async (req, res) => {
 
     try {
         const tutorial = await Tutorial.findOne({ name: tut })
-        const courses = await Course.find({ tut: tutorial._id }, null, { sort: { name: 1} })
+        const courses = await Course.find({ tut: tutorial._id }, null, { sort: { title: 1}, limit: parseInt(req.query.limit), skip: parseInt(req.query.skip) })
         res.send(courses)
     } catch(e) {
         res.status(400).send(e)
