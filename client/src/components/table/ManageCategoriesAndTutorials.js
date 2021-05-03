@@ -10,10 +10,12 @@ import Paper from "@material-ui/core/Paper";
 import editIMG from "../../assets/edit.png";
 import deleteIMG from "../../assets/delete.png";
 import LoadIMG from "../../assets/Skateboarding.gif";
+import { Link } from "react-router-dom";
 
 import axios from "axios";
 import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
+import EditCourse from "../EditCourse";
 
 const useStyles = makeStyles({
   table: {
@@ -28,8 +30,15 @@ export default function Test() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [tutorialsArr, setTutorialsArr] = useState("");
 
+  const [addTutorialInput, setAddTutorialInput] = useState("");
+  const [addTutorialImg, setAddTutorialImg] = useState(null);
+  const [selectedTutorial, setSelectedTutorial] = useState("");
+  const [coursesArr, setCoursesArr] = useState("");
+  const [selectedCourse, setSelectedCourse] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const classes = useStyles();
+
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     axios.get("/categories").then((res) => {
@@ -41,7 +50,7 @@ export default function Test() {
   useEffect(() => {
     console.log("setting is loading to:", !!selectedCategory);
     setIsLoading(!!selectedCategory);
-  }, [selectedCategory]);
+  }, [selectedCategory, count]);
 
   useEffect(() => {
     if (selectedCategory !== "") {
@@ -52,12 +61,16 @@ export default function Test() {
         setIsLoading(false);
       });
     }
-  }, [selectedCategory]);
+  }, [selectedCategory, count]);
 
-  const handleDeleteLanguage = (e, name) => {
-    e.preventDefault();
-    console.log(name);
-  };
+  useEffect(() => {
+    if (selectedTutorial !== "") {
+      axios.get(`/tutorials/${selectedTutorial}`).then((res) => {
+        setCoursesArr(res.data);
+        setIsLoading(false);
+      });
+    }
+  }, [selectedTutorial, count]);
 
   const handleDeleteCategory = (e, name) => {
     e.preventDefault();
@@ -87,7 +100,7 @@ export default function Test() {
       `شما در حال تغییر نام دسته بندی می باشید، لطفا نام جدید دسته بندی را وارد نمایید`
     );
 
-    if (newname.trim() != "") {
+    if (newname && newname.trim() != "") {
       axios
         .patch("/categories", { oldname, newname })
         .then((res) => {
@@ -116,6 +129,90 @@ export default function Test() {
     }
   };
 
+  const handleAddTutorial = (e) => {
+    if (addTutorialInput.trim() != "" && addTutorialImg && selectedCategory) {
+      let formData = new FormData();
+      formData.append("avatar", addTutorialImg);
+      formData.append("name", addTutorialInput);
+      formData.append("cat", selectedCategory);
+
+      axios({ url: "/tutorials", method: "POST", data: formData }).then(() => {
+        alertify.success("زبان برنامه نویسی  با موفقیت اضافه شد");
+        axios.get(`/categories/${selectedCategory}`).then((res) => {
+          setTutorialsArr(res.data);
+          setIsLoading(false);
+        });
+      });
+    }
+  };
+
+  const handleDeleteTutorial = (e, name) => {
+    e.preventDefault();
+    const promptResult = prompt(
+      `شما در حال حذف دسته بندی می باشید ، با حذف دسته بندی تمامی اطلاعات دوره های داخل آن حذف میگردد آیا مطمئن هستید؟`
+    );
+    if (promptResult == "yes") {
+      axios
+        .delete("/tutorials", { data: { name } })
+        .then(
+          (res) => {
+            alertify.success("زبان برنامه نویسی با موفقیت حذف شد");
+          },
+          (err) => console.log("err from handleDeleteCategory:", err)
+        )
+        .then(
+          axios.get(`/categories/${selectedCategory}`).then((res) => {
+            setTutorialsArr(res.data);
+            setIsLoading(false);
+          })
+        );
+    }
+  };
+
+  const handleEditTutorial = (e, oldname) => {
+    e.preventDefault();
+    const newname = prompt(
+      `شما در حال تغییر نام زبان برنامه نویسی می باشید، لطفا نام جدید زبان را وارد نمایید`
+    );
+
+    if (newname && newname.trim() != "") {
+      axios
+        .patch("/tutorials", { oldname, newname })
+        .then((res) => {
+          if (res.status === 200) {
+            alertify.success(" زبان برنامه نویسی با موفقیت ویرایش شد");
+            axios.get(`/categories/${selectedCategory}`).then((res) => {
+              setTutorialsArr(res.data);
+              setIsLoading(false);
+            });
+          }
+        })
+        .catch((err) => console.log("err from editingCategory", err));
+    }
+  };
+
+  //course related handlers
+
+  const handleDeleteCourse = (e, title) => {
+    e.preventDefault();
+    const promptResult = prompt(
+      `شما در حال حذف دسته بندی می باشید ، با حذف دسته بندی تمامی اطلاعات دوره های داخل آن حذف میگردد آیا مطمئن هستید؟`
+    );
+    console.log(title);
+    if (promptResult == "yes") {
+      axios
+        .delete("/courses", { data: { title } })
+        .then((res) => {
+          alertify.success(" دوره با موفقیت حذف شد");
+          axios.get(`/tutorials/${selectedTutorial}`).then((res) => {
+            setCoursesArr(res.data);
+            setIsLoading(false);
+          });
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
   return (
     <div className="tablepage-wrapper">
       <div className="table-container">
@@ -129,7 +226,7 @@ export default function Test() {
             </p>
           </div>
         )}
-        {!selectedCategory && (
+        {!selectedCategory && !selectedTutorial && !selectedCourse && (
           <TableContainer component={Paper}>
             <div className="add-category-table">
               <input
@@ -203,37 +300,130 @@ export default function Test() {
           </TableContainer>
         )}
 
-        {selectedCategory && !isLoading && (
+        {selectedCategory &&
+          !selectedTutorial &&
+          !isLoading &&
+          !selectedCourse && (
+            <TableContainer component={Paper}>
+              <div className="add-language-table">
+                <div className="add-language-top-table">
+                  <p>
+                    ❗️ شما در حال ویرایش زبان های برنامه نویسی موجود در دسته
+                    بندی {selectedCategory} می باشید
+                  </p>
+                  <button
+                    className="add-language-button-top-table"
+                    onClick={() => setSelectedCategory("")}
+                  >
+                    بازگشت به دسته بندی ها
+                  </button>
+                </div>
+                <div className="add-new-language-table">
+                  <input
+                    type="text"
+                    className="add-language-input-table"
+                    value={addTutorialInput}
+                    onChange={(e) => setAddTutorialInput(e.target.value)}
+                    placeholder="برای افزودن زبان برنامه نویسی نام آن را وارد نمایید"
+                  />
+
+                  <input
+                    type="file"
+                    className="add-language-input-table"
+                    onChange={(e) => setAddTutorialImg(e.target.files[0])}
+                    placeholder="تصویر دوره را وارد نمایید"
+                  />
+
+                  <button
+                    type="submit"
+                    className="add-language-button-table"
+                    onClick={(e) => {
+                      handleAddTutorial(e);
+                    }}
+                  >
+                    افزودن زبان برنامه نویسی
+                  </button>
+                </div>
+              </div>
+
+              <Table className={classes.table} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="left">عملیات</TableCell>
+                    <TableCell align="right">نام</TableCell>
+
+                    <TableCell align="right">تصویر</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {tutorialsArr &&
+                    tutorialsArr.map((item) => (
+                      <TableRow key={item._id} className="tablebody-row">
+                        <TableCell align="left">
+                          <button
+                            className="delete-button-table"
+                            onClick={(e) => handleDeleteTutorial(e, item.name)}
+                          >
+                            <img
+                              className="edit-image-table"
+                              src={deleteIMG}
+                            ></img>
+                          </button>
+                          <button
+                            className="edit-button-table"
+                            onClick={(e) => {
+                              handleEditTutorial(e, item.name);
+                            }}
+                          >
+                            <img
+                              className="edit-image-table"
+                              src={editIMG}
+                            ></img>
+                          </button>
+                        </TableCell>
+                        <TableCell align="right">
+                          <button
+                            className="tutorial-button-table"
+                            onClick={() => setSelectedTutorial(item.name)}
+                          >
+                            {item.name}
+                          </button>
+                        </TableCell>
+
+                        <TableCell component="th" scope="row" align="right">
+                          {
+                            <img
+                              className="table-avatar"
+                              src={`http://localhost:3001/tutorials/${item.name}/avatar`}
+                            />
+                          }
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
+
+        {/*this is the table for showing courses in each tutorial*/}
+
+        {selectedTutorial && !isLoading && !selectedCourse && (
           <TableContainer component={Paper}>
             <div className="add-language-table">
               <div className="add-language-top-table">
                 <p>
-                  ❗️ شما در حال ویرایش زبان های برنامه نویسی موجود در دسته بندی{" "}
-                  {selectedCategory} می باشید
+                  ❗️ شما در حال مشاهده دوره های {selectedTutorial} می باشید
                 </p>
                 <button
                   className="add-language-button-top-table"
-                  onClick={() => setSelectedCategory("")}
+                  onClick={() => {
+                    setSelectedTutorial("");
+                    setCoursesArr([]);
+                  }}
                 >
-                  بازگشت به دسته بندی ها
+                  بازگشت به زبان های برنامه نویسی
                 </button>
               </div>
-              <input
-                type="text"
-                className="add-language-input-table"
-                value={addCategoryInput}
-                onChange={(e) => setAddCategoryInput(e.target.value)}
-                placeholder="برای افزودن دسته بندی نام آن را وارد نمایید و روی افزودن دسته بندی کلیک نمایید"
-              />
-              <button
-                type="submit"
-                className="add-language-button-table"
-                onClick={(e) => {
-                  handleAddCategory(e);
-                }}
-              >
-                افزودن دسته بندی
-              </button>
             </div>
 
             <Table className={classes.table} aria-label="simple table">
@@ -246,26 +436,34 @@ export default function Test() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {tutorialsArr &&
-                  tutorialsArr.map((item) => (
+                {coursesArr &&
+                  coursesArr?.map((item) => (
                     <TableRow key={item._id} className="tablebody-row">
                       <TableCell align="left">
                         <button
-                          onClick={(e) => {
-                            handleDeleteLanguage(e, item.name);
-                          }}
+                          className="delete-button-table"
+                          onClick={(e) => handleDeleteCourse(e, item.title)}
                         >
-                          حذف زبان
+                          <img
+                            className="edit-image-table"
+                            src={deleteIMG}
+                          ></img>
                         </button>
-                        <button>ویرایش زبان</button>
                       </TableCell>
-                      <TableCell align="right">{item.name}</TableCell>
+                      <TableCell align="right">
+                        <Link
+                          className="tutorial-button-table"
+                          to={`/course/edit/${item.title}`}
+                        >
+                          {item.title}
+                        </Link>
+                      </TableCell>
 
                       <TableCell component="th" scope="row" align="right">
                         {
                           <img
                             className="table-avatar"
-                            src={`http://localhost:3001/tutorials/${item.name}/avatar`}
+                            src={`/courses/${item.title}/avatar`}
                           />
                         }
                       </TableCell>
