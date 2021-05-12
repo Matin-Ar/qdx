@@ -25,10 +25,13 @@ router.get("/test", async (req, res) => {
   }
 });
 
-router.get("/search", async (req, res) => {
-  try {
-    if (req.body.word == undefined) {
-      throw new Error("No word!");
+router.get('/search/:word', async (req, res) => {
+    console.log(req.params.word)
+    try {
+        const course = await Course.find({ title: { '$regex': req.params.word } }, 'title', { sort: { title : 1 }, limit: parseInt(req.query.limit), skip: parseInt(req.query.skip) })
+        res.send(course)
+    } catch(e) {
+        res.status(400).send(e)
     }
     const course = await Course.find(
       { title: { $regex: req.body.word } },
