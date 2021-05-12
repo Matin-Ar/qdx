@@ -421,6 +421,12 @@ nav {
   padding: 2em;
   color: $white;
 }
+
+.newcourse-wrapper {
+  width: 80%;
+  margin-top: 2em;
+}
+
 //Single Course Comp
 .singlecoursecomponent {
   height: 100%;
@@ -1675,11 +1681,17 @@ input[type="submit"]:disabled {
 }
 
 .add-language-input-table {
-  width: 90%;
+  width: 40%;
   height: 30px;
   outline: none;
   border: none;
   padding-right: 1em;
+}
+
+.add-new-language-table {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .add-language-button-table {
@@ -1715,6 +1727,24 @@ input[type="submit"]:disabled {
 
 .category-button-table:hover {
   background-color: lighten($gray, $amount: 20%);
+}
+
+.tutorial-button-table {
+  outline: none;
+  border: none;
+  padding: 1em;
+  cursor: pointer;
+  background-color: lighten($green, $amount: 20%);
+}
+.editCourse {
+  background-color: $light;
+  padding: 1em;
+  direction: rtl;
+  font-size: 1.5em;
+}
+.tutorial-button-table:hover {
+  background-color: lighten($green, $amount: 10%);
+  cursor: pointer;
 }
 
 .loading-gif {

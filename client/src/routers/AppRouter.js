@@ -19,6 +19,7 @@ import DashboardPage from "../components/DashboardPage";
 import SpecificTutorialsPage from "../components/SpecificTutorialsPage";
 import ManageCategoriesAndTutorials from "../components/table/ManageCategoriesAndTutorials";
 import AllCategories from "../components/AllCategories";
+import EditCourse from "../components/EditCourse";
 
 export const AppRouter = (props) => {
   //check local storage to see if token exists
@@ -40,7 +41,11 @@ export const AppRouter = (props) => {
             path="/ManageCategoriesAndTutorials"
             component={ManageCategoriesAndTutorials}
           />
-
+          <PrivateRoute
+            path="/course/edit/:name"
+            component={EditCourse}
+            isAuth={props.isAuth}
+          />
           <PrivateRoute
             path="/course/:courseName"
             component={SingleCoursePage}
