@@ -9,9 +9,12 @@ const { sendWelcomeEmail, sendCancelatonEmail } = require('../emails/account')
 const router = new express.Router()
 
 router.post('/users/singup', async (req, res) => {
-    const user = new User(req.body)
 
     try {
+        if(req.body.role){
+            throw new Error('You can not choose role!')
+        }
+        const user = new User(req.body)
         await user.save()
         sendWelcomeEmail(user.email, user.name)
         const token = await user.generateAuthToken()

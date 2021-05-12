@@ -71,6 +71,12 @@ const userSchema = new mongoose.Schema({
     },
     education: {
         type: String
+    },
+    role: {
+        type: String,
+        required: true,
+        trim: true,
+        default: 'User'
     }
 }, {
     timestamps: true
