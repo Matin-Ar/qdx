@@ -85,24 +85,26 @@ export const userLogIn = ({ name, lastname, number, email, token, _id }) => ({
 });
 
 //startUserLogin
-export const startUserLogIn = ({ email, password }) => (dispatch) => {
-  return axios.post("/users/login", { email, password }).then(
-    (resp) => {
-      const token = resp.data.token;
-      setAutherizationToken(token);
-      localStorage.setItem("jwtToken", token);
+export const startUserLogIn =
+  ({ email, password }) =>
+  (dispatch) => {
+    return axios.post("/users/login", { email, password }).then(
+      (resp) => {
+        const token = resp.data.token;
+        setAutherizationToken(token);
+        localStorage.setItem("jwtToken", token);
 
-      const user = resp.data.user;
-      dispatch(userLogIn({ token, ...user }));
+        const user = resp.data.user;
+        dispatch(userLogIn({ token, ...user }));
 
-      return resp;
-    },
-    (error) => {
-      console.log("error from startUserLogin Catch:", error);
-      return "ایمیل و یا رمز عبور وارد شده صحیح نمی باشد";
-    }
-  );
-};
+        return resp;
+      },
+      (error) => {
+        console.log("error from startUserLogin Catch:", error);
+        return "ایمیل و یا رمز عبور وارد شده صحیح نمی باشد";
+      }
+    );
+  };
 
 export const SetCurrentUser = ({ name, lastname, number, email, _id }) => ({
   type: "SET_CURRENT_USER",
@@ -116,7 +118,6 @@ export const SetCurrentUser = ({ name, lastname, number, email, _id }) => ({
 export const startSetCurrentUser = () => (dispatch) => {
   axios.get("/users/me").then(
     (resp) => {
-      console.log("this is from startSetCurrentUSer", resp.data);
       dispatch(SetCurrentUser(resp.data));
     },
     (error) => console.log("there was a error in setting current user", error)
@@ -131,7 +132,6 @@ export const setUserAvatar = (avatar) => ({
 export const startSetUserAvatar = (file, userId) => (dispatch) => {
   let formData = new FormData();
   formData.append("avatar", file);
-  console.log(formData);
   return axios({
     url: "/users/me/avatar",
     method: "POST",
@@ -147,7 +147,6 @@ export const startSetUserAvatar = (file, userId) => (dispatch) => {
       return res.status;
     })
     .catch((err) => {
-      console.log("avatar upload action error :", err);
       return err;
     });
 };

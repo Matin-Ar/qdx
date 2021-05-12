@@ -9,8 +9,6 @@ import linkICON from "../assets/courses/link.png";
 import { Link } from "react-router-dom";
 
 export default function CourseComponent(props) {
-  console.log("props from CourseComponent :  ", props);
-
   return (
     <div className="single-course-Container-wrapper">
       {props.course && (
