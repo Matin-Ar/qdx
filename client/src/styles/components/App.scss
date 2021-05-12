@@ -213,10 +213,22 @@ nav {
   position: relative;
 }
 
-.logout-text {
+.logout-div {
+  background-color: $yellow;
+  color: white;
   position: absolute;
-  left: -8em;
+  border-radius: 10px;
+  direction: rtl;
+  padding: 1em;
+  width: 95%;
+  left: 0;
+  top: 80px;
 }
+
+#nav-links > div > div.logout-div > a {
+  color: black;
+}
+
 //HomePage
 
 //Hero
@@ -241,6 +253,7 @@ nav {
 }
 
 .hero-input-container {
+  direction: rtl;
   width: 100%;
   max-width: 1080px;
   position: relative;
@@ -1763,6 +1776,72 @@ input[type="submit"]:disabled {
   align-items: center;
 }
 
+//service page
+
+.service-page-wrapper {
+  background-color: black;
+}
+
+.service-page-hero {
+  display: flex;
+  background-color: black;
+}
+.service-page-hero-text {
+  direction: rtl;
+  color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 5em;
+}
+
+.carousel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.carousel-item {
+  width: 100px;
+  margin-left: 2em;
+  opacity: 0.3;
+}
+
+.carousel-item li {
+  list-style: none;
+}
+
+.service-page-bg {
+  height: 90vh;
+  width: 70%;
+  object-fit: cover;
+  align-self: flex-start;
+  transform: rotateY(180deg);
+}
+
+.service-page-second-view {
+  height: 100vh;
+  z-index: 1000;
+}
+
+.service-page-hero-button {
+  width: 300px;
+  background-color: $yellow;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  margin-top: 2em;
+  padding: 0.7em;
+  color: black;
+  text-align: center;
+}
 //footer
 .footer-container {
   background-color: $light;

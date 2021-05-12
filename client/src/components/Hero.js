@@ -1,5 +1,4 @@
 import React from "react";
-import searchicon from "../assets/search-icon.png";
 import CourseSeachComponent from "./CourseSeachComponent";
 export default function Hero() {
   return (
