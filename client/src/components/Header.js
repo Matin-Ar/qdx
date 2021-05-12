@@ -1,12 +1,15 @@
-import React, { Fragment } from "react";
+import React, { useState, useRef } from "react";
 import { connect } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import LangCustomSelect from "./LangCustomSelect";
 import ThemeCustomSelect from "./ThemeCustomSelect";
 import { startUserLogOut } from "../Actions/user";
 import HeaderProfile from "./HeaderProfile";
+import { render } from "react-dom";
 
 export const Header = (props) => {
+  const [profileHover, setprofileHover] = useState(false);
+
   const handleLogOut = () => {
     props.dispatch(startUserLogOut(props.token));
   };
@@ -26,14 +29,45 @@ export const Header = (props) => {
 
   const handleLoginMenu = () => {
     return (
-      <div className="loginMenu">
+      <div
+        className="loginMenu"
+        onMouseEnter={(e) => setprofileHover(true)}
+        onMouseLeave={(e) => {
+          if (profileHover) {
+            setTimeout(() => {
+              setprofileHover(false);
+            }, 5000);
+          }
+        }}
+      >
         <HeaderProfile
           userName={props.userName}
           userAvatar={props.userAvatar}
+          onMouseEnter={(e) => setprofileHover(true)}
+          onMouseLeave={(e) => {
+            if (profileHover) {
+              setTimeout(() => {
+                setprofileHover(false);
+              }, 5000);
+            }
+          }}
         />
-        <Link className="logout-text" to="/" onClick={handleLogOut}>
-          خروج
-        </Link>
+
+        {profileHover && (
+          <div
+            className="logout-div"
+            onMouseLeave={(e) => {
+              if (profileHover) {
+                console.log("on mouse leave from item");
+                setprofileHover(false);
+              }
+            }}
+          >
+            <Link className="logout-text" to="/" onClick={handleLogOut}>
+              خروج
+            </Link>
+          </div>
+        )}
       </div>
     );
   };
@@ -58,6 +92,10 @@ export const Header = (props) => {
             <NavLink to="/aboutus" activeClassName="selected">
               درباره ما
             </NavLink>
+            <NavLink to="/Services" activeClassName="selected">
+              خدمات
+            </NavLink>
+
             <NavLink to="/contactus" activeClassName="selected">
               تماس با ما
             </NavLink>
