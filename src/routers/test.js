@@ -31,11 +31,10 @@ router.get('/search', async (req, res) => {
             throw new Error('No word!')
         }
         const course = await Course.find({ title: { '$regex': req.body.word } }, 'title', { sort: { title : 1 }, limit: parseInt(req.query.limit), skip: parseInt(req.query.skip) })
-        console.log(course)
         res.send(course)
     } catch(e) {
         res.status(400).send(e)
     }
-})  
+})
 
 module.exports = router

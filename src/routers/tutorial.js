@@ -4,6 +4,8 @@ const sharp = require('sharp')
 const Tutorial = require('../models/tutorial')
 const Category = require('../models/category')
 const Course = require('../models/course')
+const auth = require('../middleware/auth')
+const adminAuth = require('../middleware/adminAuth')
 const router = new express.Router()
 
 const upload = multer({
@@ -18,7 +20,7 @@ const upload = multer({
     }
 })
 
-router.post('/tutorials', upload.single('avatar'), async (req,res) => {
+router.post('/tutorials', auth, adminAuth, upload.single('avatar'), async (req,res) => {
     try {
         const cat = await Category.findOne({ name: req.body.cat })
         const buffer = await sharp(req.file.buffer).png().toBuffer()
@@ -36,18 +38,7 @@ router.post('/tutorials', upload.single('avatar'), async (req,res) => {
     res.status(400).send({ error: error.message })
 })
 
-
-router.get('/tutorials', async (req, res) => {
-    const tutorial = await Tutorial.find({ }, null, { sort: { name : 1 } })
-
-    try {
-        res.send(tutorial)
-    } catch(e) {
-        res.status(400).send(e)
-    }
-})
-
-router.patch('/tutorials', async (req, res) => {
+router.patch('/tutorials', auth, adminAuth, async (req, res) => {
     try {
         if(!req.body.oldname || !req.body.newname) {
             throw new Error()
@@ -62,7 +53,7 @@ router.patch('/tutorials', async (req, res) => {
     }
 })
 
-router.delete('/tutorials', async (req, res) => {
+router.delete('/tutorials', auth, adminAuth, async (req, res) => {
     try {
         const tutorial = await Tutorial.findOne({ name: req.body.name })
         if(!tutorial) {
@@ -74,6 +65,16 @@ router.delete('/tutorials', async (req, res) => {
         res.send({ message: "Deleted!"})
     } catch (e) {
         res.status(500).send()
+    }
+})
+
+router.get('/tutorials', async (req, res) => {
+    const tutorial = await Tutorial.find({ }, null, { sort: { name : 1 } })
+
+    try {
+        res.send(tutorial)
+    } catch(e) {
+        res.status(400).send(e)
     }
 })
 
