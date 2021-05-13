@@ -5,16 +5,17 @@ import maleBlackIcon from "../../src/assets/gender/male-black.png";
 import maleColorIcon from "../../src/assets/gender/male-color.png";
 import femaleBlackIcon from "../../src/assets/gender/female-black.png";
 import femaleColorIcon from "../../src/assets/gender/female-color.png";
+import { connect } from "react-redux";
 
-export default class sexSelect extends Component {
+export class sexSelect extends Component {
   constructor(props) {
     super(props);
     this.handleGenderValue = this.handleGenderValue.bind(this);
 
     this.state = {
-      male: false,
-      female: false,
-      agender: false,
+      male: this.props.genderstate === "male" ? true : false,
+      female: this.props.genderstate === "female" ? true : false,
+      agender: this.props.genderstate === "agender" ? true : false,
     };
   }
 
@@ -38,6 +39,14 @@ export default class sexSelect extends Component {
         female: false,
         agender: true,
       });
+    }
+
+    if (this.state.female) {
+      this.props.setFormGender("female");
+    } else if (this.state.male) {
+      this.props.setFormGender("male");
+    } else if (this.state.agender) {
+      this.props.setFormGender("agender");
     }
   }
 
@@ -78,3 +87,11 @@ export default class sexSelect extends Component {
     );
   }
 }
+
+const mapStatetoProps = (state) => {
+  return {
+    genderstate: state.user.gender,
+  };
+};
+
+export default connect(mapStatetoProps)(sexSelect);

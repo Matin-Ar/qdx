@@ -122,6 +122,10 @@ export const SetCurrentUser = ({
   email,
   _id,
   role,
+  bday,
+  education,
+  codinglanguage,
+  gender,
 }) => ({
   type: "SET_CURRENT_USER",
   name,
@@ -130,6 +134,10 @@ export const SetCurrentUser = ({
   email,
   _id,
   role,
+  bday,
+  education,
+  codinglanguage,
+  gender,
 });
 
 export const startSetCurrentUser = () => (dispatch) => {

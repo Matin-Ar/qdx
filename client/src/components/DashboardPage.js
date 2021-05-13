@@ -53,13 +53,11 @@ export class DashboardPage extends Component {
 
               {this.props.isAdmin && (
                 <Tab>
-                  <img src={addCourseIMG} />
                   <Link
                     to="/ManageCategoriesAndTutorials"
                     className="courseandcategorymanagment-link"
                   >
-                    {" "}
-                    مدیریت دسته بندی ها و زبان ها
+                    <img src={addCourseIMG} /> مدیریت دسته بندی ها و زبان ها
                   </Link>
                 </Tab>
               )}

@@ -3,20 +3,35 @@ import { connect } from "react-redux";
 import DatePicker, { utils } from "react-modern-calendar-datepicker";
 import SexSelect from "./SexSelect";
 import axios from "axios";
+import { SetCurrentUser } from "../Actions/user";
 import { withRouter } from "react-router";
+import alertify from "alertifyjs";
+import "alertifyjs/build/css/alertify.css";
+
 export function DashboardForm({
+  dispatch,
   handleModleOpen,
   firstName,
   lastName,
   phoneNumber,
-  age,
-  gender,
-  id,
+  usergender,
   email,
   userAvatar,
   history,
+  usereducation,
+  usercodinglanguage,
+  bday,
 }) {
-  const [selectedDay, setSelectedDay] = useState(null);
+  const formatedBdy = JSON.parse(bday);
+  const [selectedDay, setSelectedDay] = useState(formatedBdy);
+  const [formFirstName, setFormFirstName] = useState(firstName);
+  const [formLastName, setFormLastName] = useState(lastName);
+  const [formPhoneNumber, setFormPhoneNumber] = useState(phoneNumber);
+  // const [formAge, setFormAge] = useState(age);
+  const [formGender, setFormGender] = useState(usergender);
+  const [formEmail, setFormEmail] = useState(email);
+  const [codinglanguage, setCodinglanguage] = useState(usercodinglanguage);
+  const [education, setEducation] = useState(usereducation);
 
   const now = utils("fa").getToday();
 
@@ -56,6 +71,29 @@ export function DashboardForm({
     }
   };
 
+  const handleUpdateUser = (e) => {
+    e.preventDefault();
+
+    axios
+      .patch("/users/me", {
+        name: formFirstName,
+        lastname: formLastName,
+        gender: formGender,
+        bday: JSON.stringify(selectedDay),
+        codinglanguage,
+        education,
+      })
+      .then((res) => {
+        console.log("this res is from server after update", res.data);
+        console.log("form gender is : ", formGender);
+        alertify.success("عملیات بروزرسانی با موفقیت انجام شد");
+        dispatch(SetCurrentUser(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <form autocomplete="off">
       <div className="dashboard-avatar-container">
@@ -69,7 +107,7 @@ export function DashboardForm({
       <div className="user-info-wrapper">
         <div className="left-user-info">
           <label htmlFor="dashboard-sex-info">جنسیت</label>
-          <SexSelect />
+          <SexSelect setFormGender={setFormGender} gender={usergender} />
 
           <label htmlFor="registersureName">تاریح تولد </label>
           <div>
@@ -88,8 +126,11 @@ export function DashboardForm({
             type="text"
             name="dashboardEducation"
             autocomplete="false"
-            disabled
-            placeholder="غیر فعال است"
+            value={education}
+            onChange={(e) => {
+              setEducation(e.target.value);
+            }}
+            placeholder="مقطع و رشته تحصیلی خود را وارد نمایید"
           />
 
           <label htmlFor="dashboardCodingLanguage">
@@ -98,9 +139,10 @@ export function DashboardForm({
           <input
             type="text"
             name="dashboardCodingLanguage"
+            value={codinglanguage}
             autocomplete="false"
-            disabled
-            placeholder="غیر فعال است"
+            placeholder="برای مثال Nodejs,React"
+            onChange={(e) => setCodinglanguage(e.target.value)}
           />
         </div>
         <div className="right-user-info">
@@ -109,20 +151,23 @@ export function DashboardForm({
             type="text"
             name="dashboardName"
             autocomplete="false"
-            value={firstName}
+            value={formFirstName}
+            onChange={(e) => setFormFirstName(e.target.value)}
           />
           <label htmlFor="dashboardLastName">نام خانوادگی </label>
           <input
             type="text"
             name="dashboardLastName"
             autocomplete="false"
-            value={lastName}
+            value={formLastName}
+            onChange={(e) => setFormLastName(e.target.value)}
           />
 
           <label htmlFor="phoneNumber">شماره همراه</label>
           <input
             type="number"
             name="phoneNumber"
+            disabled
             autocomplete="false"
             value={phoneNumber}
           />
@@ -130,6 +175,7 @@ export function DashboardForm({
           <label htmlFor="dashboardEmail">ایمیل</label>
           <input
             type="email"
+            disabled
             name="dashboardEmail"
             autocomplete="false"
             value={email}
@@ -137,7 +183,9 @@ export function DashboardForm({
         </div>
       </div>
       <div className="dashboard-button-wrapper">
-        <button className="dashboard-button-update">بروزرسانی</button>
+        <button className="dashboard-button-update" onClick={handleUpdateUser}>
+          بروزرسانی
+        </button>
         <button className="dashboard-button-delete" onClick={handleDeleteUser}>
           حذف پروفایل
         </button>
@@ -150,13 +198,17 @@ const mapStateToProps = (state) => {
   return {
     firstName: state.user.name ? state.user.name : "نام",
     lastName: state.user.lastname ? state.user.lastname : "نام خانواگی",
-    age: state.user.age ? state.user.age : null,
+    age: state.user.bday ? state.user.bday : null,
     phoneNumber: state.user.number
       ? state.user.number
       : "شماره موبایل خود را وارد نمایید",
     email: state.user.email ? state.user.email : "ایمیل خود را وارد نمایید",
-    gender: state.user.gender ? state.user.gender : null,
+    gender: state.user.gender ? state.user.gender : "agender",
     userAvatar: state.user.avatar,
+    usereducation: state.user.education,
+    usercodinglanguage: state.user.codinglanguage,
+    usergender: state.user.gender,
+    bday: state.user.bday,
   };
 };
 

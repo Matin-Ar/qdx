@@ -11,6 +11,10 @@ const usersReducerDefaults = {
   id: "",
   avatar: "",
   role: "",
+  bday: "",
+  education: "",
+  codinglanguage: "",
+  gender: "agender",
 };
 
 //USERS reducer
@@ -52,6 +56,10 @@ const usersReducer = (state = usersReducerDefaults, action) => {
         isAuth: true,
         role: action.role,
         id: action._id,
+        gender: action.gender,
+        bday: action.bday,
+        education: action.education,
+        codinglanguage: action.codinglanguage,
         avatar: `http://localhost:3001/users/${
           action._id
         }/avatar/?${moment().valueOf()}`,
@@ -65,7 +73,11 @@ const usersReducer = (state = usersReducerDefaults, action) => {
         email: action.email,
         isAuth: true,
         role: action.role,
+        gender: action.gender,
         id: action._id,
+        bday: action.bday,
+        education: action.education,
+        codinglanguage: action.codinglanguage,
         avatar: `http://localhost:3001/users/${
           action._id
         }/avatar/?${moment().valueOf()}`,
