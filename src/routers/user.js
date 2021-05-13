@@ -5,6 +5,7 @@ const fs = require('fs')
 var cors = require('cors')
 const User = require('../models/user')
 const auth = require('../middleware/auth')
+const adminAuth = require('../middleware/adminAuth')
 const { sendWelcomeEmail, sendCancelatonEmail } = require('../emails/account')
 const router = new express.Router()
 
@@ -134,6 +135,27 @@ router.get('/users/:id/avatar', async (req, res) => {
         res.send(user.avatar)
     }   catch (e) {
         res.status(404).send()
+    }
+})
+
+//admin
+router.get('/users/profiles', auth, adminAuth, async (req, res) => {
+    try {
+        const profiles = await User.find({ }, 'email', { sort: { email : 1 }, limit: parseInt(req.query.limit), skip: parseInt(req.query.skip) })
+        console.log(profiles)
+        res.send(profiles)
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
+router.delete('/users/profiles', auth, adminAuth, async (req, res) => {
+    try {
+        const profile = await User.findById(req.body.id)
+        await profile.delete()
+        res.send({ message: 'Deleted !'})
+    } catch (e) {
+        res.status(500).send()
     }
 })
 
