@@ -74,7 +74,15 @@ export const startUserLogOut = (token) => (dispatch) => {
 };
 
 //USER_LOGIN
-export const userLogIn = ({ name, lastname, number, email, token, _id }) => ({
+export const userLogIn = ({
+  name,
+  lastname,
+  number,
+  email,
+  token,
+  _id,
+  role,
+}) => ({
   type: "USER_LOG_IN",
   name,
   lastname,
@@ -82,6 +90,7 @@ export const userLogIn = ({ name, lastname, number, email, token, _id }) => ({
   email,
   token,
   _id,
+  role,
 });
 
 //startUserLogin
@@ -106,13 +115,21 @@ export const startUserLogIn =
     );
   };
 
-export const SetCurrentUser = ({ name, lastname, number, email, _id }) => ({
+export const SetCurrentUser = ({
+  name,
+  lastname,
+  number,
+  email,
+  _id,
+  role,
+}) => ({
   type: "SET_CURRENT_USER",
   name,
   lastname,
   number,
   email,
   _id,
+  role,
 });
 
 export const startSetCurrentUser = () => (dispatch) => {

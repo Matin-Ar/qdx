@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { connect } from "react-redux";
 import "react-tabs/style/react-tabs.css";
 import ProfileEditTab from "./ProfileEditTab";
 import editUserIMG from "../assets/Dashboard/edit-user.png";
@@ -21,8 +22,8 @@ const CustomTabPanel = ({ children, myCustomProp, ...otherProps }) => (
 
 CustomTabPanel.tabsRole = "TabPanel";
 
-export default class DashboardPage extends Component {
-  render() {
+export class DashboardPage extends Component {
+  render(props) {
     return (
       <div className="dashboard-Container">
         <div className="dashboard-content-wrapper">
@@ -42,38 +43,61 @@ export default class DashboardPage extends Component {
                 <img src={editUserIMG} />
                 ویرایش حساب کاربری
               </Tab>
-              <Tab disabled>
-                <img src={adminIMG} />
-                پنل مدیریت
-              </Tab>
-              <Tab>
-                <img src={addCourseIMG} />
-                <Link
-                  to="/ManageCategoriesAndTutorials"
-                  className="courseandcategorymanagment-link"
-                >
-                  {" "}
-                  مدیریت دسته بندی ها و زبان ها
-                </Link>
-              </Tab>
 
-              <Tab>
-                <img src={addCourseIMG} />
-                افزودن دوره
-              </Tab>
+              {this.props.isAdmin && (
+                <Tab disabled>
+                  <img src={adminIMG} />
+                  پنل مدیریت
+                </Tab>
+              )}
+
+              {this.props.isAdmin && (
+                <Tab>
+                  <img src={addCourseIMG} />
+                  <Link
+                    to="/ManageCategoriesAndTutorials"
+                    className="courseandcategorymanagment-link"
+                  >
+                    {" "}
+                    مدیریت دسته بندی ها و زبان ها
+                  </Link>
+                </Tab>
+              )}
+
+              {this.props.isAdmin && (
+                <Tab>
+                  <img src={addCourseIMG} />
+                  افزودن دوره
+                </Tab>
+              )}
             </TabList>
+
             <CustomTabPanel>Dashboard Tab</CustomTabPanel>
+
             <CustomTabPanel>
               <ProfileEditTab />
             </CustomTabPanel>
-            <CustomTabPanel>addmin Tab</CustomTabPanel>
-            <CustomTabPanel>manage dashboard</CustomTabPanel>
-            <CustomTabPanel>
-              <AddCourseTab />
-            </CustomTabPanel>
+
+            {this.props.isAdmin && <CustomTabPanel>addmin Tab</CustomTabPanel>}
+
+            {this.props.isAdmin && (
+              <CustomTabPanel>manage dashboard</CustomTabPanel>
+            )}
+
+            {this.props.isAdmin && (
+              <CustomTabPanel>
+                <AddCourseTab />
+              </CustomTabPanel>
+            )}
           </Tabs>
         </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => ({
+  isAdmin: state.user.role === "Admin" ? true : false,
+});
+
+export default connect(mapStateToProps)(DashboardPage);

@@ -10,6 +10,7 @@ const usersReducerDefaults = {
   isAuth: false,
   id: "",
   avatar: "",
+  role: "",
 };
 
 //USERS reducer
@@ -49,6 +50,7 @@ const usersReducer = (state = usersReducerDefaults, action) => {
         email: action.email,
         token: action.token,
         isAuth: true,
+        role: action.role,
         id: action._id,
         avatar: `http://localhost:3001/users/${
           action._id
@@ -62,6 +64,7 @@ const usersReducer = (state = usersReducerDefaults, action) => {
         number: action.number,
         email: action.email,
         isAuth: true,
+        role: action.role,
         id: action._id,
         avatar: `http://localhost:3001/users/${
           action._id
