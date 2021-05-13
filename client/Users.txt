@@ -78,9 +78,6 @@ GET - /courses/{TITLE COURSE}/avatar
 GET - /tutorials/{NAME TUTORIAL}
 	course haye marboot be oon tutorial mide
 
-
-NEW : 
-
 PATCH - /tutorials
 	ye body ba key haye oldname & newname (daghighan mesle category ha)
 	mesal : 
@@ -129,28 +126,15 @@ PATCH - /courses/:title
 				"shortdesc": "aaaa",
 			}
 
+NEW :
 
+GET - /users/profiles
+	kolle email haye user haro behet mide . hatman baiad admin bashi.
 
-bazam soal dashti sohbat mikonim ok mikonim.
+DELETE - /users/profiles
+	niaz be ye boddy dare ke attribute body he id hast , mesal : 
+	{
+		"id": "..."
+	}
+	usere ba in id vared shodaro kollan az databse pak mikone.
 -------------------------------------------------------------------------------------------------------------------------------------------------------
-
-http://localhost:3001/tutorials/back-end
-http://localhost:3001/tutorials/front-end
-
-
-//link avatar course
-
-//link avatar tutorial
-http://localhost:3001/tutorials/${tutorial-name}/avatar
-
-
-//گرفتن جدید ترین دوره ها
-http://localhost:3001/courses
-
-//گرفتن توتوریال ها در کتگوری مشخص
-
-//گرفتن دوره ها در توتوریال مشخص--
-
-//sort bar asase alephabet
-//sort bar asase jadidtarin
-//sort bar asase most popular

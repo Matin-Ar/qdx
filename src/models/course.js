@@ -77,6 +77,12 @@ const courseSchema = new mongoose.Schema({
     timestamps: true
 })
 
+courseSchema.virtual('courses', {
+    ref: 'Comment',
+    localField: '_id',
+    foreignField: 'course'
+})
+
 courseSchema.methods.toJSON = function () {
     const course = this
     const courseObject = course.toObject()
