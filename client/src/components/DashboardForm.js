@@ -22,12 +22,12 @@ export function DashboardForm({
   usercodinglanguage,
   bday,
 }) {
-  // const formatedBdy = JSON.parse(bday);
-  const [selectedDay, setSelectedDay] = useState(null);
+  const [selectedDay, setSelectedDay] = useState(
+    bday ? JSON.parse(bday) : null
+  );
   const [formFirstName, setFormFirstName] = useState(firstName);
   const [formLastName, setFormLastName] = useState(lastName);
   const [formPhoneNumber, setFormPhoneNumber] = useState(phoneNumber);
-  // const [formAge, setFormAge] = useState(age);
   const [formGender, setFormGender] = useState(userGender);
   const [formEmail, setFormEmail] = useState(email);
   const [codinglanguage, setCodinglanguage] = useState(usercodinglanguage);
@@ -119,11 +119,6 @@ export function DashboardForm({
               maximumDate={maximumDate}
               locale="fa" // add this
             />
-            <span style={{ marginRight: "10px" }}>
-              {" "}
-              تاریخ تولد ثبت شده شما : {JSON.parse(bday).day}/{" "}
-              {JSON.parse(bday).month} / {JSON.parse(bday).year}
-            </span>
           </div>
 
           <label htmlFor="dashboardEducation">رشته تحصیلی</label>
@@ -217,3 +212,8 @@ const mapStateToProps = (state) => {
 };
 
 export default withRouter(connect(mapStateToProps)(DashboardForm));
+// {<span style={{ marginRight: "10px" }}>
+//               {" "}
+//               تاریخ تولد ثبت شده شما : {formatedBdy.day}/ {formatedBdy.month} /{" "}
+//               {formatedBdy.year}
+//             </span>}

@@ -1604,6 +1604,64 @@ input[type="submit"]:disabled {
 //   display: none;
 // }
 
+.user-comments-tab {
+  padding: 1em;
+}
+.user-comments-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2em;
+  width: 100%;
+  background-color: $light;
+  padding: 1em;
+}
+
+.user-comments-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin-left: 2em;
+}
+
+.user-comments-username {
+  margin-left: 1em;
+}
+
+.user-comments-info {
+  margin-right: 2em;
+  padding-right: 2em;
+  border-right: 1px solid rgba($yellow, 0.5);
+}
+
+.user-comments-title {
+  font-size: 14px;
+}
+
+.user-comments-text {
+  font-size: 12px;
+}
+
+.user-comments-input-title {
+  width: 100%;
+  outline: none;
+  border: none;
+  color: white;
+  margin-top: 1em;
+  height: 30px;
+  background-color: $light;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.user-comments-input-text {
+  width: 100%;
+  outline: none;
+  border: none;
+  color: white;
+  margin-top: 1em;
+  background-color: $light;
+  padding: 1em;
+}
 .active-tab {
   border-bottom: 5px solid $yellow;
   color: $yellow;
