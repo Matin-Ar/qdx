@@ -3,22 +3,39 @@ import { connect } from "react-redux";
 import DatePicker, { utils } from "react-modern-calendar-datepicker";
 import SexSelect from "./SexSelect";
 import axios from "axios";
+import { SetCurrentUser } from "../Actions/user";
 import { withRouter } from "react-router";
+import alertify from "alertifyjs";
+import "alertifyjs/build/css/alertify.css";
+
 export function DashboardForm({
+  dispatch,
   handleModleOpen,
   firstName,
   lastName,
   phoneNumber,
-  age,
-  gender,
-  id,
+  userGender,
   email,
   userAvatar,
   history,
+  usereducation,
+  usercodinglanguage,
+  bday,
 }) {
+  // const formatedBdy = JSON.parse(bday);
   const [selectedDay, setSelectedDay] = useState(null);
+  const [formFirstName, setFormFirstName] = useState(firstName);
+  const [formLastName, setFormLastName] = useState(lastName);
+  const [formPhoneNumber, setFormPhoneNumber] = useState(phoneNumber);
+  // const [formAge, setFormAge] = useState(age);
+  const [formGender, setFormGender] = useState(userGender);
+  const [formEmail, setFormEmail] = useState(email);
+  const [codinglanguage, setCodinglanguage] = useState(usercodinglanguage);
+  const [education, setEducation] = useState(usereducation);
 
   const now = utils("fa").getToday();
+
+  console.log("dashboard form gender vale is ", userGender);
 
   const defaultValue = {
     year: now.year,
@@ -56,8 +73,29 @@ export function DashboardForm({
     }
   };
 
+  const handleUpdateUser = (e) => {
+    e.preventDefault();
+
+    axios
+      .patch("/users/me", {
+        name: formFirstName,
+        lastname: formLastName,
+        gender: formGender,
+        bday: JSON.stringify(selectedDay),
+        codinglanguage,
+        education,
+      })
+      .then((res) => {
+        alertify.success("عملیات بروزرسانی با موفقیت انجام شد");
+        dispatch(SetCurrentUser(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
-    <form autocomplete="off">
+    <form autoComplete="off">
       <div className="dashboard-avatar-container">
         <img
           className="dashboard-avatar-img"
@@ -69,7 +107,7 @@ export function DashboardForm({
       <div className="user-info-wrapper">
         <div className="left-user-info">
           <label htmlFor="dashboard-sex-info">جنسیت</label>
-          <SexSelect />
+          <SexSelect setFormGender={setFormGender} genderProp={userGender} />
 
           <label htmlFor="registersureName">تاریح تولد </label>
           <div>
@@ -81,15 +119,23 @@ export function DashboardForm({
               maximumDate={maximumDate}
               locale="fa" // add this
             />
+            <span style={{ marginRight: "10px" }}>
+              {" "}
+              تاریخ تولد ثبت شده شما : {JSON.parse(bday).day}/{" "}
+              {JSON.parse(bday).month} / {JSON.parse(bday).year}
+            </span>
           </div>
 
           <label htmlFor="dashboardEducation">رشته تحصیلی</label>
           <input
             type="text"
             name="dashboardEducation"
-            autocomplete="false"
-            disabled
-            placeholder="غیر فعال است"
+            autoComplete="false"
+            value={education}
+            onChange={(e) => {
+              setEducation(e.target.value);
+            }}
+            placeholder="مقطع و رشته تحصیلی خود را وارد نمایید"
           />
 
           <label htmlFor="dashboardCodingLanguage">
@@ -98,9 +144,10 @@ export function DashboardForm({
           <input
             type="text"
             name="dashboardCodingLanguage"
-            autocomplete="false"
-            disabled
-            placeholder="غیر فعال است"
+            value={codinglanguage}
+            autoComplete="false"
+            placeholder="برای مثال Nodejs,React"
+            onChange={(e) => setCodinglanguage(e.target.value)}
           />
         </div>
         <div className="right-user-info">
@@ -108,36 +155,42 @@ export function DashboardForm({
           <input
             type="text"
             name="dashboardName"
-            autocomplete="false"
-            value={firstName}
+            autoComplete="false"
+            value={formFirstName}
+            onChange={(e) => setFormFirstName(e.target.value)}
           />
           <label htmlFor="dashboardLastName">نام خانوادگی </label>
           <input
             type="text"
             name="dashboardLastName"
-            autocomplete="false"
-            value={lastName}
+            autoComplete="false"
+            value={formLastName}
+            onChange={(e) => setFormLastName(e.target.value)}
           />
 
           <label htmlFor="phoneNumber">شماره همراه</label>
           <input
             type="number"
             name="phoneNumber"
-            autocomplete="false"
+            disabled
+            autoComplete="false"
             value={phoneNumber}
           />
 
           <label htmlFor="dashboardEmail">ایمیل</label>
           <input
             type="email"
+            disabled
             name="dashboardEmail"
-            autocomplete="false"
+            autoComplete="false"
             value={email}
           />
         </div>
       </div>
       <div className="dashboard-button-wrapper">
-        <button className="dashboard-button-update">بروزرسانی</button>
+        <button className="dashboard-button-update" onClick={handleUpdateUser}>
+          بروزرسانی
+        </button>
         <button className="dashboard-button-delete" onClick={handleDeleteUser}>
           حذف پروفایل
         </button>
@@ -150,13 +203,16 @@ const mapStateToProps = (state) => {
   return {
     firstName: state.user.name ? state.user.name : "نام",
     lastName: state.user.lastname ? state.user.lastname : "نام خانواگی",
-    age: state.user.age ? state.user.age : null,
     phoneNumber: state.user.number
       ? state.user.number
       : "شماره موبایل خود را وارد نمایید",
     email: state.user.email ? state.user.email : "ایمیل خود را وارد نمایید",
-    gender: state.user.gender ? state.user.gender : null,
+    gender: state.user.gender ? state.user.gender : "agender",
     userAvatar: state.user.avatar,
+    usereducation: state.user.education,
+    usercodinglanguage: state.user.codinglanguage,
+    userGender: state.user.gender,
+    bday: state.user.bday,
   };
 };
 

@@ -26,7 +26,6 @@ export const AppRouter = (props) => {
   //check local storage to see if token exists
   if (localStorage.jwtToken) {
     setAutherizationToken(localStorage.jwtToken);
-    console.log("jwt token set at app router", localStorage.jwtToken);
     props.dispatch(startSetCurrentUser());
   }
 

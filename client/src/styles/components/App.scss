@@ -1642,6 +1642,12 @@ input[type="submit"]:disabled {
   color: $gray;
 }
 
+//users-table
+.users-table-avatar {
+  width: 50px;
+  border-radius: 25px;
+}
+
 //test table style
 .tablepage-wrapper {
   background-color: $dark;
@@ -1757,6 +1763,7 @@ input[type="submit"]:disabled {
 }
 .edit-button-table,
 .delete-button-table {
+  cursor: pointer;
   background-color: transparent;
   outline: none;
   border: none;
@@ -1798,6 +1805,7 @@ input[type="submit"]:disabled {
 .courseandcategorymanagment-link {
   text-decoration: none;
   color: $gray;
+  display: flex;
 }
 
 .loading-container {
@@ -1805,6 +1813,10 @@ input[type="submit"]:disabled {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.add-language-top-text {
+  font-size: 0.7em;
 }
 
 //service page

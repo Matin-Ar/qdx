@@ -82,6 +82,9 @@ export const userLogIn = ({
   token,
   _id,
   role,
+  gender,
+  codinglanguage,
+  education,
 }) => ({
   type: "USER_LOG_IN",
   name,
@@ -91,6 +94,9 @@ export const userLogIn = ({
   token,
   _id,
   role,
+  gender,
+  codinglanguage,
+  education,
 });
 
 //startUserLogin
@@ -102,7 +108,7 @@ export const startUserLogIn =
         const token = resp.data.token;
         setAutherizationToken(token);
         localStorage.setItem("jwtToken", token);
-
+        dispatch(setLoginSuccessMsg("ورود با موفقیت"));
         const user = resp.data.user;
         dispatch(userLogIn({ token, ...user }));
 
@@ -122,6 +128,10 @@ export const SetCurrentUser = ({
   email,
   _id,
   role,
+  bday,
+  education,
+  codinglanguage,
+  gender,
 }) => ({
   type: "SET_CURRENT_USER",
   name,
@@ -130,6 +140,10 @@ export const SetCurrentUser = ({
   email,
   _id,
   role,
+  bday,
+  education,
+  codinglanguage,
+  gender,
 });
 
 export const startSetCurrentUser = () => (dispatch) => {
