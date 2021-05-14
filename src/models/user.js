@@ -64,7 +64,8 @@ const userSchema = new mongoose.Schema({
         type: String
     },
     bday: {
-        type: String
+        type: String,
+        default: '{"day":1,"month":1,"year":1371}'
     },
     codinglanguage: {
         type: String
