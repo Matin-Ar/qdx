@@ -13,10 +13,11 @@ router.post('/comments', auth, async (req,res) => {
             desc: req.body.desc,
             condition: false,
             course: course._id,
-            user: req.user._id
+            user: req.user._id,
+            name: `${req.user.name} ${req.user.lastname}`
         })
         await comment.save()
-        res.status(201).send(course)
+        res.status(201).send(comment)
     } catch(e) {
         res.status(400).send(e)
     }
