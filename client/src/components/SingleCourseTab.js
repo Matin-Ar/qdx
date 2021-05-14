@@ -73,7 +73,11 @@ export default class SinglePageTabs extends Component {
                 {this.props.courseLinks &&
                   this.props.courseLinks.map((link, index) => {
                     return (
-                      <a href={`${link}`} className="course-download-links">
+                      <a
+                        key={index}
+                        href={`${link}`}
+                        className="course-download-links"
+                      >
                         دانلود قسمت <span>{index + 1}</span>
                       </a>
                     );

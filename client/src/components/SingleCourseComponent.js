@@ -17,7 +17,6 @@ export default function SingleCourseComponent(props) {
       .get(`/courses/${props.courseName}`)
       .then((res) => {
         setCourse(res.data);
-        console.log(course);
       })
       .catch((err) => console.log(err));
   }, [course.length]);

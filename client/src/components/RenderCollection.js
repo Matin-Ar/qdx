@@ -9,7 +9,11 @@ function RenderCollection({ collection }) {
       </div>
       {collection.tutorials?.map((item) => {
         return (
-          <Link className="category-links" to={`/categories/${item.name}`}>
+          <Link
+            key={Math.random()}
+            className="category-links"
+            to={`/categories/${item.name}`}
+          >
             <div className="single-category-wrapper" key={item.name}>
               <div className="single-category-text">{item.name}</div>
               <div className="single-category-img-container">

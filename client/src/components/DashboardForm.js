@@ -14,7 +14,7 @@ export function DashboardForm({
   firstName,
   lastName,
   phoneNumber,
-  usergender,
+  userGender,
   email,
   userAvatar,
   history,
@@ -22,18 +22,20 @@ export function DashboardForm({
   usercodinglanguage,
   bday,
 }) {
-  const formatedBdy = JSON.parse(bday);
-  const [selectedDay, setSelectedDay] = useState(formatedBdy);
+  // const formatedBdy = JSON.parse(bday);
+  const [selectedDay, setSelectedDay] = useState(null);
   const [formFirstName, setFormFirstName] = useState(firstName);
   const [formLastName, setFormLastName] = useState(lastName);
   const [formPhoneNumber, setFormPhoneNumber] = useState(phoneNumber);
   // const [formAge, setFormAge] = useState(age);
-  const [formGender, setFormGender] = useState(usergender);
+  const [formGender, setFormGender] = useState(userGender);
   const [formEmail, setFormEmail] = useState(email);
   const [codinglanguage, setCodinglanguage] = useState(usercodinglanguage);
   const [education, setEducation] = useState(usereducation);
 
   const now = utils("fa").getToday();
+
+  console.log("dashboard form gender vale is ", userGender);
 
   const defaultValue = {
     year: now.year,
@@ -84,8 +86,6 @@ export function DashboardForm({
         education,
       })
       .then((res) => {
-        console.log("this res is from server after update", res.data);
-        console.log("form gender is : ", formGender);
         alertify.success("عملیات بروزرسانی با موفقیت انجام شد");
         dispatch(SetCurrentUser(res.data));
       })
@@ -95,7 +95,7 @@ export function DashboardForm({
   };
 
   return (
-    <form autocomplete="off">
+    <form autoComplete="off">
       <div className="dashboard-avatar-container">
         <img
           className="dashboard-avatar-img"
@@ -107,7 +107,7 @@ export function DashboardForm({
       <div className="user-info-wrapper">
         <div className="left-user-info">
           <label htmlFor="dashboard-sex-info">جنسیت</label>
-          <SexSelect setFormGender={setFormGender} gender={usergender} />
+          <SexSelect setFormGender={setFormGender} genderProp={userGender} />
 
           <label htmlFor="registersureName">تاریح تولد </label>
           <div>
@@ -119,13 +119,18 @@ export function DashboardForm({
               maximumDate={maximumDate}
               locale="fa" // add this
             />
+            <span style={{ marginRight: "10px" }}>
+              {" "}
+              تاریخ تولد ثبت شده شما : {JSON.parse(bday).day}/{" "}
+              {JSON.parse(bday).month} / {JSON.parse(bday).year}
+            </span>
           </div>
 
           <label htmlFor="dashboardEducation">رشته تحصیلی</label>
           <input
             type="text"
             name="dashboardEducation"
-            autocomplete="false"
+            autoComplete="false"
             value={education}
             onChange={(e) => {
               setEducation(e.target.value);
@@ -140,7 +145,7 @@ export function DashboardForm({
             type="text"
             name="dashboardCodingLanguage"
             value={codinglanguage}
-            autocomplete="false"
+            autoComplete="false"
             placeholder="برای مثال Nodejs,React"
             onChange={(e) => setCodinglanguage(e.target.value)}
           />
@@ -150,7 +155,7 @@ export function DashboardForm({
           <input
             type="text"
             name="dashboardName"
-            autocomplete="false"
+            autoComplete="false"
             value={formFirstName}
             onChange={(e) => setFormFirstName(e.target.value)}
           />
@@ -158,7 +163,7 @@ export function DashboardForm({
           <input
             type="text"
             name="dashboardLastName"
-            autocomplete="false"
+            autoComplete="false"
             value={formLastName}
             onChange={(e) => setFormLastName(e.target.value)}
           />
@@ -168,7 +173,7 @@ export function DashboardForm({
             type="number"
             name="phoneNumber"
             disabled
-            autocomplete="false"
+            autoComplete="false"
             value={phoneNumber}
           />
 
@@ -177,7 +182,7 @@ export function DashboardForm({
             type="email"
             disabled
             name="dashboardEmail"
-            autocomplete="false"
+            autoComplete="false"
             value={email}
           />
         </div>
@@ -198,7 +203,6 @@ const mapStateToProps = (state) => {
   return {
     firstName: state.user.name ? state.user.name : "نام",
     lastName: state.user.lastname ? state.user.lastname : "نام خانواگی",
-    age: state.user.bday ? state.user.bday : null,
     phoneNumber: state.user.number
       ? state.user.number
       : "شماره موبایل خود را وارد نمایید",
@@ -207,7 +211,7 @@ const mapStateToProps = (state) => {
     userAvatar: state.user.avatar,
     usereducation: state.user.education,
     usercodinglanguage: state.user.codinglanguage,
-    usergender: state.user.gender,
+    userGender: state.user.gender,
     bday: state.user.bday,
   };
 };

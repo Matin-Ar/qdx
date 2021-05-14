@@ -14,7 +14,7 @@ const usersReducerDefaults = {
   bday: "",
   education: "",
   codinglanguage: "",
-  gender: "agender",
+  gender: "",
 };
 
 //USERS reducer

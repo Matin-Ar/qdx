@@ -10,8 +10,6 @@ function AllCategories() {
     return axios.get("/test").then((res) => res.data);
   });
 
-  console.log(collections);
-
   return collections.isLoading ? (
     <div className="all_categories_page_container">
       <div className="loader-container">
@@ -21,7 +19,7 @@ function AllCategories() {
   ) : (
     <div className="all_categories_page_container">
       {collections.data?.map((collection) => {
-        return <RenderCollection collection={collection} />;
+        return <RenderCollection collection={collection} key={Math.random()} />;
       })}
     </div>
   );

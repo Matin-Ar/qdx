@@ -7,16 +7,12 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import editIMG from "../../assets/edit.png";
-import deleteIMG from "../../assets/delete.png";
-import LoadIMG from "../../assets/Skateboarding.gif";
-import { Link } from "react-router-dom";
-
 import axios from "axios";
 import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
 import { useQuery } from "react-query";
 import Loader from "../Loader";
+import deleteIMG from "../../assets/delete.png";
 
 const useStyles = makeStyles({
   table: {

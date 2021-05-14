@@ -19,7 +19,13 @@ function SpecificTutorialsPage() {
       <div className="SpecificTutorialsPage-container">
         {courseList &&
           courseList.data?.map((course) => {
-            return <CourseComponent course={course} tutorialName={tutorial} />;
+            return (
+              <CourseComponent
+                course={course}
+                tutorialName={tutorial}
+                key={course.id}
+              />
+            );
           })}
       </div>
     </div>
@@ -27,24 +33,3 @@ function SpecificTutorialsPage() {
 }
 
 export default SpecificTutorialsPage;
-
-// useEffect(() => {
-//   axios
-//     .get(`/tutorials/${tutorial}`)
-//     .then((res) => {
-//       setCourseList(res.data);
-//       console.log("this is from the course list", courseList);
-//     })
-//     .catch((err) => console.log(err));
-// }, [courseList.length]);
-
-// return (
-//   <div className="SpecificTutorialsPage-wrapper">
-//     <div className="SpecificTutorialsPage-container">
-//       {courseList &&
-//         courseList.map((course) => {
-//           return <CourseComponent course={course} tutorialName={tutorial} />;
-//         })}
-//     </div>
-//   </div>
-// );

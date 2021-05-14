@@ -71,8 +71,9 @@ export default function AddCourseTabOne({ handleFormChange }) {
           className="add-course-tab-one-form-group-select-box"
           disabled={selectedCategory === "placeholder" ? true : false}
           onChange={handleFormChange}
+          defaultValue={"lang-placeholder"}
         >
-          <option value="lang-placeholder" disabled hidden selected>
+          <option value="lang-placeholder" disabled hidden>
             ابتدا دسته بندی مورد نظر را انتخاب نمایید
           </option>
           {tutorialsList.map((tutorial) => {

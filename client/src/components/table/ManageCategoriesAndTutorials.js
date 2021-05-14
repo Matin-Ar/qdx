@@ -42,21 +42,17 @@ export default function Test() {
 
   useEffect(() => {
     axios.get("/categories").then((res) => {
-      console.log("categories array is ", res.data);
       setCategoriesArr(res.data);
     });
   }, []);
 
   useEffect(() => {
-    console.log("setting is loading to:", !!selectedCategory);
     setIsLoading(!!selectedCategory);
   }, [selectedCategory, count]);
 
   useEffect(() => {
     if (selectedCategory !== "") {
       axios.get(`/categories/${selectedCategory}`).then((res) => {
-        console.log("selected category is", selectedCategory);
-        console.log("tutorials array is ", res.data);
         setTutorialsArr(res.data);
         setIsLoading(false);
       });
@@ -198,7 +194,6 @@ export default function Test() {
     const promptResult = prompt(
       `شما در حال حذف دسته بندی می باشید ، با حذف دسته بندی تمامی اطلاعات دوره های داخل آن حذف میگردد آیا مطمئن هستید؟`
     );
-    console.log(title);
     if (promptResult == "yes") {
       axios
         .delete("/courses", { data: { title } })

@@ -84,8 +84,6 @@ export class AddCourseTab extends Component {
         data: form,
       })
         .then((res) => {
-          console.log(res.data);
-          console.log(res.status);
           alertify.success("دوره با موفقیت اضافه شد");
           this.setState({
             buttonText: "دوره با موفقیت اضافه شد",
@@ -133,9 +131,7 @@ export class AddCourseTab extends Component {
     const myindex = e.currentTarget.getAttribute("index");
     const array = this.state.courseLinks;
 
-    console.log("prevArray", array);
     const newArray = array.splice(myindex, 1);
-    console.log("new array after splice", newArray);
     this.setState({
       ...this.state,
       courseLinks: array,
@@ -146,7 +142,6 @@ export class AddCourseTab extends Component {
     const arr = this.state.courseLinks;
     const newAmount = e.target.value;
     arr[index] = newAmount;
-    console.log(arr);
     this.setState({
       ...this.state,
       courseLinks: arr,
@@ -156,8 +151,6 @@ export class AddCourseTab extends Component {
   handleFormChange(e) {
     e.preventDefault();
     if (e.target.name === "couseIMG") {
-      console.log(e.target.name, "is : ", e.target.files[0]);
-
       this.setState((prevstate) => {
         return {
           ...prevstate,
@@ -166,8 +159,6 @@ export class AddCourseTab extends Component {
         };
       });
     } else {
-      console.log(e.target.name, "is : ", e.target.value);
-
       this.setState((prevstate) => {
         return {
           ...prevstate,
@@ -311,7 +302,7 @@ export class AddCourseTab extends Component {
             <div className="add-course-bottom-inputs">
               <label className="add-course-input-label">
                 <p>توضیح کوتاه</p>
-                <textArea
+                <textarea
                   required
                   value={this.courseShortDisc}
                   type="text"
@@ -323,7 +314,7 @@ export class AddCourseTab extends Component {
 
               <label className="add-course-input-label">
                 <p>توضیح کامل</p>
-                <textArea
+                <textarea
                   required
                   value={this.courseLongDisc}
                   type="text"
