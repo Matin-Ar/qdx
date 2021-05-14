@@ -12,6 +12,18 @@ import AddCourseCategory from "./AddCourseCategory";
 import AddCourseTutorial from "./AddCourseTutorial";
 import ManageCategoriesAndTutorials from "./table/ManageCategoriesAndTutorials";
 import { Link } from "react-router-dom";
+import ManageUsers from "./table/ManageUsers";
+
+// {this.props.isAdmin && (
+//   <Tab>
+//     <Link
+//       to="/ManageCategoriesAndTutorials"
+//       className="courseandcategorymanagment-link"
+//     >
+//       <img src={addCourseIMG} /> مدیریت دسته بندی ها و زبان ها
+//     </Link>
+//   </Tab>
+// )}
 
 const CustomTabPanel = ({ children, myCustomProp, ...otherProps }) => (
   <TabPanel {...otherProps}>
@@ -45,20 +57,15 @@ export class DashboardPage extends Component {
               </Tab>
 
               {this.props.isAdmin && (
-                <Tab disabled>
+                <Tab>
                   <img src={adminIMG} />
-                  پنل مدیریت
+                  پنل مدیریت کاربران
                 </Tab>
               )}
 
               {this.props.isAdmin && (
                 <Tab>
-                  <Link
-                    to="/ManageCategoriesAndTutorials"
-                    className="courseandcategorymanagment-link"
-                  >
-                    <img src={addCourseIMG} /> مدیریت دسته بندی ها و زبان ها
-                  </Link>
+                  <img src={addCourseIMG} /> مدیریت دسته بندی ها و زبان ها
                 </Tab>
               )}
 
@@ -76,10 +83,16 @@ export class DashboardPage extends Component {
               <ProfileEditTab />
             </CustomTabPanel>
 
-            {this.props.isAdmin && <CustomTabPanel>addmin Tab</CustomTabPanel>}
+            {this.props.isAdmin && (
+              <CustomTabPanel>
+                <ManageUsers />
+              </CustomTabPanel>
+            )}
 
             {this.props.isAdmin && (
-              <CustomTabPanel>manage dashboard</CustomTabPanel>
+              <CustomTabPanel>
+                <ManageCategoriesAndTutorials />
+              </CustomTabPanel>
             )}
 
             {this.props.isAdmin && (

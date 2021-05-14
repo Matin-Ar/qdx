@@ -249,16 +249,30 @@ export default function Test() {
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell align="left">عملیات</TableCell>
+                  <TableCell align="right">نام دسته بندی</TableCell>
 
                   <TableCell align="center">id</TableCell>
-                  <TableCell align="right">نام دسته بندی</TableCell>
+                  <TableCell align="left">عملیات</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {categoriesArr &&
                   categoriesArr.map((item) => (
                     <TableRow key={item._id}>
+                      <TableCell align="right">
+                        <button
+                          className="category-button-table"
+                          onClick={() => {
+                            setSelectedCategory(item.name);
+                          }}
+                        >
+                          {item.name}
+                        </button>
+                      </TableCell>
+                      <TableCell align="center" component="th" scope="row">
+                        {item._id}
+                      </TableCell>
+
                       <TableCell align="left">
                         <button
                           className="delete-button-table"
@@ -278,21 +292,6 @@ export default function Test() {
                           <img className="edit-image-table" src={editIMG}></img>
                         </button>
                       </TableCell>
-
-                      <TableCell align="center" component="th" scope="row">
-                        {item._id}
-                      </TableCell>
-
-                      <TableCell align="right">
-                        <button
-                          className="category-button-table"
-                          onClick={() => {
-                            setSelectedCategory(item.name);
-                          }}
-                        >
-                          {item.name}
-                        </button>
-                      </TableCell>
                     </TableRow>
                   ))}
               </TableBody>
@@ -307,7 +306,7 @@ export default function Test() {
             <TableContainer component={Paper}>
               <div className="add-language-table">
                 <div className="add-language-top-table">
-                  <p>
+                  <p className="add-language-top-text">
                     ❗️ شما در حال ویرایش زبان های برنامه نویسی موجود در دسته
                     بندی {selectedCategory} می باشید
                   </p>
@@ -349,16 +348,33 @@ export default function Test() {
               <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="left">عملیات</TableCell>
-                    <TableCell align="right">نام</TableCell>
-
                     <TableCell align="right">تصویر</TableCell>
+
+                    <TableCell align="right">نام</TableCell>
+                    <TableCell align="left">عملیات</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {tutorialsArr &&
                     tutorialsArr.map((item) => (
                       <TableRow key={item._id} className="tablebody-row">
+                        <TableCell component="th" scope="row" align="right">
+                          {
+                            <img
+                              className="table-avatar"
+                              src={`http://localhost:3001/tutorials/${item.name}/avatar`}
+                            />
+                          }
+                        </TableCell>
+                        <TableCell align="right">
+                          <button
+                            className="tutorial-button-table"
+                            onClick={() => setSelectedTutorial(item.name)}
+                          >
+                            {item.name}
+                          </button>
+                        </TableCell>
+
                         <TableCell align="left">
                           <button
                             className="delete-button-table"
@@ -381,23 +397,6 @@ export default function Test() {
                             ></img>
                           </button>
                         </TableCell>
-                        <TableCell align="right">
-                          <button
-                            className="tutorial-button-table"
-                            onClick={() => setSelectedTutorial(item.name)}
-                          >
-                            {item.name}
-                          </button>
-                        </TableCell>
-
-                        <TableCell component="th" scope="row" align="right">
-                          {
-                            <img
-                              className="table-avatar"
-                              src={`http://localhost:3001/tutorials/${item.name}/avatar`}
-                            />
-                          }
-                        </TableCell>
                       </TableRow>
                     ))}
                 </TableBody>
@@ -411,7 +410,7 @@ export default function Test() {
           <TableContainer component={Paper}>
             <div className="add-language-table">
               <div className="add-language-top-table">
-                <p>
+                <p className="add-language-top-text">
                   ❗️ شما در حال مشاهده دوره های {selectedTutorial} می باشید
                 </p>
                 <button
@@ -429,27 +428,25 @@ export default function Test() {
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell align="left">عملیات</TableCell>
+                  <TableCell align="right">تصویر</TableCell>
                   <TableCell align="right">نام</TableCell>
 
-                  <TableCell align="right">تصویر</TableCell>
+                  <TableCell align="right">عملیات</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {coursesArr &&
                   coursesArr?.map((item) => (
                     <TableRow key={item._id} className="tablebody-row">
-                      <TableCell align="left">
-                        <button
-                          className="delete-button-table"
-                          onClick={(e) => handleDeleteCourse(e, item.title)}
-                        >
+                      <TableCell component="th" scope="row" align="right">
+                        {
                           <img
-                            className="edit-image-table"
-                            src={deleteIMG}
-                          ></img>
-                        </button>
+                            className="table-avatar"
+                            src={`/courses/${item.title}/avatar`}
+                          />
+                        }
                       </TableCell>
+
                       <TableCell align="right">
                         <Link
                           className="tutorial-button-table"
@@ -459,13 +456,16 @@ export default function Test() {
                         </Link>
                       </TableCell>
 
-                      <TableCell component="th" scope="row" align="right">
-                        {
+                      <TableCell align="right">
+                        <button
+                          className="delete-button-table"
+                          onClick={(e) => handleDeleteCourse(e, item.title)}
+                        >
                           <img
-                            className="table-avatar"
-                            src={`/courses/${item.title}/avatar`}
-                          />
-                        }
+                            className="edit-image-table"
+                            src={deleteIMG}
+                          ></img>
+                        </button>
                       </TableCell>
                     </TableRow>
                   ))}
