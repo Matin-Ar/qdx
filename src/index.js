@@ -5,6 +5,7 @@ const categoryRouter = require('./routers/category')
 const tutorialRouter = require('./routers/tutorial')
 const courseRouter = require('./routers/course')
 const testRouter = require('./routers/test')
+const commentRouter = require('./routers/comment')
 
 const app = express()
 const port = process.env.PORT
@@ -15,7 +16,8 @@ app.use(categoryRouter)
 app.use(tutorialRouter)
 app.use(courseRouter)
 app.use(testRouter)
- 
+app.use(commentRouter) 
+
 app.listen(port, () => {
   console.log('Server is up on port ' + port)
 })
@@ -23,6 +25,7 @@ app.listen(port, () => {
 const Category = require('./models/category')
 const Tutorial = require('./models/tutorial')
 const Course = require('./models/course')
+const Comment = require('./models/comment')
 
 const alaki = async () => {
   // const tutorial = await Tutorial.findOne({ name: 'python' })
@@ -47,6 +50,15 @@ const alaki = async () => {
   // await course.populate('tut').execPopulate()
   // console.log(course)
 
+  // const comment = await Comment.findOne({ _id: '609e38a0ee17b432943c1bf5' })
+  // console.log(comment)
+  // await comment.populate('user').execPopulate()
+  // console.log(comment)
+
+  // const course = await Course.findOne({ _id: '60801c3aa0016930d0822ad8' })
+  // console.log(course)
+  // await course.populate('comments').execPopulate()
+  // console.log(course.comments)
 }
 
 alaki()

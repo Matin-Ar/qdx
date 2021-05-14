@@ -142,7 +142,6 @@ router.get('/users/:id/avatar', async (req, res) => {
 router.get('/users/profiles', auth, adminAuth, async (req, res) => {
     try {
         const profiles = await User.find({ }, 'email', { sort: { email : 1 }, limit: parseInt(req.query.limit), skip: parseInt(req.query.skip) })
-        console.log(profiles)
         res.send(profiles)
     } catch (e) {
         res.status(500).send()

@@ -77,7 +77,7 @@ const courseSchema = new mongoose.Schema({
     timestamps: true
 })
 
-courseSchema.virtual('courses', {
+courseSchema.virtual('comments', {
     ref: 'Comment',
     localField: '_id',
     foreignField: 'course'

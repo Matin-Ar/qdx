@@ -2,11 +2,6 @@ const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
 
 const commentSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        trim: true
-    },
     title: {
         type: String,
         required: true,
@@ -18,20 +13,24 @@ const commentSchema = new mongoose.Schema({
         trim: true
     },
     condition: {
-        type: String,
-        required: true,
-        trim: true
+        type: Boolean,
+        required: true
     },
     course: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Course'
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
     }
 }, {
     timestamps: true
 })
 
-tutorialSchema.plugin(uniqueValidator)
+commentSchema.plugin(uniqueValidator)
 
 const Comment = mongoose.model('Comment', commentSchema)
 
