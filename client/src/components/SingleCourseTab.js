@@ -87,7 +87,53 @@ export default class SinglePageTabs extends Component {
 
             {this.state.activeTab === "user-comments-tab" && (
               <div className="user-comments-tab active-content">
-                user Comment
+                {this.props.courseComments.map((comment) => {
+                  return (
+                    <div className="user-comments-item">
+                      <img
+                        className="user-comments-image"
+                        src={`/users/${comment.user}/avatar`}
+                      ></img>
+                      <div className="user-comments-username">
+                        {" "}
+                        <p>{comment.name}</p>
+                      </div>
+                      <div className="user-comments-info">
+                        <h1 className="user-comments-title">
+                          {" "}
+                          عنوان دیدگاه: {comment.title}
+                        </h1>
+                        <p className="user-comments-text">
+                          متن دیدگاه : {comment.desc}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+
+                <h1
+                  className="user-comments-title"
+                  style={{
+                    color: "#ffc000",
+                    marginBottom: "1em",
+                    paddingTop: "2em",
+
+                    borderTop: "1px solid rgba(255, 192, 0,0.3)",
+                  }}
+                >
+                  ثبت دیدگاه
+                </h1>
+                <label>
+                  عنوان
+                  <input
+                    type="text"
+                    className="user-comments-input-title"
+                  ></input>
+                </label>
+                <label>
+                  متن دیدگاه
+                  <textarea className="user-comments-input-text"></textarea>
+                </label>
               </div>
             )}
 

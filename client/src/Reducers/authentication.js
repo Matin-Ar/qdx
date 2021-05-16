@@ -30,6 +30,10 @@ const usersReducer = (state = usersReducerDefaults, action) => {
         token: action.payload.token,
         id: action.payload._id,
         isAuth: true,
+        bday: action.payload.bday,
+        education: action.payload.education,
+        codinglanguage: action.payload.codinglanguage,
+        gender: action.payload.gender,
         avatar: {
           url: `http://localhost:3001/users/${
             action.payload._id
@@ -45,6 +49,11 @@ const usersReducer = (state = usersReducerDefaults, action) => {
         token: null,
         isAuth: false,
         avatar: "",
+        bday: "",
+        education: "",
+        codinglanguage: "",
+        gender: "",
+        role: "",
       };
     case "USER_LOG_IN":
       return {

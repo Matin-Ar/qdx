@@ -12,11 +12,23 @@ import dummyCourseImg from "../assets/courses/courseimage/lodash.png";
 
 export default function SingleCourseComponent(props) {
   const [course, setCourse] = useState([]);
+  const [comments, setCourseComments] = useState([]);
+
   useEffect(() => {
     axios
       .get(`/courses/${props.courseName}`)
       .then((res) => {
         setCourse(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [course.length]);
+
+  useEffect(() => {
+    axios
+      .get(`/comments/${course?._id}`)
+      .then((res) => {
+        console.log(res.data);
+        setCourseComments(res.data);
       })
       .catch((err) => console.log(err));
   }, [course.length]);
@@ -75,7 +87,11 @@ export default function SingleCourseComponent(props) {
       <div className="courseLongDescription-container">
         <p>{course.longdesc}</p>
       </div>
-      <SingleCourseTab className="SingleCourseTab" courseLinks={course.links} />
+      <SingleCourseTab
+        className="SingleCourseTab"
+        courseLinks={course.links}
+        courseComments={comments}
+      />
     </div>
   );
 }

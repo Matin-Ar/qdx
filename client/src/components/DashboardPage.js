@@ -13,6 +13,7 @@ import AddCourseTutorial from "./AddCourseTutorial";
 import ManageCategoriesAndTutorials from "./table/ManageCategoriesAndTutorials";
 import { Link } from "react-router-dom";
 import ManageUsers from "./table/ManageUsers";
+import ManageComments from "./table/ManageComments";
 
 // {this.props.isAdmin && (
 //   <Tab>
@@ -71,6 +72,12 @@ export class DashboardPage extends Component {
 
               {this.props.isAdmin && (
                 <Tab>
+                  <img src={addCourseIMG} /> مدیریت دیدگاه ها
+                </Tab>
+              )}
+
+              {this.props.isAdmin && (
+                <Tab>
                   <img src={addCourseIMG} />
                   افزودن دوره
                 </Tab>
@@ -92,6 +99,12 @@ export class DashboardPage extends Component {
             {this.props.isAdmin && (
               <CustomTabPanel>
                 <ManageCategoriesAndTutorials />
+              </CustomTabPanel>
+            )}
+
+            {this.props.isAdmin && (
+              <CustomTabPanel>
+                <ManageComments />
               </CustomTabPanel>
             )}
 
