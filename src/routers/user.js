@@ -7,10 +7,10 @@ const User = require('../models/user')
 const auth = require('../middleware/auth')
 const adminAuth = require('../middleware/adminAuth')
 const { sendWelcomeEmail, sendCancelatonEmail } = require('../emails/account')
+const sendsms = require('../sms/sms')
 const router = new express.Router()
 
 router.post('/users/singup', async (req, res) => {
-
     try {
         if(req.body.role){
             throw new Error('You can not choose role!')
