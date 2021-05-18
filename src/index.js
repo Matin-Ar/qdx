@@ -6,6 +6,7 @@ const tutorialRouter = require('./routers/tutorial')
 const courseRouter = require('./routers/course')
 const testRouter = require('./routers/test')
 const commentRouter = require('./routers/comment')
+const activationRouter = require('./routers/activation')
 
 const app = express()
 const port = process.env.PORT
@@ -17,6 +18,7 @@ app.use(tutorialRouter)
 app.use(courseRouter)
 app.use(testRouter)
 app.use(commentRouter) 
+app.use(activationRouter)
 
 app.listen(port, () => {
   console.log('Server is up on port ' + port)

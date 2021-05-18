@@ -1,8 +1,8 @@
 var request = require("request");
 
-const sendsms = async (number) => {
+const sendsms = async (number, randomCode) => {
     request({ method: 'POST',
-    url: 'https://api.ghasedak.io/v2/sms/send/simple',
+    url: 'https://api.ghasedak.io/v2/verification/send/simple',
     headers:
     {
         'cache-control': 'no-cache',
@@ -10,13 +10,14 @@ const sendsms = async (number) => {
         'content-type': 'application/x-www-form-urlencoded' },
     form:
     {
-        message: 'کد فعال سازی حساب کاربری: 1234',
         receptor: number,
-        linenumber: '10008566'
+        template: 'verification',
+        type: '1',
+        param1: randomCode
     }
     }, function (error, response, body) {
         if (error) throw new Error(error)
-            console.log(body)
+        console.log(body)
         })
 }
 

@@ -78,12 +78,6 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true,
         default: 'User'
-    },
-    verify: {
-        type: Boolean,
-        required: true,
-        trim: true,
-        default: false
     }
 }, {
     timestamps: true
