@@ -42,8 +42,8 @@ export const starUserRegister = (payload) => (dispatch) => {
         return successTxt;
       },
       (error) => {
-        dispatch(startSetRegisterError(error.response.data.errors));
-        console.log("console from starUserRegister", error.response.data);
+        // dispatch(startSetRegisterError(error.response.data.error));
+        return error.response.data.error;
       }
     );
 };

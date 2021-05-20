@@ -7,6 +7,7 @@ import { starUserRegister } from "../../Actions/user";
 import NameIMG from "../../assets/register/user.svg";
 import RegisterLoader from "./RegisterLoader";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import validator from "validator";
 
@@ -28,10 +29,10 @@ function RegisterStepOne({ dispatch }) {
   const [isValidMail, setIsValidMail] = useState(false);
   const [isStrPass, setIsStrPass] = useState(0);
   const [step, setStep] = useState(2);
-  const [input1, setinput1] = useState(1);
-  const [input2, setinput2] = useState(undefined);
-  const [input3, setinput3] = useState(undefined);
-  const [input4, setinput4] = useState(undefined);
+  const [input1, setinput1] = useState("");
+  const [input2, setinput2] = useState("");
+  const [input3, setinput3] = useState("");
+  const [input4, setinput4] = useState("");
   const [verificationBtnIsDisabled, setVerificationBtnIsDisabled] =
     useState(false);
 
@@ -194,7 +195,13 @@ function RegisterStepOne({ dispatch }) {
       setIsLoadFinished(true);
       setTimeout(() => {
         setIsLoad(false);
-      });
+      }, 3000);
+    } else {
+      setIsLoad(false);
+      setErrors((prevErr) => [...prevErr, signupRes]);
+      setTimeout(() => {
+        setVerificationBtnIsDisabled(false);
+      }, 2000);
     }
   };
 
@@ -348,29 +355,35 @@ function RegisterStepOne({ dispatch }) {
               <div className="phoneverification_input_container">
                 <input
                   className="phoneverification_input"
-                  type="number"
+                  type="text"
                   required
                   min="1"
                   step="1"
+                  pattern="[0-9]"
+                  maxlength="1"
                   max="9"
                   value={input4}
                   onChange={(e) => setinput4(e.target.value)}
                 />
                 <input
                   className="phoneverification_input"
-                  type="number"
+                  type="text"
                   required
                   min="0"
+                  pattern="[0-9]"
                   max="9"
+                  maxlength="1"
                   value={input3}
                   onChange={(e) => setinput3(e.target.value)}
                   step="1"
                 />
                 <input
                   className="phoneverification_input"
-                  type="number"
+                  type="text"
                   required
                   min="0"
+                  pattern="[0-9]"
+                  maxlength="1"
                   max="9"
                   step="1"
                   value={input2}
@@ -378,9 +391,11 @@ function RegisterStepOne({ dispatch }) {
                 />
                 <input
                   className="phoneverification_input"
-                  type="number"
+                  type="text"
                   required
                   step="1"
+                  maxLength="1"
+                  pattern="[0-9]"
                   min="0"
                   max="9"
                   value={input1}
@@ -401,7 +416,7 @@ function RegisterStepOne({ dispatch }) {
   );
 }
 
-export default connect()(RegisterStepOne);
+export default withRouter(connect()(RegisterStepOne));
 
 // {<div className="registerSuccess-container">
 // <svg
