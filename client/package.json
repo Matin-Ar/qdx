@@ -11,6 +11,7 @@
     "alertifyjs": "^1.13.1",
     "animate.css": "^4.1.1",
     "axios": "^0.21.1",
+    "framer-motion": "^4.1.17",
     "history": "^5.0.0",
     "install": "^0.13.0",
     "material-table": "^1.69.3",
@@ -35,6 +36,7 @@
     "react-tabs": "^3.2.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "validator": "^13.6.0",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

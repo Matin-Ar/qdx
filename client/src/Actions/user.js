@@ -23,10 +23,10 @@ export const userRegister = (payload) => ({
 
 //START_USER_REGISTER
 export const starUserRegister = (payload) => (dispatch) => {
-  const { name, lastname, number, email, password, _id } = payload;
+  const { name, lastname, number, email, password, _id, code } = payload;
 
   return axios
-    .post("/users/singup", { name, lastname, number, email, password })
+    .post("/users/singup", { name, lastname, number, email, password, code })
 
     .then(
       (response) => {

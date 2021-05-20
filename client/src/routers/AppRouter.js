@@ -21,6 +21,7 @@ import ManageCategoriesAndTutorials from "../components/table/ManageCategoriesAn
 import AllCategories from "../components/AllCategories";
 import EditCourse from "../components/EditCourse";
 import Services from "../components/Services";
+import RegisterStepOne from "../components/Register/RegisterStepOne";
 
 export const AppRouter = (props) => {
   //check local storage to see if token exists
@@ -82,7 +83,7 @@ export const AppRouter = (props) => {
           />
           <PublicRoute
             path="/register"
-            component={RegisterPage}
+            component={RegisterStepOne}
             isAuth={props.isAuth}
           />
 

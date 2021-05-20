@@ -1943,6 +1943,135 @@ input[type="submit"]:disabled {
   color: black;
   text-align: center;
 }
+
+//new register page
+.register_tab_wrapper {
+  min-height: 70vh;
+  background-color: $light;
+  padding: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.register_tab_container {
+  position: relative;
+  display: flex;
+  height: 100%;
+  width: 90vw;
+}
+.register_hero {
+  width: 50%;
+  background-color: $gray;
+  border-radius: 10px;
+}
+
+.register-svg-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.register_form_container {
+  width: 50%;
+  background-color: $dark;
+  border-radius: 10px;
+}
+
+.register_form_container {
+  direction: rtl;
+  padding: 2em;
+  color: white;
+}
+
+.register_title {
+  font-size: 20px;
+}
+
+.register_subtitle {
+  color: $gray;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.new_register_form {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.newname,
+.newsurename,
+.newphonenumber,
+.newemail,
+.newpassword {
+  background-color: $dark;
+  border-radius: 10px;
+  height: 40px;
+  width: 100%;
+  outline: none;
+  border: 1px solid $gray;
+  padding-right: 1em;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.new_register_form label {
+  color: $gray;
+  align-self: flex-start;
+  margin-bottom: 5px;
+}
+
+.newname:focus,
+.newsurename:focus,
+.newphonenumber:focus,
+.newemail:focus,
+.newpassword:focus {
+  border: 2px solid $yellow;
+}
+
+.form-group {
+  position: relative;
+}
+
+.newregister_label {
+  position: absolute;
+  right: 15px;
+  top: 7px;
+}
+
+.register_loader {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($dark, 0.9);
+  z-index: 1000;
+}
+
+.phoneverification_input {
+  min-height: 100px;
+  min-width: 80px;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border: 1px solid rgba($yellow, 0.5);
+  border-radius: 10px;
+  color: rgba($yellow, 0.5);
+  font-size: 2em;
+  text-align: center;
+}
+
+.phoneverification_input_container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
 //footer
 .footer-container {
   background-color: $light;
