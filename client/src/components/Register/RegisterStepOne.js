@@ -28,7 +28,7 @@ function RegisterStepOne({ dispatch }) {
   const [isValidmobile, setIsValidmobile] = useState(false);
   const [isValidMail, setIsValidMail] = useState(false);
   const [isStrPass, setIsStrPass] = useState(0);
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
   const [input1, setinput1] = useState("");
   const [input2, setinput2] = useState("");
   const [input3, setinput3] = useState("");
@@ -151,7 +151,7 @@ function RegisterStepOne({ dispatch }) {
     ) {
       setErrors([]);
       axios
-        .post("/activation/sendcode", { number })
+        .post("/activation/sendcode", { number, email })
         .then((res) => {
           console.log(res.status);
           if (res.status === 200) {
@@ -164,9 +164,9 @@ function RegisterStepOne({ dispatch }) {
           }
         })
         .catch((err) => {
-          console.log(err.response.data.message);
-          setErrors([err.response.data.message]);
-
+          console.log(err.response.data.error);
+          const text = err.response.data.error.split(",");
+          setErrors([...text]);
           setTimeout(() => {
             setIsDisabled(false);
           }, 3000);
@@ -192,10 +192,12 @@ function RegisterStepOne({ dispatch }) {
     );
 
     if (signupRes === "ثبت نام موفق") {
-      setIsLoadFinished(true);
+      setTimeout(() => {
+        setIsLoadFinished(true);
+      }, 6000);
       setTimeout(() => {
         setIsLoad(false);
-      }, 3000);
+      }, 8000);
     } else {
       setIsLoad(false);
       setErrors((prevErr) => [...prevErr, signupRes]);
