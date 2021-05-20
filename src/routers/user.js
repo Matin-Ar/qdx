@@ -86,7 +86,7 @@ router.patch('/users/password', auth, async (req, res) => {
         await User.verify(req.user.number, req.body.code)
         req.user.password = req.body.password
         await req.user.save()
-        res.send(req.user)
+        res.send()
     } catch (e) {
         res.status(400).send({ error: e.message })
     }
