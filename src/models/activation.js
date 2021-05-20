@@ -22,11 +22,6 @@ const activationSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
-    },
-    status: {
-        type: Boolean,
-        required: true,
-        default: false
     }
 }, {
     timestamps: true
