@@ -14,6 +14,7 @@ const verify = async (req, res, next) => {
         if(!isMatch) {
             throw new Error("کد تایید نامعتبر می باشد !")
         }
+        await user.remove()
 
         next()
     } catch (e) {

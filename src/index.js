@@ -28,6 +28,7 @@ const Category = require('./models/category')
 const Tutorial = require('./models/tutorial')
 const Course = require('./models/course')
 const Comment = require('./models/comment')
+const Activation = require('./models/activation')
 
 const alaki = async () => {
   // const tutorial = await Tutorial.findOne({ name: 'python' })
@@ -61,6 +62,14 @@ const alaki = async () => {
   // console.log(course)
   // await course.populate('comments').execPopulate()
   // console.log(course.comments)
+  // let i = 0
+  // while(1) {
+  //   const users = await Activation.find({})
+  //   console.log(users)
+  //   i++
+  //   console.log(i)
+  // }
+
 }
 
 alaki()

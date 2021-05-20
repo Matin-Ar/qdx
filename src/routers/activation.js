@@ -21,7 +21,27 @@ router.post('/activation/sendcode', signup, async (req, res) => {
         await sendsms(req.body.number, randomCode)
         res.send({ message: "کد ارسال شد !" })
     } catch(e) {
-        console.log(e.message)
+        res.status(400).send({ message: e.message })
+    }
+})
+
+router.post('/verification/sendcode', async (req, res) => {
+    try {
+        const randomCode = (Math.floor(Math.random() * 9000 + 1000)).toString()
+        const user = await Activation.findOne({ number: req.body.number })
+        if (!user) {
+            const user = new Activation({
+                number: req.body.number,
+                code: randomCode
+            })
+            await user.save()
+        } else {
+            user.code = randomCode
+            await user.save()
+        }
+        await sendsms(req.body.number, randomCode)
+        res.send({ message: "کد ارسال شد !" })
+    } catch(e) {
         res.status(400).send({ message: e.message })
     }
 })

@@ -3,8 +3,8 @@ const User = require('../models/user')
 
 const signup = async (req, res, next) => {
     try {
-        if(!req.body.number || !req.body.email) {
-            throw new Error('Provide number and email !')
+        if(!req.body.number) {
+            throw new Error('Provide number !')
         }
         const text = []
         const number = await User.findOne({ number: req.body.number })
