@@ -1,7 +1,6 @@
 const express = require('express')
 const Activation = require('../models/activation')
 const sendsms = require('../sms/sms')
-const bcrypt = require('bcryptjs')
 const router = new express.Router()
 
 router.post('/activation/sendcode', async (req, res) => {
@@ -15,9 +14,6 @@ router.post('/activation/sendcode', async (req, res) => {
             })
             await user.save()
         } else {
-            if (user.status) {
-                throw new Error('This number already verified !')
-            }
             user.code = randomCode
             await user.save()
         }
@@ -25,24 +21,6 @@ router.post('/activation/sendcode', async (req, res) => {
         res.send({ message: "Code sent!" })
     } catch(e) {
         console.log(e.message)
-        res.status(400).send({ message: e.message })
-    }
-})
-
-router.post('/activation/verify', async (req, res) => {
-    try {
-        const user = await Activation.findOne({ number: req.body.number })
-        if (!user || user.status) {
-            throw new Error('This number already verified !')
-        }
-        const isMatch = await bcrypt.compare(req.body.code, user.code)
-        if(!isMatch) {
-            throw new Error("Wrong Code !")
-        }
-        user.status = true
-        await user.save()
-        res.send({ message: "Verified ! " })
-    } catch(e) {
         res.status(400).send({ message: e.message })
     }
 })
