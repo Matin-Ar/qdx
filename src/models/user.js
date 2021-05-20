@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const Activation = require('../models/activation')
 const uniqueValidator = require('mongoose-unique-validator')
 
 const userSchema = new mongoose.Schema({
@@ -118,6 +119,21 @@ userSchema.statics.findByCredentials = async (email, password) => {
     }
 
     return user
+} 
+
+userSchema.statics.verify = async (number, code) => {
+    if(!code){
+        throw new Error('Provide code !')
+    }
+    const user = await Activation.findOne({ number })
+    if (!user) {
+        throw new Error('You dont have verification code !')
+    }
+    const isMatch = await bcrypt.compare(code, user.code)
+    if(!isMatch) {
+        throw new Error("کد تایید نامعتبر می باشد !")
+    }
+    await user.remove()
 } 
 
 // Hashing password

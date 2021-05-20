@@ -1,11 +1,13 @@
 const express = require('express')
 const Activation = require('../models/activation')
 const sendsms = require('../sms/sms')
+const auth = require('../middleware/auth')
 const signup = require('../middleware/signup')
 const router = new express.Router()
 
-router.post('/activation/sendcode', signup, async (req, res) => {
+router.post('/activation/sendcode', async (req, res) => {
     try {
+        // await Activation.signup(req.body.number, req.body.email)
         const randomCode = (Math.floor(Math.random() * 9000 + 1000)).toString()
         const user = await Activation.findOne({ number: req.body.number })
         if (!user) {
@@ -21,17 +23,17 @@ router.post('/activation/sendcode', signup, async (req, res) => {
         await sendsms(req.body.number, randomCode)
         res.send({ message: "کد ارسال شد !" })
     } catch(e) {
-        res.status(400).send({ message: e.message })
+        res.status(400).send({ error: e.message })
     }
 })
 
-router.post('/verification/sendcode', async (req, res) => {
+router.post('/verification/sendcode', auth, async (req, res) => {
     try {
         const randomCode = (Math.floor(Math.random() * 9000 + 1000)).toString()
-        const user = await Activation.findOne({ number: req.body.number })
+        const user = await Activation.findOne({ number: req.user.number })
         if (!user) {
             const user = new Activation({
-                number: req.body.number,
+                number: req.user.number,
                 code: randomCode
             })
             await user.save()
@@ -39,10 +41,10 @@ router.post('/verification/sendcode', async (req, res) => {
             user.code = randomCode
             await user.save()
         }
-        await sendsms(req.body.number, randomCode)
+        await sendsms(req.user.number, randomCode)
         res.send({ message: "کد ارسال شد !" })
     } catch(e) {
-        res.status(400).send({ message: e.message })
+        res.status(400).send({ error: e.message })
     }
 })
 

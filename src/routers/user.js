@@ -6,22 +6,22 @@ var cors = require('cors')
 const User = require('../models/user')
 const auth = require('../middleware/auth')
 const adminAuth = require('../middleware/adminAuth')
-const verify = require('../middleware/verify')
 const { sendWelcomeEmail, sendCancelatonEmail } = require('../emails/account')
 const router = new express.Router()
 
-router.post('/users/singup', verify, async (req, res) => {
+router.post('/users/singup', async (req, res) => {
     try {
         if(req.body.role){
             throw new Error('You can not choose role!')
         }
+        await User.verify(req.body.number, req.body.code)
         const user = new User(req.body)
         await user.save()
         sendWelcomeEmail(user.email, user.name)
         const token = await user.generateAuthToken()
         res.status(201).send({ user, token })
     } catch(e) {
-        res.status(400).send(e)
+        res.status(400).send({ error: e.message})
     }
 })
 
@@ -81,11 +81,14 @@ router.patch('/users/me', auth, async (req, res) => {
 })
 
 //change password
-router.patch('/users/me', auth, async (req, res) => {
+router.patch('/users/password', auth, async (req, res) => {
     try {
-        
+        await User.verify(req.user.number, req.body.code)
+        req.user.password = req.body.password
+        await req.user.save()
+        res.send(req.user)
     } catch (e) {
-        res.status(400).send(e)
+        res.status(400).send({ error: e.message })
     }
 })
 
