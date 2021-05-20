@@ -17,7 +17,6 @@ const sendsms = async (number, randomCode) => {
     }
     }, function (error, response, body) {
         if (error) throw new Error(error)
-        console.log(body)
         })
 }
 
