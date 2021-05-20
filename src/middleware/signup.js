@@ -10,10 +10,10 @@ const signup = async (req, res, next) => {
         const number = await User.findOne({ number: req.body.number })
         const email = await User.findOne({ email: req.body.email })
         if(number) {
-            text.push('Number alread used !')
+            text.push('این شماره قبلا ثبت شده است !')
         }
         if(email) {
-            text.push('Email already used !')
+            text.push('این ایمیل قبلا ثبت شده است !')
         }
         if (number || email) {
             throw new Error(text.toString())

@@ -19,7 +19,7 @@ router.post('/activation/sendcode', signup, async (req, res) => {
             await user.save()
         }
         await sendsms(req.body.number, randomCode)
-        res.send({ message: "Code sent!" })
+        res.send({ message: "کد ارسال شد !" })
     } catch(e) {
         console.log(e.message)
         res.status(400).send({ message: e.message })
