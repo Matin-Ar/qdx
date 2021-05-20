@@ -3,13 +3,20 @@ const User = require('../models/user')
 
 const signup = async (req, res, next) => {
     try {
-        const number = await User.findOne({ number: req.body.number })
-        if(number) {
-            throw new Error('Number already used !')
+        if(!req.body.number || !req.body.email) {
+            throw new Error('Provide number and email !')
         }
+        const text = []
+        const number = await User.findOne({ number: req.body.number })
         const email = await User.findOne({ email: req.body.email })
+        if(number) {
+            text.push('این شماره قبلا ثبت شده است !')
+        }
         if(email) {
-            throw new Error('Email already used !')
+            text.push('این ایمیل قبلا ثبت شده است !')
+        }
+        if (number || email) {
+            throw new Error(text.toString())
         }
         
         next()

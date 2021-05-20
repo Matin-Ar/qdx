@@ -12,9 +12,9 @@ const verify = async (req, res, next) => {
         }
         const isMatch = await bcrypt.compare(req.body.code, user.code)
         if(!isMatch) {
-            throw new Error("Wrong Code !")
+            throw new Error("کد تایید نامعتبر می باشد !")
         }
-        
+
         next()
     } catch (e) {
         res.status(400).send({ error: e.message })
