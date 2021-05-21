@@ -364,8 +364,8 @@ function RegisterStepOne({ dispatch }) {
                   pattern="[0-9]"
                   maxlength="1"
                   max="9"
-                  value={input4}
-                  onChange={(e) => setinput4(e.target.value)}
+                  value={input1}
+                  onChange={(e) => setinput1(e.target.value)}
                 />
                 <input
                   className="phoneverification_input"
@@ -375,21 +375,21 @@ function RegisterStepOne({ dispatch }) {
                   pattern="[0-9]"
                   max="9"
                   maxlength="1"
-                  value={input3}
-                  onChange={(e) => setinput3(e.target.value)}
-                  step="1"
-                />
-                <input
-                  className="phoneverification_input"
-                  type="text"
-                  required
-                  min="0"
-                  pattern="[0-9]"
-                  maxlength="1"
-                  max="9"
-                  step="1"
                   value={input2}
                   onChange={(e) => setinput2(e.target.value)}
+                  step="1"
+                />
+                <input
+                  className="phoneverification_input"
+                  type="text"
+                  required
+                  min="0"
+                  pattern="[0-9]"
+                  maxlength="1"
+                  max="9"
+                  step="1"
+                  value={input3}
+                  onChange={(e) => setinput3(e.target.value)}
                 />
                 <input
                   className="phoneverification_input"
@@ -400,8 +400,8 @@ function RegisterStepOne({ dispatch }) {
                   pattern="[0-9]"
                   min="0"
                   max="9"
-                  value={input1}
-                  onChange={(e) => setinput1(e.target.value)}
+                  value={input4}
+                  onChange={(e) => setinput4(e.target.value)}
                 />
               </div>
               <button

@@ -7,6 +7,8 @@ import { SetCurrentUser } from "../Actions/user";
 import { withRouter } from "react-router";
 import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
+import validator from "validator";
+import { motion } from "framer-motion";
 
 export function DashboardForm({
   dispatch,
@@ -32,6 +34,21 @@ export function DashboardForm({
   const [formEmail, setFormEmail] = useState(email);
   const [codinglanguage, setCodinglanguage] = useState(usercodinglanguage);
   const [education, setEducation] = useState(usereducation);
+  const [password, setPassword] = useState("");
+  const [barWidth, setBarWidth] = useState(0);
+  const [barColor, setBarColor] = useState("red");
+  const [passwordStrength, setPasswordStreangth] = useState(null);
+  const [passwordStrengthErr, setPasswordStrengthErr] = useState();
+  const [code, setCode] = useState("");
+
+  const [isStrPass, setIsStrPass] = useState(0);
+  const [changepasswordBtnTxt, setChangepasswordBtnTxt] =
+    useState("تغییر رمز عبور");
+
+  const [disableChangePasswordBtn, setDisableChangePasswordBtn] =
+    useState(false);
+
+  const [changepasswordReq, setChangepasswordReq] = useState(false);
 
   const now = utils("fa").getToday();
 
@@ -55,6 +72,38 @@ export function DashboardForm({
     day: now.day,
   };
 
+  const validatePass = (e) => {
+    setPasswordStreangth(null);
+
+    const isStrongPassword = validator.isStrongPassword(password, {
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 1,
+      returnScore: true,
+      pointsPerUnique: 1,
+      pointsPerRepeat: 0.5,
+      pointsForContainingLower: 10,
+      pointsForContainingUpper: 10,
+      pointsForContainingNumber: 10,
+      pointsForContainingSymbol: 20,
+    });
+    console.log("score is", isStrongPassword);
+
+    if (isStrongPassword / 10 < 2) {
+      setPasswordStreangth("ضعیف");
+    } else if (isStrongPassword / 10 < 2.5) {
+      setPasswordStreangth("متوسط");
+    } else if (isStrongPassword / 10 > 4) {
+      setPasswordStreangth("قوی");
+    } else if (isStrongPassword / 10 > 5) {
+      setPasswordStreangth("خیلی قوی");
+    }
+
+    setPassword(e.target.value);
+    setIsStrPass(isStrongPassword);
+  };
   const handleDeleteUser = (e) => {
     e.preventDefault();
     const promptMsg = prompt(
@@ -92,6 +141,39 @@ export function DashboardForm({
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const handleChangePasswordReq = (e) => {
+    setChangepasswordBtnTxt("لطفا صبر نمایید");
+    setDisableChangePasswordBtn(true);
+    axios.post("/verification/sendcode").then((res) => {
+      if (res.status === 200) {
+        setChangepasswordReq(true);
+      }
+    });
+  };
+
+  const handleUpdatePassword = (e) => {
+    e.preventDefault();
+
+    if (isStrPass < 30) {
+      setPasswordStrengthErr(
+        "رمز عبور انتخابی ضعیف است رمز عبور قوی تری وارد نمایید"
+      );
+    }
+    if (isStrPass > 30) {
+      axios
+        .patch("/users/password", { password, code })
+        .then((res) => {
+          if (res.status === 200) {
+            alertify.success("تغییر رمز عبور با موفقیت انجام شد");
+            setChangepasswordReq(false);
+            setChangepasswordBtnTxt("  تغییر رمز عبور");
+            setDisableChangePasswordBtn(false);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (
@@ -183,12 +265,75 @@ export function DashboardForm({
         </div>
       </div>
       <div className="dashboard-button-wrapper">
-        <button className="dashboard-button-update" onClick={handleUpdateUser}>
-          بروزرسانی
-        </button>
-        <button className="dashboard-button-delete" onClick={handleDeleteUser}>
-          حذف پروفایل
-        </button>
+        <div>
+          <button
+            className="dashboard-button-change-password"
+            disabled={disableChangePasswordBtn}
+            style={{
+              display: changepasswordReq === true ? "none" : "inline-block",
+            }}
+            onClick={(e) => handleChangePasswordReq(e)}
+          >
+            {changepasswordBtnTxt}
+          </button>
+          <div
+            style={{
+              display: changepasswordReq === true ? "inline-block" : "none",
+            }}
+          >
+            <motion.input
+              initial={{ x: "200%" }}
+              animate={{ x: 0 }}
+              type="text"
+              className="change-password-input"
+              placeholder="رمز عبور جدید را وارد نمایید"
+              value={password}
+              onChange={(e) => validatePass(e)}
+            ></motion.input>
+
+            <motion.input
+              initial={{ x: "200%" }}
+              animate={{ x: 0 }}
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              className="change-password-verification-code"
+              type="text"
+              required
+              min="0"
+              maxlength="4"
+              step="1"
+              placeholder="کد تایید را وارد نمایید"
+            />
+
+            <motion.button
+              initial={{ x: "200%" }}
+              animate={{ x: 0 }}
+              className="dashboard-button-change-password"
+              onClick={handleUpdatePassword}
+            >
+              ارسال رمز عبور جدید
+            </motion.button>
+
+            <span style={{ fontSize: 14, color: "red" }}>
+              {passwordStrengthErr}
+            </span>
+          </div>
+        </div>
+        <div>
+          <button
+            className="dashboard-button-update"
+            onClick={handleUpdateUser}
+          >
+            بروزرسانی
+          </button>
+
+          <button
+            className="dashboard-button-delete"
+            onClick={handleDeleteUser}
+          >
+            حذف پروفایل
+          </button>
+        </div>
       </div>
     </form>
   );
@@ -212,8 +357,3 @@ const mapStateToProps = (state) => {
 };
 
 export default withRouter(connect(mapStateToProps)(DashboardForm));
-// {<span style={{ marginRight: "10px" }}>
-//               {" "}
-//               تاریخ تولد ثبت شده شما : {formatedBdy.day}/ {formatedBdy.month} /{" "}
-//               {formatedBdy.year}
-//             </span>}

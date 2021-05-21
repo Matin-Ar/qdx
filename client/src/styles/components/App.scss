@@ -1074,17 +1074,52 @@ nav {
   display: flex;
   margin-top: 1em;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 .dashboard-button-update,
-.dashboard-button-delete {
+.dashboard-button-delete,
+.dashboard-button-change-password {
   padding: 0.5em 1em;
   margin: 1em 1em;
   font-size: 0.5em;
   border-radius: 5px;
   outline: none;
   border: none;
+}
+
+.dashboard-button-change-password {
+  background-color: #5d2dc6;
+  color: white;
+}
+
+.dashboard-button-change-password:disabled {
+  background-color: $gray;
+}
+
+.change-password-verification-code {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border: 1px solid rgba($yellow, 0.5);
+  border-radius: 10px;
+  margin-right: 1em;
+  height: 35px;
+  color: white;
+  text-align: center;
+  min-width: 200px;
+}
+.change-password-input {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border: 1px solid rgba($yellow, 0.5);
+  border-radius: 10px;
+  margin-right: 1em;
+  height: 35px;
+  color: white;
+  text-align: center;
+  min-width: 200px;
 }
 
 .dashboard-button-update {
@@ -2070,6 +2105,7 @@ input[type="submit"]:disabled {
 .phoneverification_input_container {
   display: flex;
   justify-content: space-evenly;
+  direction: ltr;
   margin-top: 2em;
   margin-bottom: 2em;
 }
