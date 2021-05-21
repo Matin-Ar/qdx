@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
+    "biuld": "cd client && npm install && npm run build",
     "dev": "env-cmd -f ./config/dev.env nodemon src/index.js"
   },
   "keywords": [],

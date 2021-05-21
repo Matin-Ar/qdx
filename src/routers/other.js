@@ -4,7 +4,7 @@ const Tutorial = require('../models/tutorial')
 const Course = require('../models/course')
 const router = new express.Router()
 
-router.get('/test', async (req,res) => {    
+router.get('/getall', async (req,res) => {    
     try {
         const category = await Category.find({ }, null, { sort: { name: 1 } })
         const tutorial = await Tutorial.find({ }, null, { sort: { name: 1 } })
