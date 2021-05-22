@@ -21,6 +21,9 @@ app.use(courseRouter)
 app.use(otherRouter)
 app.use(commentRouter) 
 app.use(activationRouter)
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+})
 
 app.listen(port, () => {
   console.log('Server is up on port ' + port)
