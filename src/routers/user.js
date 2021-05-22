@@ -9,7 +9,7 @@ const adminAuth = require('../middleware/adminAuth')
 const { sendWelcomeEmail, sendCancelatonEmail } = require('../emails/account')
 const router = new express.Router()
 
-router.post('/users/singup', async (req, res) => {
+router.post('/api/users/singup', async (req, res) => {
     try {
         if(req.body.role){
             throw new Error('You can not choose role!')
@@ -25,7 +25,7 @@ router.post('/users/singup', async (req, res) => {
     }
 })
 
-router.post('/users/login', async (req, res) => {
+router.post('/api/users/login', async (req, res) => {
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password)
         const token = await user.generateAuthToken()
@@ -35,7 +35,7 @@ router.post('/users/login', async (req, res) => {
     }
 })
 
-router.post('/users/logout', auth, async (req, res) => {
+router.post('/api/users/logout', auth, async (req, res) => {
     try {
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token !== req.token
@@ -48,7 +48,7 @@ router.post('/users/logout', auth, async (req, res) => {
     }
 })
 
-router.post('/users/logoutAll', auth, async (req, res) => {
+router.post('/api/users/logoutAll', auth, async (req, res) => {
     try {
         req.user.tokens = []
         await req.user.save()
@@ -58,11 +58,11 @@ router.post('/users/logoutAll', auth, async (req, res) => {
     }
 })
 
-router.get('/users/me', auth, async (req, res) => {
+router.get('/api/users/me', auth, async (req, res) => {
     res.send(req.user)
 })
 
-router.patch('/users/me', auth, async (req, res) => {
+router.patch('/api/users/me', auth, async (req, res) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['name', 'lastname', 'gender', 'bday', 'codinglanguage', 'education']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
@@ -81,7 +81,7 @@ router.patch('/users/me', auth, async (req, res) => {
 })
 
 //change password
-router.patch('/users/password', auth, async (req, res) => {
+router.patch('/api/users/password', auth, async (req, res) => {
     try {
         await User.verify(req.user.number, req.body.code)
         req.user.password = req.body.password
@@ -93,7 +93,7 @@ router.patch('/users/password', auth, async (req, res) => {
 })
 
 
-router.delete('/users/me', auth, async (req, res) => {
+router.delete('/api/users/me', auth, async (req, res) => {
     try {
         await req.user.remove()
         sendCancelatonEmail(req.user.email, req.user.name)
@@ -116,7 +116,7 @@ const upload = multer({
 
 })
 
-router.post('/users/me/avatar', auth, cors(), upload.single('avatar'), async (req, res) => {
+router.post('/api/users/me/avatar', auth, cors(), upload.single('avatar'), async (req, res) => {
     if (!req.file) {
         res.status(400).send({ error: "Provide avatar"})
     } else {
@@ -129,13 +129,13 @@ router.post('/users/me/avatar', auth, cors(), upload.single('avatar'), async (re
     res.status(400).send({ error: error.message })
 })
 
-router.delete('/users/me/avatar', auth, async (req, res) => {
+router.delete('/api/users/me/avatar', auth, async (req, res) => {
     req.user.avatar = undefined
     await req.user.save()
     res.send()
 })
 
-router.get('/users/:id/avatar', async (req, res) => {
+router.get('/api/users/:id/avatar', async (req, res) => {
     try {
         const user = await User.findById(req.params.id)
         if (!user) {
@@ -152,7 +152,7 @@ router.get('/users/:id/avatar', async (req, res) => {
 })
 
 //admin
-router.get('/users/profiles', auth, adminAuth, async (req, res) => {
+router.get('/api/users/profiles', auth, adminAuth, async (req, res) => {
     try {
         const profiles = await User.find({ }, 'email', { sort: { email : 1 }, limit: parseInt(req.query.limit), skip: parseInt(req.query.skip) })
         res.send(profiles)
@@ -161,7 +161,7 @@ router.get('/users/profiles', auth, adminAuth, async (req, res) => {
     }
 })
 
-router.delete('/users/profiles', auth, adminAuth, async (req, res) => {
+router.delete('/api/users/profiles', auth, adminAuth, async (req, res) => {
     try {
         const profile = await User.findById(req.body.id)
         await profile.delete()

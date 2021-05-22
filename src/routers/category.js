@@ -7,7 +7,7 @@ const adminAuth = require('../middleware/adminAuth')
 const router = new express.Router()
 
 
-router.post('/categories', auth, adminAuth, async (req, res) => {
+router.post('/api/categories', auth, adminAuth, async (req, res) => {
     const category = new Category(req.body)
 
     try {
@@ -18,7 +18,7 @@ router.post('/categories', auth, adminAuth, async (req, res) => {
     }
 })
 
-router.get('/categories', async (req,res) => {
+router.get('/api/categories', async (req,res) => {
     const category = await Category.find({ }, null, { sort: { name: 1 } })
 
     try {
@@ -28,7 +28,7 @@ router.get('/categories', async (req,res) => {
     }
 })
 
-router.get('/categories/:cat', async (req, res) => {
+router.get('/api/categories/:cat', async (req, res) => {
     const cat = req.params.cat
 
     try {
@@ -40,7 +40,7 @@ router.get('/categories/:cat', async (req, res) => {
     }
 })
 
-router.patch('/categories', auth, adminAuth, async (req, res) => {
+router.patch('/api/categories', auth, adminAuth, async (req, res) => {
     try {
         if(!req.body.oldname || !req.body.newname) {
             throw new Error()
@@ -55,7 +55,7 @@ router.patch('/categories', auth, adminAuth, async (req, res) => {
     }
 })
 
-router.delete('/categories', auth, adminAuth, async (req, res) => {
+router.delete('/api/categories', auth, adminAuth, async (req, res) => {
     try {
         const category = await Category.findOne({ name: req.body.name })
         if(!category) {

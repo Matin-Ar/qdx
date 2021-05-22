@@ -5,14 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "biuld": "cd client && npm install && npm run build",
+    "build": "cd client && npm install && npm run build",
     "dev": "env-cmd -f ./config/dev.env nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@lottiefiles/react-lottie-player": "^3.3.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
