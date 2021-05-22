@@ -7,7 +7,7 @@ import Loader from "./Loader";
 
 function AllCategories() {
   const collections = useQuery("categoriesAndTutorials", () => {
-    return axios.get("/test").then((res) => res.data);
+    return axios.get("/getall").then((res) => res.data);
   });
 
   return collections.isLoading ? (
