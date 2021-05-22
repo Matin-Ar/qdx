@@ -7,7 +7,7 @@ export default function AddCourseTabOne({ handleFormChange }) {
   const [tutorialsList, setTutorialsList] = useState([]);
 
   useEffect(() => {
-    axios.get("/categories").then(
+    axios.get("/api/categories").then(
       (resp) => {
         if (resp.status === 200) {
           const categoriesArr = resp.data.map((item) => item.name);
@@ -19,7 +19,7 @@ export default function AddCourseTabOne({ handleFormChange }) {
   }, [categoriesList.length]);
 
   useEffect(() => {
-    axios.get(`/categories/${selectedCategory}`).then(
+    axios.get(`/api/categories/${selectedCategory}`).then(
       (res) => {
         let tutArr = res.data.map((tut) => tut.name);
         setTutorialsList(tutArr);

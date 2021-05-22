@@ -15,7 +15,7 @@ function CourseSeachComponent() {
       const source = CancelToken.source();
 
       const promise = axios
-        .get(`/search/${searchValue}`, {
+        .get(`/api/search/${searchValue}`, {
           // Pass the source token to your request
           cancelToken: source.token,
         })

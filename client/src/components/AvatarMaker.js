@@ -95,16 +95,14 @@ export class AvatarMaker extends React.Component {
 
   handleAvatarDelete(e) {
     axios
-      .delete("/users/me/avatar")
+      .delete("/api/users/me/avatar")
 
       .then((res) => {
         if (res.status === 200) {
           alert("حذف آواتار با موفقیت انجام شد");
           this.props.dispatch(
             setUserAvatar(
-              `http://localhost:3001/users/${
-                this.props.userId
-              }/avatar/?${moment().valueOf()}`
+              `/api/users/${this.props.userId}/avatar/?${moment().valueOf()}`
             )
           );
           this.props.handleModleClose();

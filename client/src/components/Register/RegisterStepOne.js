@@ -151,7 +151,7 @@ function RegisterStepOne({ dispatch }) {
     ) {
       setErrors([]);
       axios
-        .post("/activation/sendcode", { number, email })
+        .post("api/activation/sendcode", { number, email })
         .then((res) => {
           console.log(res.status);
           if (res.status === 200) {

@@ -5,7 +5,7 @@ const auth = require('../middleware/auth')
 const adminAuth = require('../middleware/adminAuth')
 const router = new express.Router()
 
-router.post('/comments', auth, async (req,res) => {    
+router.post('/api/comments', auth, async (req,res) => {    
     try {
         const course = await Course.findOne({ _id: req.body.courseId }, "title")
         const comment = new Comment({
@@ -23,7 +23,7 @@ router.post('/comments', auth, async (req,res) => {
     }
 })
 
-router.get('/comments', auth, adminAuth, async (req, res) => {
+router.get('/api/comments', auth, adminAuth, async (req, res) => {
     try {
         const comments = await Comment.find({ condition: false})
         res.send(comments)
@@ -32,7 +32,7 @@ router.get('/comments', auth, adminAuth, async (req, res) => {
     }
 })
 
-router.get('/comments/:courseId', async (req, res) => {
+router.get('/api/comments/:courseId', async (req, res) => {
     try {
         const comments = await Comment.find({ course: req.params.courseId , condition: true})
         res.send(comments)
@@ -41,7 +41,7 @@ router.get('/comments/:courseId', async (req, res) => {
     }
 })
 
-router.delete('/comments', auth, adminAuth, async (req, res) => {
+router.delete('/api/comments', auth, adminAuth, async (req, res) => {
     try {
         const comment = await Comment.findById(req.body.id)
         if (!comment){
@@ -54,7 +54,7 @@ router.delete('/comments', auth, adminAuth, async (req, res) => {
     }
 })
 
-router.patch('/comments', auth, adminAuth, async (req, res) => {
+router.patch('/api/comments', auth, adminAuth, async (req, res) => {
     try {
         if(!req.body.condition || req.body.condition != true) {
             req.body.condition = false

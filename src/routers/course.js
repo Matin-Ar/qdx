@@ -19,7 +19,7 @@ const upload = multer({
     }
 })
 
-router.post('/courses', auth, adminAuth, upload.single('avatar'), async (req,res) => {
+router.post('/api/courses', auth, adminAuth, upload.single('avatar'), async (req,res) => {
     try {
         const tut = await Tutorial.findOne({ name: req.body.tut })
         const buffer = await sharp(req.file.buffer).resize({ width: 390, height: 240 }).png().toBuffer()
@@ -38,7 +38,7 @@ router.post('/courses', auth, adminAuth, upload.single('avatar'), async (req,res
     res.status(400).send({ error: error.message })
 })
 
-router.patch('/courses/:title', auth, adminAuth, async (req, res) => {
+router.patch('/api/courses/:title', auth, adminAuth, async (req, res) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['title', 'shortdesc', 'longdesc', 'duration', 'author', 'publisher', 'language', 'numberofvideos', 'filedate', 'quality', 'filesize', 'links']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
@@ -66,7 +66,7 @@ router.patch('/courses/:title', auth, adminAuth, async (req, res) => {
     }
 })
 
-router.delete('/courses', auth, adminAuth, async (req, res) => {
+router.delete('/api/courses', auth, adminAuth, async (req, res) => {
     try {
         const course = await Course.findOne({ title: req.body.title })
         if(!course) {
@@ -80,7 +80,7 @@ router.delete('/courses', auth, adminAuth, async (req, res) => {
     }
 })
 
-router.get('/courses', async (req, res) => {
+router.get('/api/courses', async (req, res) => {
     try {
         const course = await Course.find({ }, null, { sort: { title : 1 }, limit: parseInt(req.query.limit), skip: parseInt(req.query.skip) })
         res.send(course)
@@ -89,7 +89,7 @@ router.get('/courses', async (req, res) => {
     }
 })
 
-router.get('/courses/:title', async (req, res) => {
+router.get('/api/courses/:title', async (req, res) => {
     try {
         const course = await Course.findOne({ title: req.params.title })
         if (!course) {
@@ -101,7 +101,7 @@ router.get('/courses/:title', async (req, res) => {
     }
 })
 
-router.get('/courses/:title/avatar', async (req, res) => {
+router.get('/api/courses/:title/avatar', async (req, res) => {
     try {
         const course = await Course.findOne({ title: req.params.title })
         if (!course) {

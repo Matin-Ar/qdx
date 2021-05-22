@@ -16,7 +16,7 @@ export default function AddCourseTutorial() {
   );
 
   useEffect(() => {
-    axios.get("/categories").then(
+    axios.get("/api/categories").then(
       (resp) => {
         if (resp.status === 200) {
           const categoriesArr = resp.data.map((item) => item.name);
@@ -42,7 +42,7 @@ export default function AddCourseTutorial() {
       formData.append("cat", selectedCategory);
 
       axios({
-        url: "/tutorials",
+        url: "/api/api/tutorials",
         method: "POST",
         data: formData,
       }).then((res) => {

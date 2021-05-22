@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const getCategories = async () => {
-  fetch("/categories").then((res) => res.json());
+  fetch("api/categories").then((res) => res.json());
 };

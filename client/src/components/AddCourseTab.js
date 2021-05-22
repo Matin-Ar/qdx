@@ -79,7 +79,7 @@ export class AddCourseTab extends Component {
       form.append("avatar", file);
       // this.state.courseLinks
       axios({
-        url: "/courses",
+        url: "/api/courses",
         method: "POST",
         data: form,
       })

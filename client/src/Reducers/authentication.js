@@ -35,9 +35,7 @@ const usersReducer = (state = usersReducerDefaults, action) => {
         codinglanguage: action.payload.codinglanguage,
         gender: action.payload.gender,
         avatar: {
-          url: `http://localhost:3001/users/${
-            action.payload._id
-          }/avatar/?${moment().valueOf()}`,
+          url: `/api/users/${action.payload._id}/avatar/?${moment().valueOf()}`,
         },
       };
     case "USER_LOG_OUT":
@@ -69,9 +67,7 @@ const usersReducer = (state = usersReducerDefaults, action) => {
         bday: action.bday,
         education: action.education,
         codinglanguage: action.codinglanguage,
-        avatar: `http://localhost:3001/users/${
-          action._id
-        }/avatar/?${moment().valueOf()}`,
+        avatar: `/api/users/${action._id}/avatar/?${moment().valueOf()}`,
       };
 
     case "SET_CURRENT_USER":
@@ -87,9 +83,7 @@ const usersReducer = (state = usersReducerDefaults, action) => {
         bday: action.bday,
         education: action.education,
         codinglanguage: action.codinglanguage,
-        avatar: `http://localhost:3001/users/${
-          action._id
-        }/avatar/?${moment().valueOf()}`,
+        avatar: `/api/users/${action._id}/avatar/?${moment().valueOf()}`,
       };
 
     case "SET_USER_AVATAR":

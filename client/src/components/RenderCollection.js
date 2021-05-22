@@ -19,7 +19,7 @@ function RenderCollection({ collection }) {
               <div className="single-category-img-container">
                 <img
                   className="single-category-image"
-                  src={`http://localhost:3001/tutorials/${item.name}/avatar`}
+                  src={`/api/tutorials/${item.name}/avatar`}
                 ></img>
               </div>
             </div>

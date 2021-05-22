@@ -113,7 +113,7 @@ export function DashboardForm({
     if (promptMsg) {
       console.log(promptMsg);
       if (promptMsg === "yes") {
-        axios.delete("/users/me");
+        axios.delete("/api/users/me");
         alert("حذف اکانت با موفقیت انجام شد | خدانگهدار");
         history.push("/");
       } else {
@@ -126,7 +126,7 @@ export function DashboardForm({
     e.preventDefault();
 
     axios
-      .patch("/users/me", {
+      .patch("/api/users/me", {
         name: formFirstName,
         lastname: formLastName,
         gender: formGender,
@@ -146,7 +146,7 @@ export function DashboardForm({
   const handleChangePasswordReq = (e) => {
     setChangepasswordBtnTxt("لطفا صبر نمایید");
     setDisableChangePasswordBtn(true);
-    axios.post("/verification/sendcode").then((res) => {
+    axios.post("/api/verification/sendcode").then((res) => {
       if (res.status === 200) {
         setChangepasswordReq(true);
       }
@@ -163,7 +163,7 @@ export function DashboardForm({
     }
     if (isStrPass > 30) {
       axios
-        .patch("/users/password", { password, code })
+        .patch("/api/users/password", { password, code })
         .then((res) => {
           if (res.status === 200) {
             alertify.success("تغییر رمز عبور با موفقیت انجام شد");

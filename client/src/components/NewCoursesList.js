@@ -6,7 +6,7 @@ import Loader from "./Loader";
 
 export default function NewCoursesList() {
   const courses = useQuery("newCourses", () => {
-    return axios.get("/courses?limit=3&skip=0").then((res) => {
+    return axios.get("/api/courses?limit=3&skip=0").then((res) => {
       return res.data;
     });
   });

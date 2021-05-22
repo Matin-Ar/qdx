@@ -14,7 +14,7 @@ export default function CourseComponent(props) {
       {props.course && (
         <div className="singlecoursecomponent">
           <div className="singlecourse-img-wrapper">
-            <img src={`/courses/${props.course.title}/avatar`}></img>
+            <img src={`/api/courses/${props.course.title}/avatar`}></img>
           </div>
           <div className="singlecourse-description-wrapper">
             <h3 className="singlecourse-description-title">

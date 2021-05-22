@@ -16,7 +16,7 @@ export default function SingleCourseComponent(props) {
 
   useEffect(() => {
     axios
-      .get(`/courses/${props.courseName}`)
+      .get(`/api/courses/${props.courseName}`)
       .then((res) => {
         setCourse(res.data);
       })
@@ -25,7 +25,7 @@ export default function SingleCourseComponent(props) {
 
   useEffect(() => {
     axios
-      .get(`/comments/${course?._id}`)
+      .get(`/api/comments/${course?._id}`)
       .then((res) => {
         console.log(res.data);
         setCourseComments(res.data);

@@ -41,7 +41,7 @@ export default function Test() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    axios.get("/categories").then((res) => {
+    axios.get("/api/categories").then((res) => {
       setCategoriesArr(res.data);
     });
   }, []);
@@ -52,7 +52,7 @@ export default function Test() {
 
   useEffect(() => {
     if (selectedCategory !== "") {
-      axios.get(`/categories/${selectedCategory}`).then((res) => {
+      axios.get(`/api/categories/${selectedCategory}`).then((res) => {
         setTutorialsArr(res.data);
         setIsLoading(false);
       });
@@ -61,7 +61,7 @@ export default function Test() {
 
   useEffect(() => {
     if (selectedTutorial !== "") {
-      axios.get(`/tutorials/${selectedTutorial}`).then((res) => {
+      axios.get(`/api/tutorials/${selectedTutorial}`).then((res) => {
         setCoursesArr(res.data);
         setIsLoading(false);
       });
@@ -75,7 +75,7 @@ export default function Test() {
     );
     if (promptResult == "yes") {
       axios
-        .delete("/categories", { data: { name } })
+        .delete("/api/categories", { data: { name } })
         .then(
           (res) => {
             alertify.success("دسته بندی  با موفقیت حذف شد");
@@ -83,7 +83,7 @@ export default function Test() {
           (err) => console.log("err from handleDeleteCategory:", err)
         )
         .then(
-          axios.get("/categories").then((res) => {
+          axios.get("/api/categories").then((res) => {
             setCategoriesArr(res.data);
           })
         );
@@ -98,11 +98,11 @@ export default function Test() {
 
     if (newname && newname.trim() != "") {
       axios
-        .patch("/categories", { oldname, newname })
+        .patch("/api/categories", { oldname, newname })
         .then((res) => {
           if (res.status === 200) {
             alertify.success("دسته بندی  با موفقیت ویرایش شد");
-            axios.get("/categories").then((res) => {
+            axios.get("/api/categories").then((res) => {
               setCategoriesArr(res.data);
             });
           }
@@ -113,9 +113,9 @@ export default function Test() {
 
   const handleAddCategory = (e) => {
     if (addCategoryInput.trim() != "") {
-      axios.post("/categories", { name: addCategoryInput }).then((res) => {
+      axios.post("/api/categories", { name: addCategoryInput }).then((res) => {
         if (res.status == 201) {
-          axios.get("/categories").then((res) => {
+          axios.get("/api/categories").then((res) => {
             alertify.success("دسته بندی  با موفقیت اضافه شد");
             setCategoriesArr(res.data);
             setAddCategoryInput("");
@@ -132,13 +132,15 @@ export default function Test() {
       formData.append("name", addTutorialInput);
       formData.append("cat", selectedCategory);
 
-      axios({ url: "/tutorials", method: "POST", data: formData }).then(() => {
-        alertify.success("زبان برنامه نویسی  با موفقیت اضافه شد");
-        axios.get(`/categories/${selectedCategory}`).then((res) => {
-          setTutorialsArr(res.data);
-          setIsLoading(false);
-        });
-      });
+      axios({ url: "/api/tutorials", method: "POST", data: formData }).then(
+        () => {
+          alertify.success("زبان برنامه نویسی  با موفقیت اضافه شد");
+          axios.get(`/api/categories/${selectedCategory}`).then((res) => {
+            setTutorialsArr(res.data);
+            setIsLoading(false);
+          });
+        }
+      );
     }
   };
 
@@ -149,7 +151,7 @@ export default function Test() {
     );
     if (promptResult == "yes") {
       axios
-        .delete("/tutorials", { data: { name } })
+        .delete("/api/tutorials", { data: { name } })
         .then(
           (res) => {
             alertify.success("زبان برنامه نویسی با موفقیت حذف شد");
@@ -157,7 +159,7 @@ export default function Test() {
           (err) => console.log("err from handleDeleteCategory:", err)
         )
         .then(
-          axios.get(`/categories/${selectedCategory}`).then((res) => {
+          axios.get(`/api/categories/${selectedCategory}`).then((res) => {
             setTutorialsArr(res.data);
             setIsLoading(false);
           })
@@ -173,11 +175,11 @@ export default function Test() {
 
     if (newname && newname.trim() != "") {
       axios
-        .patch("/tutorials", { oldname, newname })
+        .patch("/api/tutorials", { oldname, newname })
         .then((res) => {
           if (res.status === 200) {
             alertify.success(" زبان برنامه نویسی با موفقیت ویرایش شد");
-            axios.get(`/categories/${selectedCategory}`).then((res) => {
+            axios.get(`/api/categories/${selectedCategory}`).then((res) => {
               setTutorialsArr(res.data);
               setIsLoading(false);
             });
@@ -196,10 +198,10 @@ export default function Test() {
     );
     if (promptResult == "yes") {
       axios
-        .delete("/courses", { data: { title } })
+        .delete("/api/courses", { data: { title } })
         .then((res) => {
           alertify.success(" دوره با موفقیت حذف شد");
-          axios.get(`/tutorials/${selectedTutorial}`).then((res) => {
+          axios.get(`/api/tutorials/${selectedTutorial}`).then((res) => {
             setCoursesArr(res.data);
             setIsLoading(false);
           });

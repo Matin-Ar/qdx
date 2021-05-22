@@ -23,7 +23,7 @@ const useStyles = makeStyles({
 export default function ManageUsers() {
   const useFetchUsers = () => {
     return useQuery("users", () => {
-      return axios.get("/users/profiles").then((res) => res.data);
+      return axios.get("/api/users/profiles").then((res) => res.data);
     });
   };
   const users = useFetchUsers();
@@ -31,7 +31,7 @@ export default function ManageUsers() {
   const handleDeleteUser = (e, id) => {
     e.preventDefault();
     axios
-      .delete("/users/profiles", { data: { id } })
+      .delete("/api/users/profiles", { data: { id } })
       .then((res) => {
         alertify.success("کاربر با موفقیت حذف شد");
       })

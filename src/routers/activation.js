@@ -5,7 +5,7 @@ const auth = require('../middleware/auth')
 const signup = require('../middleware/signup')
 const router = new express.Router()
 
-router.post('/activation/sendcode', signup, async (req, res) => {
+router.post('/api/activation/sendcode', signup, async (req, res) => {
     try {
         // await Activation.signup(req.body.number, req.body.email)
         const randomCode = (Math.floor(Math.random() * 9000 + 1000)).toString()
@@ -27,7 +27,7 @@ router.post('/activation/sendcode', signup, async (req, res) => {
     }
 })
 
-router.post('/verification/sendcode', auth, async (req, res) => {
+router.post('/api/verification/sendcode', auth, async (req, res) => {
     try {
         const randomCode = (Math.floor(Math.random() * 9000 + 1000)).toString()
         const user = await Activation.findOne({ number: req.user.number })

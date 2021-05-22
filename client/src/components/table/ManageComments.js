@@ -26,7 +26,7 @@ function ManageComments() {
 
   const useFetchComments = () => {
     return useQuery("comments", () => {
-      return axios.get("/comments").then((res) => {
+      return axios.get("/api/comments").then((res) => {
         return res.data;
       });
     });
@@ -38,7 +38,7 @@ function ManageComments() {
     e.preventDefault();
 
     axios
-      .delete("/comments", { data: { id } })
+      .delete("/api/comments", { data: { id } })
       .then((res) => {
         alertify.warning("با موفقیت حذف گردید");
         queryClient.invalidateQueries("comments");
@@ -50,7 +50,7 @@ function ManageComments() {
     e.preventDefault();
 
     axios
-      .patch("/comments", {
+      .patch("/api/comments", {
         id,
         condition: true,
       })

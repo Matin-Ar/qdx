@@ -10,7 +10,7 @@ export default function AddCourseCategory() {
   const [categoriesList, setCategoriesList] = useState([]);
 
   useEffect(() => {
-    axios.get("/categories").then(
+    axios.get("/api/categories").then(
       (resp) => {
         if (resp.status === 200) {
           const categoriesArr = resp.data.map((item) => item.name);
@@ -26,11 +26,11 @@ export default function AddCourseCategory() {
     if (newCategory.trim() != "") {
       setButtonText("در حال اضافه نمودن دسته بندی");
       console.log(e);
-      axios.post("/categories", { name: newCategory }).then((res) => {
+      axios.post("/api/categories", { name: newCategory }).then((res) => {
         if (res.status === 201) {
           setButtonText("دسته بندی جدید با موفقیت اضافه شد");
           alertify.success("دسته بندی جدید با موفقیت اضافه شد");
-          axios.get("/categories").then(
+          axios.get("/api/categories").then(
             (resp) => {
               if (resp.status === 200) {
                 const categoriesArr = resp.data.map((item) => item.name);
@@ -60,7 +60,7 @@ export default function AddCourseCategory() {
 
     if (promptResult == "yes") {
       axios
-        .delete("/categories", { data: { name: categoryToDelete } })
+        .delete("/api/categories", { data: { name: categoryToDelete } })
         .then(
           (res) => {
             alertify.success("دسته بندی  با موفقیت حذف شد");
@@ -68,7 +68,7 @@ export default function AddCourseCategory() {
           (err) => alertify.error(err)
         )
         .then(() => {
-          axios.get("/categories").then(
+          axios.get("/api/categories").then(
             (resp) => {
               if (resp.status === 200) {
                 const categoriesArr = resp.data.map((item) => item.name);

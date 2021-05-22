@@ -63,11 +63,11 @@ export const startUserLogOut = (token) => (dispatch) => {
 
   dispatch(userLogOut());
   dispatch(clearAllErrors());
-  axios.post("/users/logout");
+  axios.post("/api/users/logout");
   setAutherizationToken();
   localStorage.removeItem("jwtToken");
 
-  return axiosAuth.post("/users/logout").then(
+  return axiosAuth.post("/api/users/logout").then(
     () => console.log("user logged out"),
     (e) => console.log("there was a error logging out")
   );
@@ -103,7 +103,7 @@ export const userLogIn = ({
 export const startUserLogIn =
   ({ email, password }) =>
   (dispatch) => {
-    return axios.post("/users/login", { email, password }).then(
+    return axios.post("/api/users/login", { email, password }).then(
       (resp) => {
         const token = resp.data.token;
         setAutherizationToken(token);
@@ -147,7 +147,7 @@ export const SetCurrentUser = ({
 });
 
 export const startSetCurrentUser = () => (dispatch) => {
-  axios.get("/users/me").then(
+  axios.get("/api/users/me").then(
     (resp) => {
       dispatch(SetCurrentUser(resp.data));
     },
@@ -164,15 +164,13 @@ export const startSetUserAvatar = (file, userId) => (dispatch) => {
   let formData = new FormData();
   formData.append("avatar", file);
   return axios({
-    url: "/users/me/avatar",
+    url: "/api/users/me/avatar",
     method: "POST",
     data: formData,
   })
     .then((res) => {
       dispatch(
-        setUserAvatar(
-          `http://localhost:3001/users/${userId}/avatar/?${moment().valueOf()}`
-        )
+        setUserAvatar(`api//users/${userId}/avatar/?${moment().valueOf()}`)
       );
 
       return res.status;

@@ -11,7 +11,7 @@ function SpecificTutorialsPage() {
   const { tutorial } = useParams();
 
   const courseList = useQuery(`tutorial ${tutorial}`, () => {
-    return axios.get(`/tutorials/${tutorial}`).then((res) => res.data);
+    return axios.get(`/api/tutorials/${tutorial}`).then((res) => res.data);
   });
 
   return (

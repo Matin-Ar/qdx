@@ -57,7 +57,7 @@ function EditCourse(props) {
 
   useEffect(() => {
     axios
-      .get(`/courses/${encodeURI(name)}`)
+      .get(`/api/courses/${encodeURI(name)}`)
       .then((res) => {
         console.log(res.data);
         setcourseTitle(res.data.title);
@@ -82,7 +82,7 @@ function EditCourse(props) {
     setButtonText("در حال بروزرسانی دوره لطفا منتظر بمانیید");
     setIsDisabled(true);
     const stringLinks = courseLinks.toString();
-    axios(`/courses/${name}`, {
+    axios(`/api/courses/${name}`, {
       method: "PATCH",
       data: {
         title: courseTitle,

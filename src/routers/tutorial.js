@@ -20,7 +20,7 @@ const upload = multer({
     }
 })
 
-router.post('/tutorials', auth, adminAuth, upload.single('avatar'), async (req,res) => {
+router.post('/api/tutorials', auth, adminAuth, upload.single('avatar'), async (req,res) => {
     try {
         const cat = await Category.findOne({ name: req.body.cat })
         const buffer = await sharp(req.file.buffer).png().toBuffer()
@@ -38,7 +38,7 @@ router.post('/tutorials', auth, adminAuth, upload.single('avatar'), async (req,r
     res.status(400).send({ error: error.message })
 })
 
-router.patch('/tutorials', auth, adminAuth, async (req, res) => {
+router.patch('/api/tutorials', auth, adminAuth, async (req, res) => {
     try {
         if(!req.body.oldname || !req.body.newname) {
             throw new Error()
@@ -53,7 +53,7 @@ router.patch('/tutorials', auth, adminAuth, async (req, res) => {
     }
 })
 
-router.delete('/tutorials', auth, adminAuth, async (req, res) => {
+router.delete('/api/tutorials', auth, adminAuth, async (req, res) => {
     try {
         const tutorial = await Tutorial.findOne({ name: req.body.name })
         if(!tutorial) {
@@ -68,7 +68,7 @@ router.delete('/tutorials', auth, adminAuth, async (req, res) => {
     }
 })
 
-router.get('/tutorials', async (req, res) => {
+router.get('/api/tutorials', async (req, res) => {
     const tutorial = await Tutorial.find({ }, null, { sort: { name : 1 } })
 
     try {
@@ -78,7 +78,7 @@ router.get('/tutorials', async (req, res) => {
     }
 })
 
-router.get('/tutorials/:tut', async (req, res) => {
+router.get('/api/tutorials/:tut', async (req, res) => {
     const tut = req.params.tut
 
     try {
@@ -90,7 +90,7 @@ router.get('/tutorials/:tut', async (req, res) => {
     }
 })
 
-router.get('/tutorials/:name/avatar', async (req, res) => {
+router.get('/api/tutorials/:name/avatar', async (req, res) => {
     try {
         const tutorial = await Tutorial.findOne({ name: req.params.name })
         if (!tutorial) {
