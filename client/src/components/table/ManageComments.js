@@ -85,7 +85,7 @@ function ManageComments() {
                     <TableCell align="right" component="th" scope="row">
                       <img
                         className="users-table-avatar"
-                        src={`/users/${item.user}/avatar`}
+                        src={`/api/users/${item.user}/avatar`}
                       ></img>
                     </TableCell>
 

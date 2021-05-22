@@ -36,7 +36,7 @@ export default function SingleCourseComponent(props) {
   return (
     <div className="singleCourse-container">
       <div className="imageContainer">
-        <img src={`/courses/${course.title}/avatar`} />
+        <img src={`/api/courses/${course.title}/avatar`} />
       </div>
       <div className="courseShortDescription-container">
         <h1>{course.title}</h1>

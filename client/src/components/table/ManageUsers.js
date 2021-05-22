@@ -65,7 +65,7 @@ export default function ManageUsers() {
                     <TableCell align="right" component="th" scope="row">
                       <img
                         className="users-table-avatar"
-                        src={`/users/${item._id}/avatar`}
+                        src={`/api/users/${item._id}/avatar`}
                       ></img>
                     </TableCell>
                     <TableCell align="right">{item.email}</TableCell>

@@ -64,7 +64,7 @@ function CourseSeachComponent() {
                   <div className="search-result-item">
                     <img
                       className="search-result-image"
-                      src={`/courses/${item.title}/avatar`}
+                      src={`/api/courses/${item.title}/avatar`}
                     ></img>
                     {item.title}
                   </div>
