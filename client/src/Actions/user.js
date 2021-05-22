@@ -26,7 +26,7 @@ export const starUserRegister = (payload) => (dispatch) => {
   const { name, lastname, number, email, password, _id, code } = payload;
 
   return axios
-    .post("/users/singup", { name, lastname, number, email, password, code })
+    .post("api/users/singup", { name, lastname, number, email, password, code })
 
     .then(
       (response) => {
