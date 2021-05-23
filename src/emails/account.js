@@ -1,28 +1,32 @@
 const nodemailer = require('nodemailer');
 
+// Create the transporter with the required configuration for Gmail
+// change the user and pass !
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.zoho.com',
+    port: 465,
+    secure: true, // use SSL
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
-  }
+    }
 });
 
 const sendWelcomeEmail = (email, name) => {
     transporter.sendMail({
-        from: 'test123mattt@gmail.com',
-        to: email,
-        subject: 'Thanks for joining in!',
-        html: `<h1>سلام ${name}</h1><p>خوش حالیم که به جمع ما پیوستی.</p>`
+        from: '"QDX" <admin@qdx.ir>', // sender address (who sends)
+        to: email, // list of receivers (who receives)
+        subject: 'Welcome !', // Subject line
+        html: `<b>سلام ${name} </b><br> به سایت QDX خوش آمدید` // html body
     })
 }
 
 const sendCancelatonEmail = (email, name) => {
     transporter.sendMail({
-        from: 'test123mattt@gmail.com',
-        to: email,
-        subject: 'Sorry to see you go!',
-        html: `<h1>خدا نگهدار ${name}</h1><p>امیدواریم که دوباره ببینیمیت.</p>`
+        from: '"QDX" <admin@qdx.ir>', // sender address (who sends)
+        to: email, // list of receivers (who receives)
+        subject: 'Bye !', // Subject line
+        html: `<b>خدا نگهدار ${name}</b><br> <h1 style="color:blue;">BYE BYE</h1> ` // html body
     })
 }
 
