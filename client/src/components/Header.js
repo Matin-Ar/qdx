@@ -4,8 +4,10 @@ import { Link, NavLink } from "react-router-dom";
 import LangCustomSelect from "./LangCustomSelect";
 import ThemeCustomSelect from "./ThemeCustomSelect";
 import { startUserLogOut } from "../Actions/user";
+import menuImg from "../assets/ham-menu.png";
 import HeaderProfile from "./HeaderProfile";
 import { render } from "react-dom";
+import MobileBottomMenu from "./MobileBottomMenu";
 
 export const Header = (props) => {
   const [profileHover, setprofileHover] = useState(false);
@@ -73,15 +75,56 @@ export const Header = (props) => {
   };
 
   return (
-    <div id="nav-container">
-      <Link to="/" className="logo-container">
-        <h1 id="logo">
-          QD<span>X</span>
-        </h1>
-      </Link>
-      <div id="left-nav-container">
-        <nav>
+    <>
+      <div id="nav-container">
+        <Link to="/" className="logo-container">
+          <h1 id="logo">
+            QD<span>X</span>
+          </h1>
+        </Link>
+        <div id="left-nav-container">
+          <nav>
+            <ul id="nav-links">
+              <NavLink to="/" activeClassName="selected">
+                صفحه اصلی
+              </NavLink>
+              <NavLink to="/dashboard" activeClassName="selected">
+                پروفایل کاربری
+              </NavLink>
+              <NavLink to="/categories" activeClassName="selected">
+                دسته بندی دوره ها
+              </NavLink>
+
+              <NavLink to="/aboutus" activeClassName="selected">
+                درباره ما
+              </NavLink>
+
+              <NavLink to="/contactus" activeClassName="selected">
+                تماس با ما
+              </NavLink>
+
+              {props.isAuthenticated && handleLoginMenu()}
+              {!props.isAuthenticated && handleLogoutMenu()}
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <div className="tablet-menu-container">
+        <div className="tablet-menu-top">
+          <Link to="/" className="logo-container">
+            <h1 id="logo">
+              QD<span>X</span>
+            </h1>
+          </Link>
+          {props.isAuthenticated && handleLoginMenu()}
+          {!props.isAuthenticated && handleLogoutMenu()}
+        </div>
+        <div className="tablet-menu-bottom">
           <ul id="nav-links">
+            <NavLink exact to="/" activeClassName="selected">
+              صفحه اصلی
+            </NavLink>
             <NavLink to="/dashboard" activeClassName="selected">
               پروفایل کاربری
             </NavLink>
@@ -92,19 +135,25 @@ export const Header = (props) => {
             <NavLink to="/aboutus" activeClassName="selected">
               درباره ما
             </NavLink>
-            <NavLink to="/Services" activeClassName="selected">
-              خدمات
-            </NavLink>
 
             <NavLink to="/contactus" activeClassName="selected">
               تماس با ما
             </NavLink>
-            {props.isAuthenticated && handleLoginMenu()}
-            {!props.isAuthenticated && handleLogoutMenu()}
           </ul>
-        </nav>
+        </div>
       </div>
-    </div>
+
+      <div className="mobile-menu-container">
+        <div className="mobile-menu">
+          <Link to="/" className="logo-container">
+            <h1 id="logo">
+              QD<span>X</span>
+            </h1>
+          </Link>
+        </div>
+      </div>
+      <MobileBottomMenu />
+    </>
   );
 };
 
